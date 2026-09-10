@@ -1,0 +1,4005 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "实验三：Benchmark 1 + SGLang 复现报告",
+    "generatedAt": "2026-09-10T10:43:44.481247+00:00",
+    "sources": [
+      {
+        "id": "results",
+        "label": "原始请求的SQLite独立聚合",
+        "path": "report/queries/metrics.sql",
+        "query": {
+          "sql": "WITH ranked AS (\n SELECT baseline, point, ttft_ms,\n ROW_NUMBER() OVER(PARTITION BY baseline, point ORDER BY ttft_ms) rn,\n COUNT(*) OVER(PARTITION BY baseline, point) n FROM requests\n), ttft AS (\n SELECT baseline, point, AVG(ttft_ms) ttft_ms_p50 FROM ranked\n WHERE rn IN ((n+1)/2,(n+2)/2) GROUP BY baseline, point\n), itl_ranked AS (\n SELECT baseline, point, value_ms,\n ROW_NUMBER() OVER(PARTITION BY baseline, point ORDER BY value_ms) rn,\n COUNT(*) OVER(PARTITION BY baseline, point) n FROM itls\n), itl AS (\n SELECT baseline, point, AVG(value_ms) itl_ms_p50 FROM itl_ranked\n WHERE rn IN ((n+1)/2,(n+2)/2) GROUP BY baseline, point\n), totals AS (\n SELECT baseline, point, COUNT(*) completed, SUM(prompt_tokens) prompt_tokens,\n SUM(output_tokens) output_tokens, SUM(cached_tokens) cached_tokens,\n AVG(prompt_tokens) actual_isl_mean, AVG(client_wait_s) client_wait_s_mean\n FROM requests GROUP BY baseline, point\n)\nSELECT totals.*, ttft.ttft_ms_p50, itl.itl_ms_p50, points.qps, points.duration_s,\n points.label, 1.0*totals.cached_tokens/totals.prompt_tokens cache_hit_ratio,\n 1.0*totals.output_tokens/points.duration_s output_token_throughput,\n CASE totals.baseline WHEN 'S0' THEN 'solid' WHEN 'S1' THEN 'dashed' ELSE 'dotted' END line_style\nFROM totals JOIN ttft USING(baseline,point) JOIN itl USING(baseline,point)\nJOIN points USING(baseline,point)\nORDER BY points.ordering,totals.baseline",
+          "engine": "sqlite",
+          "language": "sql",
+          "tables_used": [
+            "requests",
+            "itls",
+            "points"
+          ],
+          "description": "由scripts/v100_chart_queries.py将raw中原始JSON记录载入同名内存表，再执行本SQL。指标已与Python原始分析器逐项核对。"
+        }
+      },
+      {
+        "id": "requests",
+        "label": "压力点原始请求的经验CDF",
+        "path": "report/queries/cdf.sql",
+        "query": {
+          "sql": "SELECT baseline, ttft_ms,\n 1.0*ROW_NUMBER() OVER(PARTITION BY baseline ORDER BY ttft_ms)/COUNT(*) OVER(PARTITION BY baseline) cdf,\n COUNT(*) OVER(PARTITION BY baseline) n,\n CASE baseline WHEN 'S0' THEN 'solid' WHEN 'S1' THEN 'dashed' ELSE 'dotted' END line_style\nFROM requests WHERE point='pressure_4k_q1' ORDER BY baseline,ttft_ms",
+          "engine": "sqlite",
+          "language": "sql",
+          "tables_used": [
+            "requests"
+          ],
+          "description": "由scripts/v100_chart_queries.py将raw中原始JSON记录载入同名内存表，再执行本SQL。指标已与Python原始分析器逐项核对。"
+        }
+      },
+      {
+        "id": "transfer",
+        "label": "原始拷贝事件的双向统计",
+        "path": "report/queries/transfer.sql",
+        "query": {
+          "sql": "WITH directions AS (SELECT 'gpu_to_cpu' direction UNION ALL SELECT 'cpu_to_gpu')\nSELECT p.point,p.label,CASE d.direction WHEN 'gpu_to_cpu' THEN 'GPU→CPU' ELSE 'CPU→GPU' END direction,\n COALESCE(SUM(t.bytes),0) bytes, COALESCE(SUM(t.bytes),0)/1e9 GB,\n COALESCE(SUM(t.time_s),0) time_s,\n SUM(t.bytes)/NULLIF(SUM(t.time_s),0)/1e9 GBps,\n COUNT(t.bytes) operations, p.n\nFROM points p CROSS JOIN directions d\nLEFT JOIN transfers t ON t.point=p.point AND t.direction=d.direction\nWHERE p.baseline='S2' GROUP BY p.point,d.direction ORDER BY p.ordering,d.direction DESC",
+          "engine": "sqlite",
+          "language": "sql",
+          "tables_used": [
+            "transfers",
+            "points"
+          ],
+          "description": "由scripts/v100_chart_queries.py将raw中原始JSON记录载入同名内存表，再执行本SQL。指标已与Python原始分析器逐项核对。"
+        }
+      },
+      {
+        "id": "protocol",
+        "label": "已确认复现要求与实际方法",
+        "path": "docs/需求对照与指标字典.md"
+      }
+    ],
+    "blocks": [
+      {
+        "id": "b0_0",
+        "type": "markdown",
+        "body": "# 实验三：Benchmark 1 + SGLang 复现报告"
+      },
+      {
+        "id": "b1_0",
+        "type": "markdown",
+        "body": "## 技术摘要\n\n本次完成 **S0 无前缀缓存、S1 Radix Cache、S2 HiCache** 三组 Benchmark 1 推理实验，共21个测点、2184个正式请求，全部成功，每个请求输出128 tokens。使用三张同型号、同规格的 **Tesla V100-SXM2-32GB**，每组独占一张GPU，三组并行运行。\n\n本次复现验证了前缀缓存复用以及HiCache的CPU卸载、GPU驱逐和CPU→GPU回载机制。压力4K测点中，S1与S2的总复用比例分别为 **7.42%、35.14%**；S2实际回载146470 tokens，即5.399 GB的KV数据。S2的TTFT中位数比S1低4.52%，但p95高2.21%，输出吞吐仅高0.14%。因此，本轮证据支持“HiCache增加可复用缓存”，**不支持“HiCache在所有负载下都更快”**。\n\n这是经确认的 **V100兼容复现**：模型使用未量化Qwen2.5-3B-Instruct，权重/KV为FP16，框架为SGLang 0.4.6.post5及native算子适配。不是原文GPTQ/AWQ模型、BF16 KV的严格原配置复现。验证状态为ANALYZED：原始数据已复算和核验，尚未进行独立GPU重复测量。"
+      },
+      {
+        "id": "b2_0",
+        "type": "markdown",
+        "body": "## 实验设置与测量范围\n\n实验在2026年9月10日进行，S0约16:11启动，S1/S2约16:41启动，三组分别于17:11、17:38、17:40结束（UTC+8）。每张卡显存32 GiB、功率上限300 W，驱动580.173.02。主机提供20个vCPU，CPU型号为Intel Xeon Gold 6248。\n\n三组共享主机CPU、内存与I/O；S0的前三个测点在另外两组启动前完成，后续测点有重叠。各组TP=1，GPU互不共享；没有把多卡张量并行引入缓存对照。\n\n| 项目 | 本次实测设置 |\n|---|---|\n| 框架 / Python | SGLang 0.4.6.post5 / Python 3.12.3 |\n| 模型 | Qwen/Qwen2.5-3B-Instruct，未量化，FP16 |\n| PyTorch / Triton | 2.6.0+cu124 / 3.2.0 |\n| attention / sampling | torch_native / pytorch |\n| GPU KV池 | 28672 tokens × 36864 bytes/token = 1008 MiB |\n| CPU KV池 | S2请求8 GiB，按完整token向下对齐；S0/S1没有CPU KV池 |\n| KV dtype / 页大小 | FP16 / 1 token |\n| 固定输出 / 并发上限 / seed | 128 tokens / 4 / 42 |\n| 策略 | S1使用上游默认驱逐；S2为HiCache LRU，write_through_selective |\n| 关闭的功能 | CUDA graph、overlap schedule、custom all-reduce、chunked prefill |\n\n适配仅将RMSNorm、SiluAndMul、RotaryEmbedding切换到上游native实现，并为锁定的sm70/native配置放行旧版架构门槛；仍使用真实GPU能力值和上游缓存实现。另将旧版按十进制GB解释的HiCache参数换算为8 GiB。没有使用模拟缓存替代真实KV数据。"
+      },
+      {
+        "id": "b3_0",
+        "type": "markdown",
+        "body": "## 负载与计量口径\n\n每个baseline运行下表7个测点。前三点构成核心9点对照，另外四点补齐QPS和输入长度曲线；没有执行所有建议QPS与并发值的全量交叉组合。\n\n| 测点 | 模式 | 目标/实际平均ISL | QPS | 请求数 | 前缀组 |\n|---|---|---|---|---|---|\n| random_2k_q1 | random | 2048 / 2156.70 | 1 | 100 | 100 |\n| prefix_2k_q1 | prefix_repetition | 2048 / 2159.72 | 1 | 100 | 10 |\n| pressure_4k_q1 | prefix_repetition | 4096 / 4310.94 | 1 | 128 | 32 |\n| prefix_2k_q025 | prefix_repetition | 2048 / 2159.72 | 0.25 | 100 | 10 |\n| prefix_2k_q05 | prefix_repetition | 2048 / 2159.72 | 0.5 | 100 | 10 |\n| prefix_1k_q1 | prefix_repetition | 1024 / 1074.95 | 1 | 100 | 10 |\n| prefix_4k_q1 | prefix_repetition | 4096 / 4319.36 | 1 | 100 | 10 |\n\n负载来自锁定版本的SGLang `sample_generated_shared_prefix_requests`。目标前缀与后缀各占输入长度的一半；random每请求独立前缀组，prefix_repetition在组内共享前缀。三个baseline读取相同数据文件、输入SHA256及Poisson计划到达序列。生成器将随机tokens解码为文本再编码，因此实际平均输入长度不是精确的1024/2048/4096，表中和长度曲线使用真实token统计。此合成负载用于缓存机制对照，不代表自然语言任务准确率。\n\n每点先做4次预热、清空缓存，再进行正式测量，84次预热不计入2184次正式请求。温度为0，ignore_eos保证固定输出长度。\n\n**延迟有两个起点，不能混用。** 主列TTFT/E2E从实际发送HTTP请求起算，包含服务器侧排队与处理；`offered_*`从计划到达时刻起算，还包含客户端等待并发槽的时间。QPS是计划到达率，不是实测接收率；并发上限4会在负载较高时积累客户端队列。本轮native路径的实测吞吐较低，不能把标注“QPS1”的结果当作服务器稳定承载1 req/s。\n\n| 指标 | 定义与分母 |\n|---|---|\n| TTFT、E2E | HTTP发送到首个流式token块、到响应结束；报告均值及p50/p95/p99 |\n| ITL | 相邻SSE块时间差/后一块新增tokens；保留全部分块数据，块内时间为平均分摊 |\n| Prefill / Decode | 批次CUDA事件跨度及CPU调用跨度；不是单请求纯kernel时间 |\n| 吞吐 | 请求数、输出tokens、逻辑input+output tokens除以正式测量墙钟时间 |\n| Physical / Prefill吞吐 | 实际计算的prompt tokens加output除以墙钟；prompt tokens除以prefill批次CUDA跨度总和 |\n| 总复用比例 | 请求meta_info.cached_tokens总和 / 实际输入tokens总和；S2包含GPU与CPU回载 |\n| GPU / CPU KV占用 | 每批次已用tokens/对应池容量；提供采样均值和峰值，非时间加权均值 |\n| Offload字节 / 时间 / 大小 | 两个方向分别记录原有阻塞tensor.to调用payload与时间，按测量窗口汇总 |\n| 有效传输带宽 | payload总字节/阻塞拷贝调用总墙钟时间；GB为十进制，不是裸链路峰值 |"
+      },
+      {
+        "id": "b4_0",
+        "type": "markdown",
+        "body": "## 缓存复用增加，但性能收益取决于负载\n\n随机2K中三个baseline的前缀复用均为0。S2仍发生7.871 GB的GPU→CPU写入，却没有CPU→GPU回载；其TTFT中位数比S1高12.41%。这表明在低复用负载下，需要同时核对“写出了多少”与“真正读回了多少”，不能用开启HiCache本身代替收益证据。\n\n共享2K中，S1与S2的复用比例为36.58%和45.10%，但S2的TTFT中位数比S1高6.94%。压力4K中，S2的复用明显更多且中位TTFT更低，但输出吞吐差距很小。以下两张图分别看缓存和吞吐，不能把复用率直接当作加速比。"
+      },
+      {
+        "id": "b4_1",
+        "type": "chart",
+        "chartId": "cache",
+        "layout": "full"
+      },
+      {
+        "id": "b4_2",
+        "type": "markdown",
+        "body": "输出吞吐使用完整测量窗口作为分母，包含到达间隔与请求完成时间；它描述本次负载下的服务表现，不是V100或SGLang的理论峰值。不同负载不得汇总成一个“平均提升”来掩盖差异。"
+      },
+      {
+        "id": "b4_3",
+        "type": "chart",
+        "chartId": "throughput",
+        "layout": "full"
+      },
+      {
+        "id": "b4_4",
+        "type": "markdown",
+        "body": "| 负载 | 组 | TTFT p50/p95(ms) | ITL p50(ms) | E2E p50(s) | 输出tokens/s | 总复用率 |\n|---|---|---|---|---|---|---|\n| 随机2K | S0 | 1115.84/1158.22 | 115.18 | 16.72 | 28.49 | 0.00% |\n| 随机2K | S1 | 1112.69/1125.29 | 112.12 | 16.35 | 31.28 | 0.00% |\n| 随机2K | S2 | 1250.77/1306.77 | 114.11 | 16.89 | 30.28 | 0.00% |\n| 共享2K | S0 | 1112.59/1134.80 | 114.18 | 16.60 | 30.81 | 0.00% |\n| 共享2K | S1 | 953.59/1085.80 | 112.66 | 16.17 | 31.63 | 36.58% |\n| 共享2K | S2 | 1019.81/1117.98 | 113.44 | 16.34 | 31.20 | 45.10% |\n| 压力4K | S0 | 6111.93/6250.92 | 124.29 | 21.94 | 23.33 | 0.00% |\n| 压力4K | S1 | 5940.54/6189.25 | 123.47 | 21.71 | 23.59 | 7.42% |\n| 压力4K | S2 | 5671.96/6325.92 | 124.52 | 21.55 | 23.62 | 35.14% |"
+      },
+      {
+        "id": "b5_0",
+        "type": "markdown",
+        "body": "## QPS与输入长度曲线\n\n固定共享2K负载比较0.25、0.5、1三种计划QPS；固定QPS1比较1K、2K、4K目标输入长度。折线只连接实际测量的离散配置点，不拟合或外推。长度变化同时改变计算量与缓存压力，不是仅改变一种底层因素。"
+      },
+      {
+        "id": "b5_1",
+        "type": "chart",
+        "chartId": "qps_ttft",
+        "layout": "full"
+      },
+      {
+        "id": "b5_2",
+        "type": "markdown",
+        "body": "QPS曲线中的TTFT从HTTP发送起算。客户端等待另行记录，避免把大量等待时间藏在图外：共享2K、QPS1时，S0/S1/S2的客户端平均等待分别为151.54、146.18、149.22秒；这些值不属于上述HTTP口径TTFT。"
+      },
+      {
+        "id": "b5_3",
+        "type": "chart",
+        "chartId": "qps_itl",
+        "layout": "full"
+      },
+      {
+        "id": "b5_4",
+        "type": "markdown",
+        "body": "ITL是流式块分摊后的token间隔，中位数接近并不意味着总请求时间或尾延迟相同，也不能将每个ITL样本当成独立实验重复。"
+      },
+      {
+        "id": "b5_5",
+        "type": "chart",
+        "chartId": "context_ttft",
+        "layout": "full"
+      },
+      {
+        "id": "b5_6",
+        "type": "markdown",
+        "body": "4K输入的TTFT明显高于1K/2K。native attention路径和缓存容量共同影响这一形状；结论限定于本模型、本软件配置和所测输入长度。"
+      },
+      {
+        "id": "b5_7",
+        "type": "chart",
+        "chartId": "context_itl",
+        "layout": "full"
+      },
+      {
+        "id": "b5_8",
+        "type": "markdown",
+        "body": "长度与ITL也不是单调加速关系。所有21点的原始分位数均保留在汇总CSV中，没有删去不利点。"
+      },
+      {
+        "id": "b6_0",
+        "type": "markdown",
+        "body": "## 尾延迟没有随中位数同步改善\n\n压力4K点每组128个请求。S1的TTFT p50/p95为5940.54/6189.25 ms，S2为5671.96/6325.92 ms。S2中位数低4.52%，但p95高2.21%，p99也高2.90%。因此，应分别报告中心与尾部，不将“中位数更低”写成“所有请求更快”。"
+      },
+      {
+        "id": "b6_1",
+        "type": "chart",
+        "chartId": "cdf",
+        "layout": "full"
+      },
+      {
+        "id": "b6_2",
+        "type": "markdown",
+        "body": "HTML展示完整TTFT经验CDF；交付PNG还包含ITL经验CDF。CDF中的128个请求来自同一次运行，没有跨seed独立重复或置信区间。"
+      },
+      {
+        "id": "b7_0",
+        "type": "markdown",
+        "body": "## HiCache双向传输与回载成本\n\nS2的7个正式测点共写出44.752 GB，读回10.244 GB；该合计只用于数据量核对，不用于跨负载性能比较。压力点写出13.035 GB、读回5.399 GB，并记录494019个GPU驱逐tokens与146470个host回载tokens。每token KV为36864 bytes，逐层传输字节与回载token计数精确一致。"
+      },
+      {
+        "id": "b7_1",
+        "type": "chart",
+        "chartId": "transfer_bytes",
+        "layout": "full"
+      },
+      {
+        "id": "b7_2",
+        "type": "markdown",
+        "body": "GPU→CPU按打包批次测量，CPU→GPU按层测量，因此两个方向的操作次数和“单次大小”粒度不同。压力点两个方向的阻塞调用总时间分别为13.779秒、4.408秒；对应有效带宽为0.95和1.23 GB/s。时间包含运行时等待，不是纯DMA耗时，也没有假设传输可被计算完全隐藏。"
+      },
+      {
+        "id": "b7_3",
+        "type": "chart",
+        "chartId": "transfer_bw",
+        "layout": "full"
+      },
+      {
+        "id": "b7_4",
+        "type": "markdown",
+        "body": "没有发生回载的random点，H→D字节为0、带宽为不可用，而不是“0 GB/s性能”。详细表列出每方向字节、总时间、操作数、单次大小p50/p95/p99以及调用时间/CUDA事件两种带宽口径；后者也可能包含流间等待，不能当作裸PCIe带宽。\n\n| 测点 | 方向 | GB | 调用总秒数 | GB/s | 操作数 | 单次MiB p50/p95 |\n|---|---|---|---|---|---|---|\n| 随机2K | GPU→CPU | 7.871 | 6.213 | 1.267 | 198 | 37.863/38.391 |\n| 随机2K | CPU→GPU | 0.000 | 0.000 | 不可用 | 0 | 不可用/不可用 |\n| 共享2K | GPU→CPU | 4.371 | 3.996 | 1.094 | 110 | 37.916/38.449 |\n| 共享2K | CPU→GPU | 0.599 | 0.279 | 2.147 | 504 | 1.057/2.113 |\n| 压力4K | GPU→CPU | 13.035 | 13.779 | 0.946 | 328 | 37.934/38.215 |\n| 压力4K | CPU→GPU | 5.399 | 4.408 | 1.225 | 1620 | 2.116/6.307 |\n| 2K/QPS0.25 | GPU→CPU | 4.371 | 4.102 | 1.065 | 110 | 37.916/38.449 |\n| 2K/QPS0.25 | CPU→GPU | 0.599 | 0.283 | 2.119 | 504 | 1.057/2.113 |\n| 2K/QPS0.5 | GPU→CPU | 4.371 | 3.751 | 1.165 | 110 | 37.916/38.449 |\n| 2K/QPS0.5 | CPU→GPU | 0.599 | 0.285 | 2.101 | 504 | 1.057/2.113 |\n| 共享1K | GPU→CPU | 2.183 | 0.764 | 2.858 | 103 | 18.949/37.631 |\n| 共享1K | CPU→GPU | 0.020 | 0.008 | 2.502 | 36 | 0.519/0.519 |\n| 共享4K | GPU→CPU | 8.552 | 9.535 | 0.897 | 215 | 37.969/38.320 |\n| 共享4K | CPU→GPU | 3.028 | 2.919 | 1.037 | 1080 | 2.112/4.257 |\n\n独立18请求机制探针先于正式实验运行，成功触发GPU驱逐、D→H、H→D和host复用。该探针采用精确4096 token输入、OSL16、并发1，与正式负载不同，不混入性能统计。"
+      },
+      {
+        "id": "b8_0",
+        "type": "markdown",
+        "body": "## 需求覆盖、验证与限制\n\n已覆盖：S0/S1/S2 × random/prefix_repetition、1–4K长度、固定OSL128、三档QPS、warmup排除、延迟分位数、吞吐、分层KV占用、缓存复用、驱逐以及双向offload字节/时间/大小/带宽。需求对照表逐项列出字段和图表。\n\n原始数据校验包括：数据集SHA256、实际输入token数、请求数与唯一ID、输出长度、S0零复用、batch内请求归属、批次输出计数、计算+缓存token会计、回载字节会计、三组代码及版本一致性。所有21点通过。依赖环境的pip check通过。\n\n不能补算或未独立测量的项目包括：精确设备queue time、KV load stall、external query分母、reuse distance、overlap ratio与SLO goodput；I/O三阶段甘特图为可选，本次不绘制没有充分分解证据的请求级甘特图。Prefill/decode仅有批次跨度，不能替代纯kernel分析。8 GiB CPU池修正、native适配、旧版SGLang和非量化模型均已披露。\n\n本轮为单seed、单次测量，三张相同规格GPU并行但未做卡间轮换；不提供显著性或普遍提升结论。模型指纹在实验后补采，下载时未记录不可变ModelScope提交号；交付保存权重与分词文件SHA256，重下载后必须校验。原环境只读借用了已有SEDS环境中的torch/triton，尚未验证全新机器从零安装。"
+      },
+      {
+        "id": "b9_0",
+        "type": "markdown",
+        "body": "## 复现结论与后续问题\n\n本次交付完成了已确认范围内的V100兼容机制复现和描述性性能测量：缓存关闭、GPU前缀复用、CPU层卸载与回载都有真实记录。结果说明，“更多缓存命中”需要与复制成本、TTFT尾部和实际吞吐一起评估；HiCache不是当前所有负载的统一最优项。\n\n若继续优化，优先研究低复用负载的无效写出，以及压力场景中额外复用为何没有转化成同等幅度的吞吐收益。严格性能因果比较还需要同卡轮换或多次重复，并测试更合适的到达率；原配置严格复现则需要支持对应量化与BF16栈的GPU。这些均为后续工作，不计入本次已经完成的实验结果。"
+      },
+      {
+        "id": "b10_0",
+        "type": "markdown",
+        "body": "## 代码与数据来源\n\n需求依据为随包保存的《复现阶段.md》，分工为实验3。上游代码来自 [SGLang](https://github.com/sgl-project/sglang) 的0.4.6.post5安装包；模型来自 [ModelScope官方Qwen仓库](https://modelscope.cn/models/Qwen/Qwen2.5-3B-Instruct)。[AI-infra-project](https://github.com/Kadsoo/AI-infra-project) 仅作为此前交付形式参考，本报告的性能数值全部来自本次运行，不借用他人的实验结果。\n\n交付包含实测源码、便携重跑入口、离线分析脚本、原始请求与事件、环境指纹、CSV/JSON汇总、图表、数据验收脚本和文件SHA256清单。原始结果只读保留；新GPU实验必须写入新目录，不覆盖本次证据。"
+      }
+    ],
+    "charts": [
+      {
+        "id": "cache",
+        "title": "核心负载的总缓存复用比例",
+        "type": "bar",
+        "dataset": "core",
+        "sourceId": "results",
+        "subtitle": "2026年9月10日；seed42；每组100请求，压力点128请求；三张同规格V100",
+        "showDescription": true,
+        "layout": "full",
+        "valueFormat": "percent",
+        "encodings": {
+          "x": {
+            "field": "label",
+            "type": "nominal",
+            "label": "测点"
+          },
+          "y": {
+            "field": "cache_hit_ratio",
+            "type": "quantitative",
+            "label": "复用tokens/输入tokens"
+          },
+          "color": {
+            "field": "baseline",
+            "type": "nominal"
+          }
+        },
+        "palette": {
+          "kind": "categorical"
+        },
+        "legend": {
+          "position": "bottom"
+        },
+        "settings": {
+          "groupMode": "grouped",
+          "showPoints": "always",
+          "sort": "none"
+        },
+        "intent": "comparison",
+        "question": "核心负载的总缓存复用比例",
+        "rationale": "按照复现要求对实际离散配置或经验分布做对照，不进行插值估计、统计外推或跨测点平均。"
+      },
+      {
+        "id": "throughput",
+        "title": "核心负载的输出吞吐",
+        "type": "bar",
+        "dataset": "core",
+        "sourceId": "results",
+        "subtitle": "2026年9月10日；seed42；每组100请求，压力点128请求；三张同规格V100",
+        "showDescription": true,
+        "layout": "full",
+        "valueFormat": "number",
+        "encodings": {
+          "x": {
+            "field": "label",
+            "type": "nominal",
+            "label": "测点"
+          },
+          "y": {
+            "field": "output_token_throughput",
+            "type": "quantitative",
+            "label": "tokens/s"
+          },
+          "color": {
+            "field": "baseline",
+            "type": "nominal"
+          }
+        },
+        "palette": {
+          "kind": "categorical"
+        },
+        "legend": {
+          "position": "bottom"
+        },
+        "settings": {
+          "groupMode": "grouped",
+          "showPoints": "always",
+          "sort": "none"
+        },
+        "intent": "comparison",
+        "question": "核心负载的输出吞吐",
+        "rationale": "按照复现要求对实际离散配置或经验分布做对照，不进行插值估计、统计外推或跨测点平均。"
+      },
+      {
+        "id": "qps_ttft",
+        "title": "QPS与TTFT中位数",
+        "type": "line",
+        "dataset": "qps",
+        "sourceId": "results",
+        "subtitle": "2026年9月10日；seed42；每组100请求，压力点128请求；三张同规格V100",
+        "showDescription": true,
+        "layout": "full",
+        "valueFormat": "number",
+        "encodings": {
+          "x": {
+            "field": "qps",
+            "type": "quantitative",
+            "label": "计划QPS"
+          },
+          "y": {
+            "field": "ttft_ms_p50",
+            "type": "quantitative",
+            "label": "ms"
+          },
+          "color": {
+            "field": "baseline",
+            "type": "nominal"
+          },
+          "lineStyle": {
+            "field": "line_style",
+            "type": "nominal"
+          }
+        },
+        "palette": {
+          "kind": "categorical"
+        },
+        "legend": {
+          "position": "bottom"
+        },
+        "settings": {
+          "groupMode": "grouped",
+          "showPoints": "always",
+          "sort": "none"
+        },
+        "intent": "custom",
+        "question": "QPS与TTFT中位数",
+        "rationale": "按照复现要求对实际离散配置或经验分布做对照，不进行插值估计、统计外推或跨测点平均。"
+      },
+      {
+        "id": "qps_itl",
+        "title": "QPS与ITL中位数",
+        "type": "line",
+        "dataset": "qps",
+        "sourceId": "results",
+        "subtitle": "2026年9月10日；seed42；每组100请求，压力点128请求；三张同规格V100",
+        "showDescription": true,
+        "layout": "full",
+        "valueFormat": "number",
+        "encodings": {
+          "x": {
+            "field": "qps",
+            "type": "quantitative",
+            "label": "计划QPS"
+          },
+          "y": {
+            "field": "itl_ms_p50",
+            "type": "quantitative",
+            "label": "ms"
+          },
+          "color": {
+            "field": "baseline",
+            "type": "nominal"
+          },
+          "lineStyle": {
+            "field": "line_style",
+            "type": "nominal"
+          }
+        },
+        "palette": {
+          "kind": "categorical"
+        },
+        "legend": {
+          "position": "bottom"
+        },
+        "settings": {
+          "groupMode": "grouped",
+          "showPoints": "always",
+          "sort": "none"
+        },
+        "intent": "custom",
+        "question": "QPS与ITL中位数",
+        "rationale": "按照复现要求对实际离散配置或经验分布做对照，不进行插值估计、统计外推或跨测点平均。"
+      },
+      {
+        "id": "context_ttft",
+        "title": "输入长度与TTFT中位数",
+        "type": "line",
+        "dataset": "context",
+        "sourceId": "results",
+        "subtitle": "2026年9月10日；seed42；每组100请求，压力点128请求；三张同规格V100",
+        "showDescription": true,
+        "layout": "full",
+        "valueFormat": "number",
+        "encodings": {
+          "x": {
+            "field": "actual_isl_mean",
+            "type": "quantitative",
+            "label": "实际平均输入tokens"
+          },
+          "y": {
+            "field": "ttft_ms_p50",
+            "type": "quantitative",
+            "label": "ms"
+          },
+          "color": {
+            "field": "baseline",
+            "type": "nominal"
+          },
+          "lineStyle": {
+            "field": "line_style",
+            "type": "nominal"
+          }
+        },
+        "palette": {
+          "kind": "categorical"
+        },
+        "legend": {
+          "position": "bottom"
+        },
+        "settings": {
+          "groupMode": "grouped",
+          "showPoints": "always",
+          "sort": "none"
+        },
+        "intent": "custom",
+        "question": "输入长度与TTFT中位数",
+        "rationale": "按照复现要求对实际离散配置或经验分布做对照，不进行插值估计、统计外推或跨测点平均。"
+      },
+      {
+        "id": "context_itl",
+        "title": "输入长度与ITL中位数",
+        "type": "line",
+        "dataset": "context",
+        "sourceId": "results",
+        "subtitle": "2026年9月10日；seed42；每组100请求，压力点128请求；三张同规格V100",
+        "showDescription": true,
+        "layout": "full",
+        "valueFormat": "number",
+        "encodings": {
+          "x": {
+            "field": "actual_isl_mean",
+            "type": "quantitative",
+            "label": "实际平均输入tokens"
+          },
+          "y": {
+            "field": "itl_ms_p50",
+            "type": "quantitative",
+            "label": "ms"
+          },
+          "color": {
+            "field": "baseline",
+            "type": "nominal"
+          },
+          "lineStyle": {
+            "field": "line_style",
+            "type": "nominal"
+          }
+        },
+        "palette": {
+          "kind": "categorical"
+        },
+        "legend": {
+          "position": "bottom"
+        },
+        "settings": {
+          "groupMode": "grouped",
+          "showPoints": "always",
+          "sort": "none"
+        },
+        "intent": "custom",
+        "question": "输入长度与ITL中位数",
+        "rationale": "按照复现要求对实际离散配置或经验分布做对照，不进行插值估计、统计外推或跨测点平均。"
+      },
+      {
+        "id": "cdf",
+        "title": "压力4K的TTFT经验CDF",
+        "type": "line",
+        "dataset": "cdf",
+        "sourceId": "requests",
+        "subtitle": "每组128请求；QPS1；完整TTFT样本；连线仅指示经验累计分布",
+        "showDescription": true,
+        "layout": "full",
+        "valueFormat": "percent",
+        "encodings": {
+          "x": {
+            "field": "ttft_ms",
+            "type": "quantitative",
+            "label": "TTFT(ms)"
+          },
+          "y": {
+            "field": "cdf",
+            "type": "quantitative",
+            "label": "累计比例"
+          },
+          "color": {
+            "field": "baseline",
+            "type": "nominal"
+          },
+          "lineStyle": {
+            "field": "line_style",
+            "type": "nominal"
+          }
+        },
+        "palette": {
+          "kind": "categorical"
+        },
+        "legend": {
+          "position": "bottom"
+        },
+        "settings": {
+          "groupMode": "grouped",
+          "showPoints": "always",
+          "sort": "none"
+        },
+        "intent": "custom",
+        "question": "压力4K的TTFT经验CDF",
+        "rationale": "按照复现要求对实际离散配置或经验分布做对照，不进行插值估计、统计外推或跨测点平均。"
+      },
+      {
+        "id": "transfer_bytes",
+        "title": "S2各测点双向传输量",
+        "type": "bar",
+        "dataset": "transfer",
+        "sourceId": "transfer",
+        "subtitle": "2026年9月10日；seed42；每组100请求，压力点128请求；三张同规格V100",
+        "showDescription": true,
+        "layout": "full",
+        "valueFormat": "number",
+        "encodings": {
+          "x": {
+            "field": "label",
+            "type": "nominal",
+            "label": "测点"
+          },
+          "y": {
+            "field": "GB",
+            "type": "quantitative",
+            "label": "GB"
+          },
+          "color": {
+            "field": "direction",
+            "type": "nominal"
+          }
+        },
+        "palette": {
+          "kind": "categorical"
+        },
+        "legend": {
+          "position": "bottom"
+        },
+        "settings": {
+          "groupMode": "grouped",
+          "showPoints": "always",
+          "sort": "none"
+        },
+        "intent": "comparison",
+        "question": "S2各测点双向传输量",
+        "rationale": "按照复现要求对实际离散配置或经验分布做对照，不进行插值估计、统计外推或跨测点平均。"
+      },
+      {
+        "id": "transfer_bw",
+        "title": "S2各测点有效传输带宽",
+        "type": "bar",
+        "dataset": "transfer",
+        "sourceId": "transfer",
+        "subtitle": "2026年9月10日；seed42；每组100请求，压力点128请求；三张同规格V100",
+        "showDescription": true,
+        "layout": "full",
+        "valueFormat": "number",
+        "encodings": {
+          "x": {
+            "field": "label",
+            "type": "nominal",
+            "label": "测点"
+          },
+          "y": {
+            "field": "GBps",
+            "type": "quantitative",
+            "label": "GB/s"
+          },
+          "color": {
+            "field": "direction",
+            "type": "nominal"
+          }
+        },
+        "palette": {
+          "kind": "categorical"
+        },
+        "legend": {
+          "position": "bottom"
+        },
+        "settings": {
+          "groupMode": "grouped",
+          "showPoints": "always",
+          "sort": "none"
+        },
+        "intent": "comparison",
+        "question": "S2各测点有效传输带宽",
+        "rationale": "按照复现要求对实际离散配置或经验分布做对照，不进行插值估计、统计外推或跨测点平均。"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "status": "ready",
+    "generatedAt": "2026-09-10T10:43:44.481247+00:00",
+    "datasets": {
+      "core": [
+        {
+          "baseline": "S0",
+          "point": "random_2k_q1",
+          "completed": 100,
+          "prompt_tokens": 215670,
+          "output_tokens": 12800,
+          "cached_tokens": 0,
+          "actual_isl_mean": 2156.7,
+          "client_wait_s_mean": 172.61678763639821,
+          "ttft_ms_p50": 1115.837740508141,
+          "itl_ms_p50": 115.1847785076825,
+          "qps": 1.0,
+          "duration_s": 449.23151099000825,
+          "label": "随机2K",
+          "cache_hit_ratio": 0.0,
+          "output_token_throughput": 28.493103637791553,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S1",
+          "point": "random_2k_q1",
+          "completed": 100,
+          "prompt_tokens": 215670,
+          "output_tokens": 12800,
+          "cached_tokens": 0,
+          "actual_isl_mean": 2156.7,
+          "client_wait_s_mean": 148.16735814423853,
+          "ttft_ms_p50": 1112.6873644971056,
+          "itl_ms_p50": 112.1225684764795,
+          "qps": 1.0,
+          "duration_s": 409.18490892398404,
+          "label": "随机2K",
+          "cache_hit_ratio": 0.0,
+          "output_token_throughput": 31.28170106189793,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S2",
+          "point": "random_2k_q1",
+          "completed": 100,
+          "prompt_tokens": 215670,
+          "output_tokens": 12800,
+          "cached_tokens": 0,
+          "actual_isl_mean": 2156.7,
+          "client_wait_s_mean": 154.46778397981717,
+          "ttft_ms_p50": 1250.7713729864918,
+          "itl_ms_p50": 114.11265702918172,
+          "qps": 1.0,
+          "duration_s": 422.6587672260066,
+          "label": "随机2K",
+          "cache_hit_ratio": 0.0,
+          "output_token_throughput": 30.28447767452913,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S0",
+          "point": "prefix_2k_q1",
+          "completed": 100,
+          "prompt_tokens": 215972,
+          "output_tokens": 12800,
+          "cached_tokens": 0,
+          "actual_isl_mean": 2159.72,
+          "client_wait_s_mean": 151.54112765079685,
+          "ttft_ms_p50": 1112.591072509531,
+          "itl_ms_p50": 114.17504400014877,
+          "qps": 1.0,
+          "duration_s": 415.4852929720073,
+          "label": "共享2K",
+          "cache_hit_ratio": 0.0,
+          "output_token_throughput": 30.80734797720597,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S1",
+          "point": "prefix_2k_q1",
+          "completed": 100,
+          "prompt_tokens": 215972,
+          "output_tokens": 12800,
+          "cached_tokens": 79010,
+          "actual_isl_mean": 2159.72,
+          "client_wait_s_mean": 146.1835128635861,
+          "ttft_ms_p50": 953.5864219942596,
+          "itl_ms_p50": 112.66135051846504,
+          "qps": 1.0,
+          "duration_s": 404.6372463540174,
+          "label": "共享2K",
+          "cache_hit_ratio": 0.3658344600225955,
+          "output_token_throughput": 31.633271814036792,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S2",
+          "point": "prefix_2k_q1",
+          "completed": 100,
+          "prompt_tokens": 215972,
+          "output_tokens": 12800,
+          "cached_tokens": 97407,
+          "actual_isl_mean": 2159.72,
+          "client_wait_s_mean": 149.22159552716883,
+          "ttft_ms_p50": 1019.8108034965117,
+          "itl_ms_p50": 113.43932000454515,
+          "qps": 1.0,
+          "duration_s": 410.22910211997805,
+          "label": "共享2K",
+          "cache_hit_ratio": 0.45101679847387627,
+          "output_token_throughput": 31.20207692202304,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S0",
+          "point": "pressure_4k_q1",
+          "completed": 128,
+          "prompt_tokens": 551800,
+          "output_tokens": 16384,
+          "cached_tokens": 0,
+          "actual_isl_mean": 4310.9375,
+          "client_wait_s_mean": 275.0457008420242,
+          "ttft_ms_p50": 6111.933786000009,
+          "itl_ms_p50": 124.2896654875949,
+          "qps": 1.0,
+          "duration_s": 702.231050819013,
+          "label": "压力4K",
+          "cache_hit_ratio": 0.0,
+          "output_token_throughput": 23.331352239254187,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S1",
+          "point": "pressure_4k_q1",
+          "completed": 128,
+          "prompt_tokens": 551800,
+          "output_tokens": 16384,
+          "cached_tokens": 40952,
+          "actual_isl_mean": 4310.9375,
+          "client_wait_s_mean": 271.28270426562676,
+          "ttft_ms_p50": 5940.542151482077,
+          "itl_ms_p50": 123.47198149655014,
+          "qps": 1.0,
+          "duration_s": 694.6164460660075,
+          "label": "压力4K",
+          "cache_hit_ratio": 0.07421529539688293,
+          "output_token_throughput": 23.58711788756449,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S2",
+          "point": "pressure_4k_q1",
+          "completed": 128,
+          "prompt_tokens": 551800,
+          "output_tokens": 16384,
+          "cached_tokens": 193884,
+          "actual_isl_mean": 4310.9375,
+          "client_wait_s_mean": 273.2045497319009,
+          "ttft_ms_p50": 5671.957390004536,
+          "itl_ms_p50": 124.5192814967595,
+          "qps": 1.0,
+          "duration_s": 693.6536357300356,
+          "label": "压力4K",
+          "cache_hit_ratio": 0.3513664371148967,
+          "output_token_throughput": 23.619857456317753,
+          "line_style": "dotted"
+        }
+      ],
+      "qps": [
+        {
+          "baseline": "S0",
+          "point": "prefix_2k_q025",
+          "completed": 100,
+          "prompt_tokens": 215972,
+          "output_tokens": 12800,
+          "cached_tokens": 0,
+          "actual_isl_mean": 2159.72,
+          "client_wait_s_mean": 11.074707433881413,
+          "ttft_ms_p50": 1043.4295055019902,
+          "itl_ms_p50": 114.69845499959774,
+          "qps": 0.25,
+          "duration_s": 438.7159331619623,
+          "label": "2K/QPS0.25",
+          "cache_hit_ratio": 0.0,
+          "output_token_throughput": 29.17605455481504,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S1",
+          "point": "prefix_2k_q025",
+          "completed": 100,
+          "prompt_tokens": 215972,
+          "output_tokens": 12800,
+          "cached_tokens": 80086,
+          "actual_isl_mean": 2159.72,
+          "client_wait_s_mean": 7.0772255444212355,
+          "ttft_ms_p50": 843.9454055042006,
+          "itl_ms_p50": 111.7094854998868,
+          "qps": 0.25,
+          "duration_s": 437.0741184609942,
+          "label": "2K/QPS0.25",
+          "cache_hit_ratio": 0.37081658733539535,
+          "output_token_throughput": 29.285650784061033,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S2",
+          "point": "prefix_2k_q025",
+          "completed": 100,
+          "prompt_tokens": 215972,
+          "output_tokens": 12800,
+          "cached_tokens": 97407,
+          "actual_isl_mean": 2159.72,
+          "client_wait_s_mean": 9.305094043798745,
+          "ttft_ms_p50": 905.5005400150549,
+          "itl_ms_p50": 113.80281997844577,
+          "qps": 0.25,
+          "duration_s": 438.81729382497724,
+          "label": "2K/QPS0.25",
+          "cache_hit_ratio": 0.45101679847387627,
+          "output_token_throughput": 29.169315293907477,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S0",
+          "point": "prefix_2k_q05",
+          "completed": 100,
+          "prompt_tokens": 215972,
+          "output_tokens": 12800,
+          "cached_tokens": 0,
+          "actual_isl_mean": 2159.72,
+          "client_wait_s_mean": 104.47581742438953,
+          "ttft_ms_p50": 1112.4251849832945,
+          "itl_ms_p50": 114.92994250147603,
+          "qps": 0.5,
+          "duration_s": 417.77009185700445,
+          "label": "2K/QPS0.5",
+          "cache_hit_ratio": 0.0,
+          "output_token_throughput": 30.638861540096126,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S1",
+          "point": "prefix_2k_q05",
+          "completed": 100,
+          "prompt_tokens": 215972,
+          "output_tokens": 12800,
+          "cached_tokens": 80080,
+          "actual_isl_mean": 2159.72,
+          "client_wait_s_mean": 99.31435897148855,
+          "ttft_ms_p50": 953.7224729720037,
+          "itl_ms_p50": 113.53958048857749,
+          "qps": 0.5,
+          "duration_s": 407.4731240249821,
+          "label": "2K/QPS0.5",
+          "cache_hit_ratio": 0.3707888059563277,
+          "output_token_throughput": 31.413114743771995,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S2",
+          "point": "prefix_2k_q05",
+          "completed": 100,
+          "prompt_tokens": 215972,
+          "output_tokens": 12800,
+          "cached_tokens": 97407,
+          "actual_isl_mean": 2159.72,
+          "client_wait_s_mean": 107.2589720867388,
+          "ttft_ms_p50": 1027.3350799980108,
+          "itl_ms_p50": 115.66335047245957,
+          "qps": 0.5,
+          "duration_s": 430.6784495339962,
+          "label": "2K/QPS0.5",
+          "cache_hit_ratio": 0.45101679847387627,
+          "output_token_throughput": 29.72054908679524,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S0",
+          "point": "prefix_2k_q1",
+          "completed": 100,
+          "prompt_tokens": 215972,
+          "output_tokens": 12800,
+          "cached_tokens": 0,
+          "actual_isl_mean": 2159.72,
+          "client_wait_s_mean": 151.54112765079685,
+          "ttft_ms_p50": 1112.591072509531,
+          "itl_ms_p50": 114.17504400014877,
+          "qps": 1.0,
+          "duration_s": 415.4852929720073,
+          "label": "共享2K",
+          "cache_hit_ratio": 0.0,
+          "output_token_throughput": 30.80734797720597,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S1",
+          "point": "prefix_2k_q1",
+          "completed": 100,
+          "prompt_tokens": 215972,
+          "output_tokens": 12800,
+          "cached_tokens": 79010,
+          "actual_isl_mean": 2159.72,
+          "client_wait_s_mean": 146.1835128635861,
+          "ttft_ms_p50": 953.5864219942596,
+          "itl_ms_p50": 112.66135051846504,
+          "qps": 1.0,
+          "duration_s": 404.6372463540174,
+          "label": "共享2K",
+          "cache_hit_ratio": 0.3658344600225955,
+          "output_token_throughput": 31.633271814036792,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S2",
+          "point": "prefix_2k_q1",
+          "completed": 100,
+          "prompt_tokens": 215972,
+          "output_tokens": 12800,
+          "cached_tokens": 97407,
+          "actual_isl_mean": 2159.72,
+          "client_wait_s_mean": 149.22159552716883,
+          "ttft_ms_p50": 1019.8108034965117,
+          "itl_ms_p50": 113.43932000454515,
+          "qps": 1.0,
+          "duration_s": 410.22910211997805,
+          "label": "共享2K",
+          "cache_hit_ratio": 0.45101679847387627,
+          "output_token_throughput": 31.20207692202304,
+          "line_style": "dotted"
+        }
+      ],
+      "context": [
+        {
+          "baseline": "S0",
+          "point": "prefix_1k_q1",
+          "completed": 100,
+          "prompt_tokens": 107495,
+          "output_tokens": 12800,
+          "cached_tokens": 0,
+          "actual_isl_mean": 1074.95,
+          "client_wait_s_mean": 151.5447752752085,
+          "ttft_ms_p50": 502.38945297314785,
+          "itl_ms_p50": 150.2722695004195,
+          "qps": 1.0,
+          "duration_s": 447.0018921990413,
+          "label": "共享1K",
+          "cache_hit_ratio": 0.0,
+          "output_token_throughput": 28.635225540164843,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S1",
+          "point": "prefix_1k_q1",
+          "completed": 100,
+          "prompt_tokens": 107495,
+          "output_tokens": 12800,
+          "cached_tokens": 46680,
+          "actual_isl_mean": 1074.95,
+          "client_wait_s_mean": 163.1463678491948,
+          "ttft_ms_p50": 405.45192747958936,
+          "itl_ms_p50": 113.80398299661465,
+          "qps": 1.0,
+          "duration_s": 421.63067554001464,
+          "label": "共享1K",
+          "cache_hit_ratio": 0.43425275594213686,
+          "output_token_throughput": 30.358322443228452,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S2",
+          "point": "prefix_1k_q1",
+          "completed": 100,
+          "prompt_tokens": 107495,
+          "output_tokens": 12800,
+          "cached_tokens": 47742,
+          "actual_isl_mean": 1074.95,
+          "client_wait_s_mean": 138.64207597654197,
+          "ttft_ms_p50": 420.71742098778486,
+          "itl_ms_p50": 114.8601820168551,
+          "qps": 1.0,
+          "duration_s": 386.4554523769766,
+          "label": "共享1K",
+          "cache_hit_ratio": 0.4441322852225685,
+          "output_token_throughput": 33.121540713867205,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S0",
+          "point": "prefix_2k_q1",
+          "completed": 100,
+          "prompt_tokens": 215972,
+          "output_tokens": 12800,
+          "cached_tokens": 0,
+          "actual_isl_mean": 2159.72,
+          "client_wait_s_mean": 151.54112765079685,
+          "ttft_ms_p50": 1112.591072509531,
+          "itl_ms_p50": 114.17504400014877,
+          "qps": 1.0,
+          "duration_s": 415.4852929720073,
+          "label": "共享2K",
+          "cache_hit_ratio": 0.0,
+          "output_token_throughput": 30.80734797720597,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S1",
+          "point": "prefix_2k_q1",
+          "completed": 100,
+          "prompt_tokens": 215972,
+          "output_tokens": 12800,
+          "cached_tokens": 79010,
+          "actual_isl_mean": 2159.72,
+          "client_wait_s_mean": 146.1835128635861,
+          "ttft_ms_p50": 953.5864219942596,
+          "itl_ms_p50": 112.66135051846504,
+          "qps": 1.0,
+          "duration_s": 404.6372463540174,
+          "label": "共享2K",
+          "cache_hit_ratio": 0.3658344600225955,
+          "output_token_throughput": 31.633271814036792,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S2",
+          "point": "prefix_2k_q1",
+          "completed": 100,
+          "prompt_tokens": 215972,
+          "output_tokens": 12800,
+          "cached_tokens": 97407,
+          "actual_isl_mean": 2159.72,
+          "client_wait_s_mean": 149.22159552716883,
+          "ttft_ms_p50": 1019.8108034965117,
+          "itl_ms_p50": 113.43932000454515,
+          "qps": 1.0,
+          "duration_s": 410.22910211997805,
+          "label": "共享2K",
+          "cache_hit_ratio": 0.45101679847387627,
+          "output_token_throughput": 31.20207692202304,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S0",
+          "point": "prefix_4k_q1",
+          "completed": 100,
+          "prompt_tokens": 431936,
+          "output_tokens": 12800,
+          "cached_tokens": 0,
+          "actual_isl_mean": 4319.36,
+          "client_wait_s_mean": 240.50365000144578,
+          "ttft_ms_p50": 6097.197482507909,
+          "itl_ms_p50": 124.32489849743433,
+          "qps": 1.0,
+          "duration_s": 580.3613168899901,
+          "label": "共享4K",
+          "cache_hit_ratio": 0.0,
+          "output_token_throughput": 22.055225990236515,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S1",
+          "point": "prefix_4k_q1",
+          "completed": 100,
+          "prompt_tokens": 431936,
+          "output_tokens": 12800,
+          "cached_tokens": 99395,
+          "actual_isl_mean": 4319.36,
+          "client_wait_s_mean": 208.21279712127463,
+          "ttft_ms_p50": 5662.257810472511,
+          "itl_ms_p50": 122.71422150661238,
+          "qps": 1.0,
+          "duration_s": 534.9176692389883,
+          "label": "共享4K",
+          "cache_hit_ratio": 0.23011510964587345,
+          "output_token_throughput": 23.928916048352235,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S2",
+          "point": "prefix_4k_q1",
+          "completed": 100,
+          "prompt_tokens": 431936,
+          "output_tokens": 12800,
+          "cached_tokens": 192367,
+          "actual_isl_mean": 4319.36,
+          "client_wait_s_mean": 232.23783078263105,
+          "ttft_ms_p50": 5552.4882820027415,
+          "itl_ms_p50": 126.28952751401812,
+          "qps": 1.0,
+          "duration_s": 579.0210734169814,
+          "label": "共享4K",
+          "cache_hit_ratio": 0.4453599607349237,
+          "output_token_throughput": 22.1062765893187,
+          "line_style": "dotted"
+        }
+      ],
+      "transfer": [
+        {
+          "point": "random_2k_q1",
+          "label": "随机2K",
+          "direction": "GPU→CPU",
+          "bytes": 7870537728,
+          "GB": 7.870537728,
+          "time_s": 6.212542371591553,
+          "GBps": 1.2668787200534932,
+          "operations": 198,
+          "n": 100
+        },
+        {
+          "point": "random_2k_q1",
+          "label": "随机2K",
+          "direction": "CPU→GPU",
+          "bytes": 0,
+          "GB": 0.0,
+          "time_s": 0,
+          "GBps": null,
+          "operations": 0,
+          "n": 100
+        },
+        {
+          "point": "prefix_2k_q1",
+          "label": "共享2K",
+          "direction": "GPU→CPU",
+          "bytes": 4370780160,
+          "GB": 4.37078016,
+          "time_s": 3.9962217531283386,
+          "GBps": 1.0937281337249236,
+          "operations": 110,
+          "n": 100
+        },
+        {
+          "point": "prefix_2k_q1",
+          "label": "共享2K",
+          "direction": "CPU→GPU",
+          "bytes": 599076864,
+          "GB": 0.599076864,
+          "time_s": 0.2790488729951903,
+          "GBps": 2.146852834665724,
+          "operations": 504,
+          "n": 100
+        },
+        {
+          "point": "pressure_4k_q1",
+          "label": "压力4K",
+          "direction": "GPU→CPU",
+          "bytes": 13034668032,
+          "GB": 13.034668032,
+          "time_s": 13.779160574951675,
+          "GBps": 0.9459696736312774,
+          "operations": 328,
+          "n": 128
+        },
+        {
+          "point": "pressure_4k_q1",
+          "label": "压力4K",
+          "direction": "CPU→GPU",
+          "bytes": 5399470080,
+          "GB": 5.39947008,
+          "time_s": 4.407681320386473,
+          "GBps": 1.2250137175358595,
+          "operations": 1620,
+          "n": 128
+        },
+        {
+          "point": "prefix_2k_q025",
+          "label": "2K/QPS0.25",
+          "direction": "GPU→CPU",
+          "bytes": 4370780160,
+          "GB": 4.37078016,
+          "time_s": 4.102103186014574,
+          "GBps": 1.0654973709343623,
+          "operations": 110,
+          "n": 100
+        },
+        {
+          "point": "prefix_2k_q025",
+          "label": "2K/QPS0.25",
+          "direction": "CPU→GPU",
+          "bytes": 599076864,
+          "GB": 0.599076864,
+          "time_s": 0.282725339056924,
+          "GBps": 2.118935876063736,
+          "operations": 504,
+          "n": 100
+        },
+        {
+          "point": "prefix_2k_q05",
+          "label": "2K/QPS0.5",
+          "direction": "GPU→CPU",
+          "bytes": 4370780160,
+          "GB": 4.37078016,
+          "time_s": 3.750911997864023,
+          "GBps": 1.1652579859215477,
+          "operations": 110,
+          "n": 100
+        },
+        {
+          "point": "prefix_2k_q05",
+          "label": "2K/QPS0.5",
+          "direction": "CPU→GPU",
+          "bytes": 599076864,
+          "GB": 0.599076864,
+          "time_s": 0.28518996777711436,
+          "GBps": 2.100623905775672,
+          "operations": 504,
+          "n": 100
+        },
+        {
+          "point": "prefix_1k_q1",
+          "label": "共享1K",
+          "direction": "GPU→CPU",
+          "bytes": 2183049216,
+          "GB": 2.183049216,
+          "time_s": 0.7639046692638658,
+          "GBps": 2.857750847502593,
+          "operations": 103,
+          "n": 100
+        },
+        {
+          "point": "prefix_1k_q1",
+          "label": "共享1K",
+          "direction": "CPU→GPU",
+          "bytes": 19574784,
+          "GB": 0.019574784,
+          "time_s": 0.007822963932994753,
+          "GBps": 2.5022209187798805,
+          "operations": 36,
+          "n": 100
+        },
+        {
+          "point": "prefix_4k_q1",
+          "label": "共享4K",
+          "direction": "GPU→CPU",
+          "bytes": 8551526400,
+          "GB": 8.5515264,
+          "time_s": 9.535395867016632,
+          "GBps": 0.8968192321810277,
+          "operations": 215,
+          "n": 100
+        },
+        {
+          "point": "prefix_4k_q1",
+          "label": "共享4K",
+          "direction": "CPU→GPU",
+          "bytes": 3027714048,
+          "GB": 3.027714048,
+          "time_s": 2.9186037823092192,
+          "GBps": 1.037384404951484,
+          "operations": 1080,
+          "n": 100
+        }
+      ],
+      "cdf": [
+        {
+          "baseline": "S0",
+          "ttft_ms": 1469.620619987836,
+          "cdf": 0.0078125,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 1475.6997140066233,
+          "cdf": 0.015625,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 1490.158638014691,
+          "cdf": 0.0234375,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 1506.1014420061838,
+          "cdf": 0.03125,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 1513.7637729931157,
+          "cdf": 0.0390625,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 1516.3919469923712,
+          "cdf": 0.046875,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 1518.916751985671,
+          "cdf": 0.0546875,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 1530.087305989582,
+          "cdf": 0.0625,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 1547.0916379999835,
+          "cdf": 0.0703125,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 1560.1672529883217,
+          "cdf": 0.078125,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 1565.8498250122648,
+          "cdf": 0.0859375,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 1566.6969919984695,
+          "cdf": 0.09375,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 1568.778688000748,
+          "cdf": 0.1015625,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 1571.530501008965,
+          "cdf": 0.109375,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 1571.969478012761,
+          "cdf": 0.1171875,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 1572.6830229978077,
+          "cdf": 0.125,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 1572.699370997725,
+          "cdf": 0.1328125,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 1573.8724269904196,
+          "cdf": 0.140625,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 1574.2279370024335,
+          "cdf": 0.1484375,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 1574.6399279742036,
+          "cdf": 0.15625,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 1581.626592000248,
+          "cdf": 0.1640625,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 1582.0108139887452,
+          "cdf": 0.171875,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 1586.2112510076258,
+          "cdf": 0.1796875,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 1586.3984629977494,
+          "cdf": 0.1875,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 1588.115727994591,
+          "cdf": 0.1953125,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 1589.5598590141162,
+          "cdf": 0.203125,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 1589.630992995808,
+          "cdf": 0.2109375,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 1590.1547629910056,
+          "cdf": 0.21875,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 1591.742708988022,
+          "cdf": 0.2265625,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 1600.0768519879784,
+          "cdf": 0.234375,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 1600.2424050238915,
+          "cdf": 0.2421875,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 1604.8499929893296,
+          "cdf": 0.25,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 4767.813343001762,
+          "cdf": 0.2578125,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 4923.1318090169225,
+          "cdf": 0.265625,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6004.973616014468,
+          "cdf": 0.2734375,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6005.105819989694,
+          "cdf": 0.28125,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6005.628779006656,
+          "cdf": 0.2890625,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6005.751413002145,
+          "cdf": 0.296875,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6006.794256012654,
+          "cdf": 0.3046875,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6009.1066119784955,
+          "cdf": 0.3125,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6012.953192985151,
+          "cdf": 0.3203125,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6013.601471000584,
+          "cdf": 0.328125,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6014.664604997961,
+          "cdf": 0.3359375,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6019.481646973873,
+          "cdf": 0.34375,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6019.918581994716,
+          "cdf": 0.3515625,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6021.132410998689,
+          "cdf": 0.359375,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6040.312864002772,
+          "cdf": 0.3671875,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6040.916319994722,
+          "cdf": 0.375,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6042.060642008437,
+          "cdf": 0.3828125,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6043.127142009325,
+          "cdf": 0.390625,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6043.777242011856,
+          "cdf": 0.3984375,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6044.891457015183,
+          "cdf": 0.40625,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6062.448751996271,
+          "cdf": 0.4140625,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6063.1343639979605,
+          "cdf": 0.421875,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6064.244231994962,
+          "cdf": 0.4296875,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6075.138729996979,
+          "cdf": 0.4375,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6075.7380290015135,
+          "cdf": 0.4453125,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6076.829893980175,
+          "cdf": 0.453125,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6100.273944000946,
+          "cdf": 0.4609375,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6100.916741997935,
+          "cdf": 0.46875,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6102.060278004501,
+          "cdf": 0.4765625,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6106.509731995175,
+          "cdf": 0.484375,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6107.061373011675,
+          "cdf": 0.4921875,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6108.131857006811,
+          "cdf": 0.5,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6115.735714993207,
+          "cdf": 0.5078125,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6128.500476974295,
+          "cdf": 0.515625,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6129.094353003893,
+          "cdf": 0.5234375,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6130.136593012139,
+          "cdf": 0.53125,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6135.30541799264,
+          "cdf": 0.5390625,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6136.0234519816,
+          "cdf": 0.546875,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6136.718583991751,
+          "cdf": 0.5546875,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6145.751853007823,
+          "cdf": 0.5625,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6146.322540007532,
+          "cdf": 0.5703125,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6147.403745999327,
+          "cdf": 0.578125,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6148.130513000069,
+          "cdf": 0.5859375,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6148.749840998789,
+          "cdf": 0.59375,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6149.813762982376,
+          "cdf": 0.6015625,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6151.098497997737,
+          "cdf": 0.609375,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6151.653331995476,
+          "cdf": 0.6171875,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6152.796721988125,
+          "cdf": 0.625,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6153.4754970052745,
+          "cdf": 0.6328125,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6154.027778015006,
+          "cdf": 0.640625,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6155.172392027453,
+          "cdf": 0.6484375,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6156.5909950004425,
+          "cdf": 0.65625,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6157.197891996475,
+          "cdf": 0.6640625,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6158.29191901139,
+          "cdf": 0.671875,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6160.041711991653,
+          "cdf": 0.6796875,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6160.679586988408,
+          "cdf": 0.6875,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6161.602586013032,
+          "cdf": 0.6953125,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6162.221398000838,
+          "cdf": 0.703125,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6164.187393995235,
+          "cdf": 0.7109375,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6164.5985880168155,
+          "cdf": 0.71875,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6165.205274999607,
+          "cdf": 0.7265625,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6165.800440008752,
+          "cdf": 0.734375,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6166.286133986432,
+          "cdf": 0.7421875,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6169.33002602309,
+          "cdf": 0.75,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6169.93777998141,
+          "cdf": 0.7578125,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6171.067070012214,
+          "cdf": 0.765625,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6184.722400997998,
+          "cdf": 0.7734375,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6184.726139006671,
+          "cdf": 0.78125,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6185.287589993095,
+          "cdf": 0.7890625,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6185.375785978977,
+          "cdf": 0.796875,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6186.397788987961,
+          "cdf": 0.8046875,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6188.996473007137,
+          "cdf": 0.8125,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6194.925374991726,
+          "cdf": 0.8203125,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6195.47791799414,
+          "cdf": 0.828125,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6196.545223006979,
+          "cdf": 0.8359375,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6206.701389019145,
+          "cdf": 0.84375,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6207.33653800562,
+          "cdf": 0.8515625,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6208.507814008044,
+          "cdf": 0.859375,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6212.470328988275,
+          "cdf": 0.8671875,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6213.0626250000205,
+          "cdf": 0.875,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6214.12180698826,
+          "cdf": 0.8828125,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6218.271543009905,
+          "cdf": 0.890625,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6218.815205007559,
+          "cdf": 0.8984375,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6219.869093998568,
+          "cdf": 0.90625,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6232.801495003514,
+          "cdf": 0.9140625,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6233.354638010496,
+          "cdf": 0.921875,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6234.463512984803,
+          "cdf": 0.9296875,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6247.83143500099,
+          "cdf": 0.9375,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6248.508356016828,
+          "cdf": 0.9453125,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6252.217250992544,
+          "cdf": 0.953125,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6271.388238994405,
+          "cdf": 0.9609375,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6271.9164619920775,
+          "cdf": 0.96875,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6273.0704360001255,
+          "cdf": 0.9765625,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6289.057538990164,
+          "cdf": 0.984375,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6289.616507012397,
+          "cdf": 0.9921875,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S0",
+          "ttft_ms": 6290.696910989936,
+          "cdf": 1.0,
+          "n": 128,
+          "line_style": "solid"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 1379.940468003042,
+          "cdf": 0.0078125,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 1394.4187460001558,
+          "cdf": 0.015625,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 1415.9915880300105,
+          "cdf": 0.0234375,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 1467.7684310008772,
+          "cdf": 0.03125,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 1469.1875710268505,
+          "cdf": 0.0390625,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 1498.2324719894677,
+          "cdf": 0.046875,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 1510.645842005033,
+          "cdf": 0.0546875,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 1520.3996860072948,
+          "cdf": 0.0625,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 1521.0354260052554,
+          "cdf": 0.0703125,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 1523.0777169927023,
+          "cdf": 0.078125,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 1526.54219197575,
+          "cdf": 0.0859375,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 1544.6317640016787,
+          "cdf": 0.09375,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 1553.1719000427984,
+          "cdf": 0.1015625,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 1558.1303650396876,
+          "cdf": 0.109375,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 1560.722263995558,
+          "cdf": 0.1171875,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 1563.7452509836294,
+          "cdf": 0.125,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 1565.7119519892149,
+          "cdf": 0.1328125,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 1566.0339940222912,
+          "cdf": 0.140625,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 1566.3730980013497,
+          "cdf": 0.1484375,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 1568.1108509888873,
+          "cdf": 0.15625,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 1568.8472209731117,
+          "cdf": 0.1640625,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 1577.5967790395953,
+          "cdf": 0.171875,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 1580.716749012936,
+          "cdf": 0.1796875,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 1585.741406015586,
+          "cdf": 0.1875,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 1587.6643370138481,
+          "cdf": 0.1953125,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 1589.467482001055,
+          "cdf": 0.203125,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 1590.8602430135943,
+          "cdf": 0.2109375,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 1591.3239539950155,
+          "cdf": 0.21875,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 1591.8517379905097,
+          "cdf": 0.2265625,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 1592.2511469689198,
+          "cdf": 0.234375,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 1592.555646027904,
+          "cdf": 0.2421875,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 1592.6697099930607,
+          "cdf": 0.25,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 4743.730782996863,
+          "cdf": 0.2578125,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 4898.157174990047,
+          "cdf": 0.265625,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5823.154243000317,
+          "cdf": 0.2734375,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5823.382180009503,
+          "cdf": 0.28125,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5824.288274976425,
+          "cdf": 0.2890625,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5824.462438002229,
+          "cdf": 0.296875,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5825.09110897081,
+          "cdf": 0.3046875,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5825.283101003151,
+          "cdf": 0.3125,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5843.126213992946,
+          "cdf": 0.3203125,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5844.237021985464,
+          "cdf": 0.328125,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5845.025761984289,
+          "cdf": 0.3359375,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5858.608577982523,
+          "cdf": 0.34375,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5859.66732603265,
+          "cdf": 0.3515625,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5860.490197024774,
+          "cdf": 0.359375,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5877.061399980448,
+          "cdf": 0.3671875,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5878.137733961921,
+          "cdf": 0.375,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5878.978956025094,
+          "cdf": 0.3828125,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5908.313243999146,
+          "cdf": 0.390625,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5908.937034022529,
+          "cdf": 0.3984375,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5910.070487996563,
+          "cdf": 0.40625,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5927.581253985409,
+          "cdf": 0.4140625,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5928.784822986927,
+          "cdf": 0.421875,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5929.6121100196615,
+          "cdf": 0.4296875,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5933.101852016989,
+          "cdf": 0.4375,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5933.790531009436,
+          "cdf": 0.4453125,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5934.9500719690695,
+          "cdf": 0.453125,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5935.029332002159,
+          "cdf": 0.4609375,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5936.093363037799,
+          "cdf": 0.46875,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5936.769243038725,
+          "cdf": 0.4765625,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5936.898079991806,
+          "cdf": 0.484375,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5937.459786015097,
+          "cdf": 0.4921875,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5938.530026003718,
+          "cdf": 0.5,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5942.554276960436,
+          "cdf": 0.5078125,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5942.836260015611,
+          "cdf": 0.515625,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5943.478917994071,
+          "cdf": 0.5234375,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5943.617561017163,
+          "cdf": 0.53125,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5944.4813299924135,
+          "cdf": 0.5390625,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5944.659179018345,
+          "cdf": 0.546875,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5952.389753016178,
+          "cdf": 0.5546875,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5953.619000036269,
+          "cdf": 0.5625,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5954.412552993745,
+          "cdf": 0.5703125,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5961.272157961503,
+          "cdf": 0.578125,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5961.899346963037,
+          "cdf": 0.5859375,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5963.030111044645,
+          "cdf": 0.59375,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5970.692717004567,
+          "cdf": 0.6015625,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5971.730194985867,
+          "cdf": 0.609375,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5972.0423350227065,
+          "cdf": 0.6171875,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5972.566927026492,
+          "cdf": 0.625,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5972.704191983212,
+          "cdf": 0.6328125,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5973.818814964034,
+          "cdf": 0.640625,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5981.313775002491,
+          "cdf": 0.6484375,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5981.9375179940835,
+          "cdf": 0.65625,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5983.082495979033,
+          "cdf": 0.6640625,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5990.917023969814,
+          "cdf": 0.671875,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5991.104640997946,
+          "cdf": 0.6796875,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5991.608662996441,
+          "cdf": 0.6875,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5992.206687980797,
+          "cdf": 0.6953125,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5992.830389004666,
+          "cdf": 0.703125,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5995.406829984859,
+          "cdf": 0.7109375,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 5999.090885045007,
+          "cdf": 0.71875,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 6000.215602980461,
+          "cdf": 0.7265625,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 6001.058447989635,
+          "cdf": 0.734375,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 6011.190331017133,
+          "cdf": 0.7421875,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 6011.754520994145,
+          "cdf": 0.75,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 6012.9632280441,
+          "cdf": 0.7578125,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 6015.59864700539,
+          "cdf": 0.765625,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 6016.261518991087,
+          "cdf": 0.7734375,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 6017.445575969759,
+          "cdf": 0.78125,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 6020.979374006856,
+          "cdf": 0.7890625,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 6021.650637034327,
+          "cdf": 0.796875,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 6022.7446489734575,
+          "cdf": 0.8046875,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 6077.81754998723,
+          "cdf": 0.8125,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 6078.9098989916965,
+          "cdf": 0.8203125,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 6082.101052976213,
+          "cdf": 0.828125,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 6091.37679397827,
+          "cdf": 0.8359375,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 6107.120348024182,
+          "cdf": 0.84375,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 6107.714181998745,
+          "cdf": 0.8515625,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 6108.966139960103,
+          "cdf": 0.859375,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 6109.4539720215835,
+          "cdf": 0.8671875,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 6110.137167037465,
+          "cdf": 0.875,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 6111.252345959656,
+          "cdf": 0.8828125,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 6131.806763005443,
+          "cdf": 0.890625,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 6132.421846035868,
+          "cdf": 0.8984375,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 6133.566989970859,
+          "cdf": 0.90625,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 6166.683678049594,
+          "cdf": 0.9140625,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 6167.3835450201295,
+          "cdf": 0.921875,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 6170.880934980232,
+          "cdf": 0.9296875,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 6187.8394989762455,
+          "cdf": 0.9375,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 6188.497796014417,
+          "cdf": 0.9453125,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 6189.651948981918,
+          "cdf": 0.953125,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 6246.610322967172,
+          "cdf": 0.9609375,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 6247.7149670012295,
+          "cdf": 0.96875,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 6248.549900017679,
+          "cdf": 0.9765625,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 6263.685462006833,
+          "cdf": 0.984375,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 6264.732786046807,
+          "cdf": 0.9921875,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S1",
+          "ttft_ms": 6265.569670998957,
+          "cdf": 1.0,
+          "n": 128,
+          "line_style": "dashed"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 1535.277105984278,
+          "cdf": 0.0078125,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 1548.3303539804183,
+          "cdf": 0.015625,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 1566.4167960057966,
+          "cdf": 0.0234375,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 1579.2571229976602,
+          "cdf": 0.03125,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 1585.1074430393055,
+          "cdf": 0.0390625,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 1600.8319969987497,
+          "cdf": 0.046875,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 1603.7890709703788,
+          "cdf": 0.0546875,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 1604.7906519961543,
+          "cdf": 0.0625,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 1608.4698420017958,
+          "cdf": 0.0703125,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 1624.4752579950728,
+          "cdf": 0.078125,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 1647.6558180293068,
+          "cdf": 0.0859375,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 1656.198835989926,
+          "cdf": 0.09375,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 1669.7744749835692,
+          "cdf": 0.1015625,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 1684.0298310271464,
+          "cdf": 0.109375,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 1688.668335962575,
+          "cdf": 0.1171875,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 1709.9717870005406,
+          "cdf": 0.125,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 1710.2077660383657,
+          "cdf": 0.1328125,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 1722.0694459974766,
+          "cdf": 0.140625,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 1723.3245800016448,
+          "cdf": 0.1484375,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 1732.3475109878927,
+          "cdf": 0.15625,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 1744.1093100351281,
+          "cdf": 0.1640625,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 1771.2885899818502,
+          "cdf": 0.171875,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 1780.6856959941797,
+          "cdf": 0.1796875,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 1786.7634780122899,
+          "cdf": 0.1875,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 1807.2614860138856,
+          "cdf": 0.1953125,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 1839.6256159758195,
+          "cdf": 0.203125,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 1918.1500819977373,
+          "cdf": 0.2109375,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 1920.091332984157,
+          "cdf": 0.21875,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 1963.5543189942837,
+          "cdf": 0.2265625,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 1988.5685960180126,
+          "cdf": 0.234375,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 2004.1171789634973,
+          "cdf": 0.2421875,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 2058.6486920365132,
+          "cdf": 0.25,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 4664.181418018416,
+          "cdf": 0.2578125,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 4819.527380983345,
+          "cdf": 0.265625,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5550.297955982387,
+          "cdf": 0.2734375,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5550.910969031975,
+          "cdf": 0.28125,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5552.00612405315,
+          "cdf": 0.2890625,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5566.0199679550715,
+          "cdf": 0.296875,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5568.263721012045,
+          "cdf": 0.3046875,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5569.115993974265,
+          "cdf": 0.3125,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5575.547078973614,
+          "cdf": 0.3203125,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5576.668214984238,
+          "cdf": 0.328125,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5577.5075210258365,
+          "cdf": 0.3359375,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5592.892531014513,
+          "cdf": 0.34375,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5593.758391973097,
+          "cdf": 0.3515625,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5594.4536330061965,
+          "cdf": 0.359375,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5604.594164993614,
+          "cdf": 0.3671875,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5605.653026024811,
+          "cdf": 0.375,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5606.472599960398,
+          "cdf": 0.3828125,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5621.6680650250055,
+          "cdf": 0.390625,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5622.683039051481,
+          "cdf": 0.3984375,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5623.540166008752,
+          "cdf": 0.40625,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5628.346165001858,
+          "cdf": 0.4140625,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5629.350605013315,
+          "cdf": 0.421875,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5633.858982997481,
+          "cdf": 0.4296875,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5634.0884329983965,
+          "cdf": 0.4375,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5634.755612001754,
+          "cdf": 0.4453125,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5638.3800730109215,
+          "cdf": 0.453125,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5653.559447964653,
+          "cdf": 0.4609375,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5654.437878984027,
+          "cdf": 0.46875,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5655.111467989627,
+          "cdf": 0.4765625,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5667.781508993357,
+          "cdf": 0.484375,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5668.941142968833,
+          "cdf": 0.4921875,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5669.778426003177,
+          "cdf": 0.5,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5674.136354005896,
+          "cdf": 0.5078125,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5675.220803997945,
+          "cdf": 0.515625,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5676.026417000685,
+          "cdf": 0.5234375,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5677.367091993801,
+          "cdf": 0.53125,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5677.53540497506,
+          "cdf": 0.5390625,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5677.941753005143,
+          "cdf": 0.546875,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5678.083387028892,
+          "cdf": 0.5546875,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5678.9957110304385,
+          "cdf": 0.5625,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5679.184378997888,
+          "cdf": 0.5703125,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5688.973765994888,
+          "cdf": 0.578125,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5689.567841007374,
+          "cdf": 0.5859375,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5690.675383026246,
+          "cdf": 0.59375,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5704.934130015317,
+          "cdf": 0.6015625,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5705.193202011287,
+          "cdf": 0.609375,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5705.7514259940945,
+          "cdf": 0.6171875,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5719.466262962669,
+          "cdf": 0.625,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5720.3659630031325,
+          "cdf": 0.6328125,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5721.002693055198,
+          "cdf": 0.640625,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5725.864481995814,
+          "cdf": 0.6484375,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5726.714953954797,
+          "cdf": 0.65625,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5727.406790014356,
+          "cdf": 0.6640625,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5740.284673986025,
+          "cdf": 0.671875,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5741.314473969396,
+          "cdf": 0.6796875,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5742.2121730051,
+          "cdf": 0.6875,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5744.648463034537,
+          "cdf": 0.6953125,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5745.560125971679,
+          "cdf": 0.703125,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5746.172297978774,
+          "cdf": 0.7109375,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5771.2532710283995,
+          "cdf": 0.71875,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5771.769232000224,
+          "cdf": 0.7265625,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5772.889111016411,
+          "cdf": 0.734375,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5782.059510005638,
+          "cdf": 0.7421875,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5783.088787982706,
+          "cdf": 0.75,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5786.1513390089385,
+          "cdf": 0.7578125,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5787.032339023426,
+          "cdf": 0.765625,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5787.720483960584,
+          "cdf": 0.7734375,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5787.731318967417,
+          "cdf": 0.78125,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5832.330843026284,
+          "cdf": 0.7890625,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5832.9716750304215,
+          "cdf": 0.796875,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5834.159242978785,
+          "cdf": 0.8046875,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5874.521586985793,
+          "cdf": 0.8125,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5875.437321024947,
+          "cdf": 0.8203125,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 5878.399361972697,
+          "cdf": 0.828125,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 6011.675163987093,
+          "cdf": 0.8359375,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 6020.5778980161995,
+          "cdf": 0.84375,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 6021.134783979505,
+          "cdf": 0.8515625,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 6022.232402989175,
+          "cdf": 0.859375,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 6197.046757966746,
+          "cdf": 0.8671875,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 6198.074184008874,
+          "cdf": 0.875,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 6198.844993021339,
+          "cdf": 0.8828125,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 6205.269258003682,
+          "cdf": 0.890625,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 6206.207530980464,
+          "cdf": 0.8984375,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 6207.095310033765,
+          "cdf": 0.90625,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 6281.811982975341,
+          "cdf": 0.9140625,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 6282.717748021241,
+          "cdf": 0.921875,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 6283.24021602748,
+          "cdf": 0.9296875,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 6324.561626999639,
+          "cdf": 0.9375,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 6325.4604620160535,
+          "cdf": 0.9453125,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 6326.171783963218,
+          "cdf": 0.953125,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 6328.937178011984,
+          "cdf": 0.9609375,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 6330.002950038761,
+          "cdf": 0.96875,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 6330.838694004342,
+          "cdf": 0.9765625,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 6445.4910539789125,
+          "cdf": 0.984375,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 6446.074509003665,
+          "cdf": 0.9921875,
+          "n": 128,
+          "line_style": "dotted"
+        },
+        {
+          "baseline": "S2",
+          "ttft_ms": 6447.263625974301,
+          "cdf": 1.0,
+          "n": 128,
+          "line_style": "dotted"
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "results",
+      "label": "原始请求的SQLite独立聚合",
+      "path": "report/queries/metrics.sql",
+      "query": {
+        "sql": "WITH ranked AS (\n SELECT baseline, point, ttft_ms,\n ROW_NUMBER() OVER(PARTITION BY baseline, point ORDER BY ttft_ms) rn,\n COUNT(*) OVER(PARTITION BY baseline, point) n FROM requests\n), ttft AS (\n SELECT baseline, point, AVG(ttft_ms) ttft_ms_p50 FROM ranked\n WHERE rn IN ((n+1)/2,(n+2)/2) GROUP BY baseline, point\n), itl_ranked AS (\n SELECT baseline, point, value_ms,\n ROW_NUMBER() OVER(PARTITION BY baseline, point ORDER BY value_ms) rn,\n COUNT(*) OVER(PARTITION BY baseline, point) n FROM itls\n), itl AS (\n SELECT baseline, point, AVG(value_ms) itl_ms_p50 FROM itl_ranked\n WHERE rn IN ((n+1)/2,(n+2)/2) GROUP BY baseline, point\n), totals AS (\n SELECT baseline, point, COUNT(*) completed, SUM(prompt_tokens) prompt_tokens,\n SUM(output_tokens) output_tokens, SUM(cached_tokens) cached_tokens,\n AVG(prompt_tokens) actual_isl_mean, AVG(client_wait_s) client_wait_s_mean\n FROM requests GROUP BY baseline, point\n)\nSELECT totals.*, ttft.ttft_ms_p50, itl.itl_ms_p50, points.qps, points.duration_s,\n points.label, 1.0*totals.cached_tokens/totals.prompt_tokens cache_hit_ratio,\n 1.0*totals.output_tokens/points.duration_s output_token_throughput,\n CASE totals.baseline WHEN 'S0' THEN 'solid' WHEN 'S1' THEN 'dashed' ELSE 'dotted' END line_style\nFROM totals JOIN ttft USING(baseline,point) JOIN itl USING(baseline,point)\nJOIN points USING(baseline,point)\nORDER BY points.ordering,totals.baseline",
+        "engine": "sqlite",
+        "language": "sql",
+        "tables_used": [
+          "requests",
+          "itls",
+          "points"
+        ],
+        "description": "由scripts/v100_chart_queries.py将raw中原始JSON记录载入同名内存表，再执行本SQL。指标已与Python原始分析器逐项核对。"
+      }
+    },
+    {
+      "id": "requests",
+      "label": "压力点原始请求的经验CDF",
+      "path": "report/queries/cdf.sql",
+      "query": {
+        "sql": "SELECT baseline, ttft_ms,\n 1.0*ROW_NUMBER() OVER(PARTITION BY baseline ORDER BY ttft_ms)/COUNT(*) OVER(PARTITION BY baseline) cdf,\n COUNT(*) OVER(PARTITION BY baseline) n,\n CASE baseline WHEN 'S0' THEN 'solid' WHEN 'S1' THEN 'dashed' ELSE 'dotted' END line_style\nFROM requests WHERE point='pressure_4k_q1' ORDER BY baseline,ttft_ms",
+        "engine": "sqlite",
+        "language": "sql",
+        "tables_used": [
+          "requests"
+        ],
+        "description": "由scripts/v100_chart_queries.py将raw中原始JSON记录载入同名内存表，再执行本SQL。指标已与Python原始分析器逐项核对。"
+      }
+    },
+    {
+      "id": "transfer",
+      "label": "原始拷贝事件的双向统计",
+      "path": "report/queries/transfer.sql",
+      "query": {
+        "sql": "WITH directions AS (SELECT 'gpu_to_cpu' direction UNION ALL SELECT 'cpu_to_gpu')\nSELECT p.point,p.label,CASE d.direction WHEN 'gpu_to_cpu' THEN 'GPU→CPU' ELSE 'CPU→GPU' END direction,\n COALESCE(SUM(t.bytes),0) bytes, COALESCE(SUM(t.bytes),0)/1e9 GB,\n COALESCE(SUM(t.time_s),0) time_s,\n SUM(t.bytes)/NULLIF(SUM(t.time_s),0)/1e9 GBps,\n COUNT(t.bytes) operations, p.n\nFROM points p CROSS JOIN directions d\nLEFT JOIN transfers t ON t.point=p.point AND t.direction=d.direction\nWHERE p.baseline='S2' GROUP BY p.point,d.direction ORDER BY p.ordering,d.direction DESC",
+        "engine": "sqlite",
+        "language": "sql",
+        "tables_used": [
+          "transfers",
+          "points"
+        ],
+        "description": "由scripts/v100_chart_queries.py将raw中原始JSON记录载入同名内存表，再执行本SQL。指标已与Python原始分析器逐项核对。"
+      }
+    },
+    {
+      "id": "protocol",
+      "label": "已确认复现要求与实际方法",
+      "path": "docs/需求对照与指标字典.md"
+    }
+  ]
+}
