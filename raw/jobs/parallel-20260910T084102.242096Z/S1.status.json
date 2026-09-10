@@ -1,0 +1,10 @@
+{
+  "baseline": "S1",
+  "pid": 101698,
+  "started_ns": 1789029662354433036,
+  "status": "completed",
+  "gpu_index": "1",
+  "gpu_uuid": "GPU-e0793c56-a140-f368-abb5-9d265981da85",
+  "port": 30172,
+  "ended_ns": 1789033139788014803
+}

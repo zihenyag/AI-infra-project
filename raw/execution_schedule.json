@@ -1,0 +1,88 @@
+{
+  "mode": "same_model_different_gpus_parallel",
+  "started_ns": 1789029662242680597,
+  "started_at_utc": "20260910T084102.242096Z",
+  "gpu_inventory": [
+    {
+      "index": "0",
+      "uuid": "GPU-0b76d21b-4a19-a7fb-34cd-15d0f4b4612f",
+      "name": "Tesla V100-SXM2-32GB",
+      "memory_total_mib": "32768",
+      "memory_used_mib": "10149",
+      "utilization_pct": "44"
+    },
+    {
+      "index": "1",
+      "uuid": "GPU-e0793c56-a140-f368-abb5-9d265981da85",
+      "name": "Tesla V100-SXM2-32GB",
+      "memory_total_mib": "32768",
+      "memory_used_mib": "0",
+      "utilization_pct": "0"
+    },
+    {
+      "index": "2",
+      "uuid": "GPU-bce0b2ef-65eb-c23e-491f-89e85889c17c",
+      "name": "Tesla V100-SXM2-32GB",
+      "memory_total_mib": "32768",
+      "memory_used_mib": "0",
+      "utilization_pct": "0"
+    },
+    {
+      "index": "3",
+      "uuid": "GPU-1d5f5f6d-8625-4e7c-5288-9c236022c6df",
+      "name": "Tesla V100-SXM2-32GB",
+      "memory_total_mib": "32768",
+      "memory_used_mib": "0",
+      "utilization_pct": "0"
+    }
+  ],
+  "job_dir": "/root/beamforming/CV/v100-probe/formal/jobs/parallel-20260910T084102.242096Z",
+  "wrapper_sha256": "c4ce2da7312a386cc0e4f1cc6ecd2f21bd73a979f22f0a324bdf15b3fb987d04",
+  "existing_s0_run": "/root/beamforming/CV/v100-probe/formal/runs/submission/S0/20260910T081117.352859Z",
+  "existing_s0_gpu_uuid": "GPU-0b76d21b-4a19-a7fb-34cd-15d0f4b4612f",
+  "limitations": [
+    "S0先独占后与S1/S2并行",
+    "共享CPU与主机内存，非严格资源隔离对照"
+  ],
+  "assignments": {
+    "S1": {
+      "gpu_index": "1",
+      "gpu_uuid": "GPU-e0793c56-a140-f368-abb5-9d265981da85",
+      "port": 30172
+    },
+    "S2": {
+      "gpu_index": "2",
+      "gpu_uuid": "GPU-bce0b2ef-65eb-c23e-491f-89e85889c17c",
+      "port": 30173
+    }
+  },
+  "workers": {
+    "S1": {
+      "pid": 101698,
+      "command": [
+        "/root/beamforming/CV/v100-probe/.venv/bin/python",
+        "-B",
+        "/root/beamforming/CV/v100-probe/parallel_v100_experiments.py",
+        "worker",
+        "--baseline",
+        "S1",
+        "--job-dir",
+        "/root/beamforming/CV/v100-probe/formal/jobs/parallel-20260910T084102.242096Z"
+      ]
+    },
+    "S2": {
+      "pid": 101699,
+      "command": [
+        "/root/beamforming/CV/v100-probe/.venv/bin/python",
+        "-B",
+        "/root/beamforming/CV/v100-probe/parallel_v100_experiments.py",
+        "worker",
+        "--baseline",
+        "S2",
+        "--job-dir",
+        "/root/beamforming/CV/v100-probe/formal/jobs/parallel-20260910T084102.242096Z"
+      ]
+    }
+  },
+  "status": "dispatched"
+}

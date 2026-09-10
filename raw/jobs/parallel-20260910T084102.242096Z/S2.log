@@ -1,0 +1,213 @@
+RUN_DIR=/root/beamforming/CV/v100-probe/formal/runs/submission/S2/20260910T084102.471535Z
+MONITOR server_alive=True gpu={'memory_used_mib': 0.0, 'utilization_pct': 0.0, 'power_w': 42.38, 'temperature_c': 37.0}
+START S2/random_2k_q1
+MONITOR server_alive=True gpu={'memory_used_mib': 9000.0, 'utilization_pct': 98.0, 'power_w': 232.73, 'temperature_c': 44.0}
+random_2k_q1 warmup: 4/4
+MONITOR server_alive=True gpu={'memory_used_mib': 8436.0, 'utilization_pct': 46.0, 'power_w': 113.9, 'temperature_c': 44.0}
+MONITOR server_alive=True gpu={'memory_used_mib': 8976.0, 'utilization_pct': 45.0, 'power_w': 116.9, 'temperature_c': 47.0}
+random_2k_q1 measured: 10/100
+MONITOR server_alive=True gpu={'memory_used_mib': 9560.0, 'utilization_pct': 44.0, 'power_w': 117.77, 'temperature_c': 49.0}
+random_2k_q1 measured: 20/100
+MONITOR server_alive=True gpu={'memory_used_mib': 9560.0, 'utilization_pct': 44.0, 'power_w': 117.77, 'temperature_c': 52.0}
+MONITOR server_alive=True gpu={'memory_used_mib': 9560.0, 'utilization_pct': 46.0, 'power_w': 118.83, 'temperature_c': 51.0}
+random_2k_q1 measured: 30/100
+MONITOR server_alive=True gpu={'memory_used_mib': 9560.0, 'utilization_pct': 46.0, 'power_w': 115.91, 'temperature_c': 52.0}
+random_2k_q1 measured: 40/100
+MONITOR server_alive=True gpu={'memory_used_mib': 10148.0, 'utilization_pct': 44.0, 'power_w': 118.74, 'temperature_c': 53.0}
+random_2k_q1 measured: 50/100
+MONITOR server_alive=True gpu={'memory_used_mib': 10148.0, 'utilization_pct': 44.0, 'power_w': 117.69, 'temperature_c': 54.0}
+random_2k_q1 measured: 60/100
+MONITOR server_alive=True gpu={'memory_used_mib': 10148.0, 'utilization_pct': 98.0, 'power_w': 269.82, 'temperature_c': 58.0}
+MONITOR server_alive=True gpu={'memory_used_mib': 10148.0, 'utilization_pct': 45.0, 'power_w': 120.6, 'temperature_c': 54.0}
+random_2k_q1 measured: 70/100
+MONITOR server_alive=True gpu={'memory_used_mib': 10148.0, 'utilization_pct': 45.0, 'power_w': 114.56, 'temperature_c': 54.0}
+random_2k_q1 measured: 80/100
+MONITOR server_alive=True gpu={'memory_used_mib': 10148.0, 'utilization_pct': 45.0, 'power_w': 120.19, 'temperature_c': 55.0}
+MONITOR server_alive=True gpu={'memory_used_mib': 10148.0, 'utilization_pct': 44.0, 'power_w': 116.73, 'temperature_c': 55.0}
+random_2k_q1 measured: 90/100
+MONITOR server_alive=True gpu={'memory_used_mib': 10148.0, 'utilization_pct': 29.0, 'power_w': 266.14, 'temperature_c': 56.0}
+random_2k_q1 measured: 100/100
+{"status": "completed", "baseline": "S2", "point": {"name": "random_2k_q1", "mode": "random", "isl": 2048, "n": 100, "groups": 100, "qps": 1, "osl": 128, "concurrency": 4}, "measurement": {"start_ns": 1789029710296618864, "end_ns": 1789030132955383606, "duration_s": 422.6587672260066, "completed": 100}, "input_sha256": "03796991652490a33fef09be05f7046eeefe42b1d6f38a598022dd9880c942e3", "transfer_bytes": {"gpu_to_cpu": 7870537728, "cpu_to_gpu": 0}, "host_reuse_tokens": 0, "evicted_tokens": 201005}
+START S2/prefix_2k_q1
+MONITOR server_alive=True gpu={'memory_used_mib': 10148.0, 'utilization_pct': 46.0, 'power_w': 118.82, 'temperature_c': 54.0}
+prefix_2k_q1 warmup: 4/4
+MONITOR server_alive=True gpu={'memory_used_mib': 10268.0, 'utilization_pct': 46.0, 'power_w': 121.24, 'temperature_c': 55.0}
+prefix_2k_q1 measured: 10/100
+MONITOR server_alive=True gpu={'memory_used_mib': 10268.0, 'utilization_pct': 45.0, 'power_w': 122.05, 'temperature_c': 55.0}
+prefix_2k_q1 measured: 20/100
+MONITOR server_alive=True gpu={'memory_used_mib': 10288.0, 'utilization_pct': 45.0, 'power_w': 112.93, 'temperature_c': 56.0}
+MONITOR server_alive=True gpu={'memory_used_mib': 10290.0, 'utilization_pct': 97.0, 'power_w': 121.16, 'temperature_c': 58.0}
+prefix_2k_q1 measured: 30/100
+MONITOR server_alive=True gpu={'memory_used_mib': 10290.0, 'utilization_pct': 45.0, 'power_w': 122.61, 'temperature_c': 55.0}
+prefix_2k_q1 measured: 40/100
+MONITOR server_alive=True gpu={'memory_used_mib': 10290.0, 'utilization_pct': 45.0, 'power_w': 119.71, 'temperature_c': 55.0}
+MONITOR server_alive=True gpu={'memory_used_mib': 10290.0, 'utilization_pct': 45.0, 'power_w': 121.97, 'temperature_c': 55.0}
+prefix_2k_q1 measured: 50/100
+MONITOR server_alive=True gpu={'memory_used_mib': 10290.0, 'utilization_pct': 45.0, 'power_w': 117.29, 'temperature_c': 56.0}
+prefix_2k_q1 measured: 60/100
+MONITOR server_alive=True gpu={'memory_used_mib': 10292.0, 'utilization_pct': 45.0, 'power_w': 115.91, 'temperature_c': 56.0}
+prefix_2k_q1 measured: 70/100
+MONITOR server_alive=True gpu={'memory_used_mib': 10292.0, 'utilization_pct': 45.0, 'power_w': 124.15, 'temperature_c': 57.0}
+MONITOR server_alive=True gpu={'memory_used_mib': 10292.0, 'utilization_pct': 97.0, 'power_w': 248.79, 'temperature_c': 59.0}
+prefix_2k_q1 measured: 80/100
+MONITOR server_alive=True gpu={'memory_used_mib': 10292.0, 'utilization_pct': 46.0, 'power_w': 124.55, 'temperature_c': 56.0}
+prefix_2k_q1 measured: 90/100
+MONITOR server_alive=True gpu={'memory_used_mib': 10880.0, 'utilization_pct': 46.0, 'power_w': 123.02, 'temperature_c': 56.0}
+prefix_2k_q1 measured: 100/100
+{"status": "completed", "baseline": "S2", "point": {"name": "prefix_2k_q1", "mode": "prefix_repetition", "isl": 2048, "n": 100, "groups": 10, "qps": 1, "osl": 128, "concurrency": 4}, "measurement": {"start_ns": 1789030152663962240, "end_ns": 1789030562893062717, "duration_s": 410.22910211997805, "completed": 100}, "input_sha256": "a9d1cbe95d4b3fd8c0e8886bd7e40568a3cf9a16abd401ab77de339bc1309f1b", "transfer_bytes": {"gpu_to_cpu": 4370780160, "cpu_to_gpu": 599076864}, "host_reuse_tokens": 16251, "evicted_tokens": 119616}
+START S2/pressure_4k_q1
+MONITOR server_alive=True gpu={'memory_used_mib': 15424.0, 'utilization_pct': 64.0, 'power_w': 138.01, 'temperature_c': 57.0}
+pressure_4k_q1 warmup: 4/4
+MONITOR server_alive=True gpu={'memory_used_mib': 12844.0, 'utilization_pct': 64.0, 'power_w': 140.82, 'temperature_c': 56.0}
+MONITOR server_alive=True gpu={'memory_used_mib': 15300.0, 'utilization_pct': 99.0, 'power_w': 237.56, 'temperature_c': 59.0}
+pressure_4k_q1 measured: 10/128
+MONITOR server_alive=True gpu={'memory_used_mib': 15300.0, 'utilization_pct': 65.0, 'power_w': 143.82, 'temperature_c': 59.0}
+MONITOR server_alive=True gpu={'memory_used_mib': 15300.0, 'utilization_pct': 63.0, 'power_w': 141.31, 'temperature_c': 58.0}
+pressure_4k_q1 measured: 20/128
+MONITOR server_alive=True gpu={'memory_used_mib': 17608.0, 'utilization_pct': 99.0, 'power_w': 236.57, 'temperature_c': 63.0}
+MONITOR server_alive=True gpu={'memory_used_mib': 17608.0, 'utilization_pct': 64.0, 'power_w': 138.5, 'temperature_c': 59.0}
+pressure_4k_q1 measured: 30/128
+MONITOR server_alive=True gpu={'memory_used_mib': 17608.0, 'utilization_pct': 65.0, 'power_w': 141.89, 'temperature_c': 59.0}
+pressure_4k_q1 measured: 40/128
+MONITOR server_alive=True gpu={'memory_used_mib': 17610.0, 'utilization_pct': 64.0, 'power_w': 142.85, 'temperature_c': 61.0}
+MONITOR server_alive=True gpu={'memory_used_mib': 17610.0, 'utilization_pct': 65.0, 'power_w': 139.95, 'temperature_c': 59.0}
+pressure_4k_q1 measured: 50/128
+MONITOR server_alive=True gpu={'memory_used_mib': 19946.0, 'utilization_pct': 99.0, 'power_w': 241.56, 'temperature_c': 63.0}
+MONITOR server_alive=True gpu={'memory_used_mib': 19946.0, 'utilization_pct': 65.0, 'power_w': 148.95, 'temperature_c': 59.0}
+pressure_4k_q1 measured: 60/128
+MONITOR server_alive=True gpu={'memory_used_mib': 19946.0, 'utilization_pct': 66.0, 'power_w': 149.53, 'temperature_c': 59.0}
+MONITOR server_alive=True gpu={'memory_used_mib': 19946.0, 'utilization_pct': 65.0, 'power_w': 145.27, 'temperature_c': 60.0}
+pressure_4k_q1 measured: 70/128
+MONITOR server_alive=True gpu={'memory_used_mib': 19946.0, 'utilization_pct': 66.0, 'power_w': 139.88, 'temperature_c': 59.0}
+pressure_4k_q1 measured: 80/128
+MONITOR server_alive=True gpu={'memory_used_mib': 19946.0, 'utilization_pct': 99.0, 'power_w': 286.39, 'temperature_c': 65.0}
+MONITOR server_alive=True gpu={'memory_used_mib': 19946.0, 'utilization_pct': 65.0, 'power_w': 144.21, 'temperature_c': 60.0}
+pressure_4k_q1 measured: 90/128
+MONITOR server_alive=True gpu={'memory_used_mib': 19946.0, 'utilization_pct': 32.0, 'power_w': 260.36, 'temperature_c': 59.0}
+MONITOR server_alive=True gpu={'memory_used_mib': 19946.0, 'utilization_pct': 65.0, 'power_w': 141.7, 'temperature_c': 60.0}
+pressure_4k_q1 measured: 100/128
+MONITOR server_alive=True gpu={'memory_used_mib': 19946.0, 'utilization_pct': 65.0, 'power_w': 143.73, 'temperature_c': 59.0}
+MONITOR server_alive=True gpu={'memory_used_mib': 19946.0, 'utilization_pct': 80.0, 'power_w': 146.63, 'temperature_c': 63.0}
+pressure_4k_q1 measured: 110/128
+MONITOR server_alive=True gpu={'memory_used_mib': 19946.0, 'utilization_pct': 65.0, 'power_w': 141.31, 'temperature_c': 60.0}
+pressure_4k_q1 measured: 120/128
+MONITOR server_alive=True gpu={'memory_used_mib': 19946.0, 'utilization_pct': 99.0, 'power_w': 283.32, 'temperature_c': 64.0}
+MONITOR server_alive=True gpu={'memory_used_mib': 19946.0, 'utilization_pct': 65.0, 'power_w': 146.05, 'temperature_c': 61.0}
+pressure_4k_q1 measured: 128/128
+{"status": "completed", "baseline": "S2", "point": {"name": "pressure_4k_q1", "mode": "prefix_repetition", "isl": 4096, "n": 128, "groups": 32, "qps": 1, "osl": 128, "concurrency": 4}, "measurement": {"start_ns": 1789030588170632349, "end_ns": 1789031281824266395, "duration_s": 693.6536357300356, "completed": 128}, "input_sha256": "42e21da4131ae4b34ba3aa98e2f5db2b6c86ee1b55edba1fbf5a083126a530b3", "transfer_bytes": {"gpu_to_cpu": 13034668032, "cpu_to_gpu": 5399470080}, "host_reuse_tokens": 146470, "evicted_tokens": 494019}
+START S2/prefix_2k_q025
+prefix_2k_q025 warmup: 4/4
+MONITOR server_alive=True gpu={'memory_used_mib': 7596.0, 'utilization_pct': 100.0, 'power_w': 76.67, 'temperature_c': 57.0}
+MONITOR server_alive=True gpu={'memory_used_mib': 10272.0, 'utilization_pct': 45.0, 'power_w': 122.77, 'temperature_c': 58.0}
+prefix_2k_q025 measured: 10/100
+MONITOR server_alive=True gpu={'memory_used_mib': 10272.0, 'utilization_pct': 45.0, 'power_w': 121.64, 'temperature_c': 57.0}
+prefix_2k_q025 measured: 20/100
+MONITOR server_alive=True gpu={'memory_used_mib': 10292.0, 'utilization_pct': 45.0, 'power_w': 120.84, 'temperature_c': 57.0}
+MONITOR server_alive=True gpu={'memory_used_mib': 10292.0, 'utilization_pct': 45.0, 'power_w': 123.5, 'temperature_c': 57.0}
+prefix_2k_q025 measured: 30/100
+MONITOR server_alive=True gpu={'memory_used_mib': 10292.0, 'utilization_pct': 45.0, 'power_w': 122.53, 'temperature_c': 57.0}
+prefix_2k_q025 measured: 40/100
+MONITOR server_alive=True gpu={'memory_used_mib': 10292.0, 'utilization_pct': 79.0, 'power_w': 120.68, 'temperature_c': 58.0}
+MONITOR server_alive=True gpu={'memory_used_mib': 10292.0, 'utilization_pct': 46.0, 'power_w': 124.8, 'temperature_c': 56.0}
+prefix_2k_q025 measured: 50/100
+MONITOR server_alive=True gpu={'memory_used_mib': 10292.0, 'utilization_pct': 45.0, 'power_w': 120.35, 'temperature_c': 56.0}
+prefix_2k_q025 measured: 60/100
+MONITOR server_alive=True gpu={'memory_used_mib': 10294.0, 'utilization_pct': 45.0, 'power_w': 121.24, 'temperature_c': 56.0}
+prefix_2k_q025 measured: 70/100
+MONITOR server_alive=True gpu={'memory_used_mib': 10294.0, 'utilization_pct': 46.0, 'power_w': 126.57, 'temperature_c': 57.0}
+MONITOR server_alive=True gpu={'memory_used_mib': 10294.0, 'utilization_pct': 42.0, 'power_w': 116.55, 'temperature_c': 56.0}
+prefix_2k_q025 measured: 80/100
+MONITOR server_alive=True gpu={'memory_used_mib': 10294.0, 'utilization_pct': 42.0, 'power_w': 117.52, 'temperature_c': 56.0}
+MONITOR server_alive=True gpu={'memory_used_mib': 10294.0, 'utilization_pct': 41.0, 'power_w': 117.93, 'temperature_c': 56.0}
+prefix_2k_q025 measured: 90/100
+MONITOR server_alive=True gpu={'memory_used_mib': 10882.0, 'utilization_pct': 45.0, 'power_w': 119.79, 'temperature_c': 57.0}
+prefix_2k_q025 measured: 100/100
+{"status": "completed", "baseline": "S2", "point": {"name": "prefix_2k_q025", "mode": "prefix_repetition", "isl": 2048, "n": 100, "groups": 10, "qps": 0.25, "osl": 128, "concurrency": 4}, "measurement": {"start_ns": 1789031301704160738, "end_ns": 1789031740521453000, "duration_s": 438.81729382497724, "completed": 100}, "input_sha256": "a9d1cbe95d4b3fd8c0e8886bd7e40568a3cf9a16abd401ab77de339bc1309f1b", "transfer_bytes": {"gpu_to_cpu": 4370780160, "cpu_to_gpu": 599076864}, "host_reuse_tokens": 16251, "evicted_tokens": 119616}
+START S2/prefix_2k_q05
+MONITOR server_alive=True gpu={'memory_used_mib': 10882.0, 'utilization_pct': 45.0, 'power_w': 116.96, 'temperature_c': 56.0}
+prefix_2k_q05 warmup: 4/4
+MONITOR server_alive=True gpu={'memory_used_mib': 10270.0, 'utilization_pct': 44.0, 'power_w': 117.85, 'temperature_c': 56.0}
+prefix_2k_q05 measured: 10/100
+MONITOR server_alive=True gpu={'memory_used_mib': 10270.0, 'utilization_pct': 44.0, 'power_w': 117.93, 'temperature_c': 56.0}
+prefix_2k_q05 measured: 20/100
+MONITOR server_alive=True gpu={'memory_used_mib': 10290.0, 'utilization_pct': 44.0, 'power_w': 121.81, 'temperature_c': 58.0}
+MONITOR server_alive=True gpu={'memory_used_mib': 10292.0, 'utilization_pct': 44.0, 'power_w': 122.78, 'temperature_c': 58.0}
+prefix_2k_q05 measured: 30/100
+MONITOR server_alive=True gpu={'memory_used_mib': 10292.0, 'utilization_pct': 44.0, 'power_w': 121.32, 'temperature_c': 56.0}
+prefix_2k_q05 measured: 40/100
+MONITOR server_alive=True gpu={'memory_used_mib': 10292.0, 'utilization_pct': 45.0, 'power_w': 122.29, 'temperature_c': 56.0}
+MONITOR server_alive=True gpu={'memory_used_mib': 10292.0, 'utilization_pct': 44.0, 'power_w': 121.32, 'temperature_c': 56.0}
+prefix_2k_q05 measured: 50/100
+MONITOR server_alive=True gpu={'memory_used_mib': 10292.0, 'utilization_pct': 44.0, 'power_w': 121.89, 'temperature_c': 57.0}
+prefix_2k_q05 measured: 60/100
+MONITOR server_alive=True gpu={'memory_used_mib': 10294.0, 'utilization_pct': 24.0, 'power_w': 255.23, 'temperature_c': 58.0}
+MONITOR server_alive=True gpu={'memory_used_mib': 10294.0, 'utilization_pct': 36.0, 'power_w': 89.93, 'temperature_c': 54.0}
+prefix_2k_q05 measured: 70/100
+MONITOR server_alive=True gpu={'memory_used_mib': 10294.0, 'utilization_pct': 33.0, 'power_w': 110.24, 'temperature_c': 57.0}
+prefix_2k_q05 measured: 80/100
+MONITOR server_alive=True gpu={'memory_used_mib': 10294.0, 'utilization_pct': 45.0, 'power_w': 121.64, 'temperature_c': 54.0}
+MONITOR server_alive=True gpu={'memory_used_mib': 10294.0, 'utilization_pct': 45.0, 'power_w': 118.9, 'temperature_c': 55.0}
+prefix_2k_q05 measured: 90/100
+MONITOR server_alive=True gpu={'memory_used_mib': 10882.0, 'utilization_pct': 45.0, 'power_w': 119.38, 'temperature_c': 55.0}
+prefix_2k_q05 measured: 100/100
+{"status": "completed", "baseline": "S2", "point": {"name": "prefix_2k_q05", "mode": "prefix_repetition", "isl": 2048, "n": 100, "groups": 10, "qps": 0.5, "osl": 128, "concurrency": 4}, "measurement": {"start_ns": 1789031759699102313, "end_ns": 1789032190377550192, "duration_s": 430.6784495339962, "completed": 100}, "input_sha256": "a9d1cbe95d4b3fd8c0e8886bd7e40568a3cf9a16abd401ab77de339bc1309f1b", "transfer_bytes": {"gpu_to_cpu": 4370780160, "cpu_to_gpu": 599076864}, "host_reuse_tokens": 16251, "evicted_tokens": 119616}
+START S2/prefix_1k_q1
+prefix_1k_q1 warmup: 4/4
+MONITOR server_alive=True gpu={'memory_used_mib': 7918.0, 'utilization_pct': 33.0, 'power_w': 107.82, 'temperature_c': 54.0}
+MONITOR server_alive=True gpu={'memory_used_mib': 8128.0, 'utilization_pct': 33.0, 'power_w': 104.35, 'temperature_c': 54.0}
+prefix_1k_q1 measured: 10/100
+MONITOR server_alive=True gpu={'memory_used_mib': 8168.0, 'utilization_pct': 33.0, 'power_w': 103.94, 'temperature_c': 53.0}
+prefix_1k_q1 measured: 20/100
+MONITOR server_alive=True gpu={'memory_used_mib': 8260.0, 'utilization_pct': 34.0, 'power_w': 114.53, 'temperature_c': 53.0}
+MONITOR server_alive=True gpu={'memory_used_mib': 8260.0, 'utilization_pct': 36.0, 'power_w': 87.01, 'temperature_c': 53.0}
+prefix_1k_q1 measured: 30/100
+MONITOR server_alive=True gpu={'memory_used_mib': 8260.0, 'utilization_pct': 35.0, 'power_w': 108.79, 'temperature_c': 53.0}
+prefix_1k_q1 measured: 40/100
+MONITOR server_alive=True gpu={'memory_used_mib': 8260.0, 'utilization_pct': 35.0, 'power_w': 107.33, 'temperature_c': 53.0}
+prefix_1k_q1 measured: 50/100
+MONITOR server_alive=True gpu={'memory_used_mib': 8260.0, 'utilization_pct': 34.0, 'power_w': 108.37, 'temperature_c': 53.0}
+prefix_1k_q1 measured: 60/100
+MONITOR server_alive=True gpu={'memory_used_mib': 8260.0, 'utilization_pct': 35.0, 'power_w': 108.3, 'temperature_c': 53.0}
+MONITOR server_alive=True gpu={'memory_used_mib': 8262.0, 'utilization_pct': 34.0, 'power_w': 108.79, 'temperature_c': 53.0}
+prefix_1k_q1 measured: 70/100
+MONITOR server_alive=True gpu={'memory_used_mib': 8262.0, 'utilization_pct': 35.0, 'power_w': 108.3, 'temperature_c': 53.0}
+prefix_1k_q1 measured: 80/100
+MONITOR server_alive=True gpu={'memory_used_mib': 8262.0, 'utilization_pct': 35.0, 'power_w': 105.81, 'temperature_c': 53.0}
+prefix_1k_q1 measured: 90/100
+MONITOR server_alive=True gpu={'memory_used_mib': 8262.0, 'utilization_pct': 36.0, 'power_w': 89.44, 'temperature_c': 52.0}
+prefix_1k_q1 measured: 100/100
+{"status": "completed", "baseline": "S2", "point": {"name": "prefix_1k_q1", "mode": "prefix_repetition", "isl": 1024, "n": 100, "groups": 10, "qps": 1, "osl": 128, "concurrency": 4}, "measurement": {"start_ns": 1789032208896146530, "end_ns": 1789032595351597375, "duration_s": 386.4554523769766, "completed": 100}, "input_sha256": "965f2a0b731a28d9ec5470d4ca4f00da6612175f90bd85982b4625a7f9611c5f", "transfer_bytes": {"gpu_to_cpu": 2183049216, "cpu_to_gpu": 19574784}, "host_reuse_tokens": 531, "evicted_tokens": 43799}
+START S2/prefix_4k_q1
+MONITOR server_alive=True gpu={'memory_used_mib': 13414.0, 'utilization_pct': 65.0, 'power_w': 137.14, 'temperature_c': 55.0}
+prefix_4k_q1 warmup: 4/4
+MONITOR server_alive=True gpu={'memory_used_mib': 11742.0, 'utilization_pct': 65.0, 'power_w': 140.14, 'temperature_c': 55.0}
+MONITOR server_alive=True gpu={'memory_used_mib': 16476.0, 'utilization_pct': 99.0, 'power_w': 217.9, 'temperature_c': 61.0}
+prefix_4k_q1 measured: 10/100
+MONITOR server_alive=True gpu={'memory_used_mib': 18804.0, 'utilization_pct': 64.0, 'power_w': 141.98, 'temperature_c': 59.0}
+MONITOR server_alive=True gpu={'memory_used_mib': 18826.0, 'utilization_pct': 53.0, 'power_w': 127.46, 'temperature_c': 58.0}
+prefix_4k_q1 measured: 20/100
+MONITOR server_alive=True gpu={'memory_used_mib': 18826.0, 'utilization_pct': 35.0, 'power_w': 108.79, 'temperature_c': 58.0}
+MONITOR server_alive=True gpu={'memory_used_mib': 18826.0, 'utilization_pct': 99.0, 'power_w': 138.68, 'temperature_c': 62.0}
+prefix_4k_q1 measured: 30/100
+MONITOR server_alive=True gpu={'memory_used_mib': 18826.0, 'utilization_pct': 53.0, 'power_w': 132.78, 'temperature_c': 59.0}
+MONITOR server_alive=True gpu={'memory_used_mib': 18826.0, 'utilization_pct': 53.0, 'power_w': 127.62, 'temperature_c': 58.0}
+prefix_4k_q1 measured: 40/100
+MONITOR server_alive=True gpu={'memory_used_mib': 18826.0, 'utilization_pct': 99.0, 'power_w': 259.57, 'temperature_c': 62.0}
+MONITOR server_alive=True gpu={'memory_used_mib': 18826.0, 'utilization_pct': 53.0, 'power_w': 128.11, 'temperature_c': 61.0}
+prefix_4k_q1 measured: 50/100
+MONITOR server_alive=True gpu={'memory_used_mib': 18826.0, 'utilization_pct': 53.0, 'power_w': 130.93, 'temperature_c': 59.0}
+MONITOR server_alive=True gpu={'memory_used_mib': 18826.0, 'utilization_pct': 54.0, 'power_w': 130.36, 'temperature_c': 59.0}
+prefix_4k_q1 measured: 60/100
+MONITOR server_alive=True gpu={'memory_used_mib': 18826.0, 'utilization_pct': 99.0, 'power_w': 252.98, 'temperature_c': 61.0}
+MONITOR server_alive=True gpu={'memory_used_mib': 18826.0, 'utilization_pct': 51.0, 'power_w': 131.9, 'temperature_c': 59.0}
+prefix_4k_q1 measured: 70/100
+MONITOR server_alive=True gpu={'memory_used_mib': 18826.0, 'utilization_pct': 64.0, 'power_w': 138.2, 'temperature_c': 59.0}
+MONITOR server_alive=True gpu={'memory_used_mib': 18826.0, 'utilization_pct': 65.0, 'power_w': 144.5, 'temperature_c': 59.0}
+prefix_4k_q1 measured: 80/100
+MONITOR server_alive=True gpu={'memory_used_mib': 18826.0, 'utilization_pct': 62.0, 'power_w': 140.04, 'temperature_c': 61.0}
+MONITOR server_alive=True gpu={'memory_used_mib': 18826.0, 'utilization_pct': 65.0, 'power_w': 147.89, 'temperature_c': 60.0}
+prefix_4k_q1 measured: 90/100
+MONITOR server_alive=True gpu={'memory_used_mib': 18826.0, 'utilization_pct': 99.0, 'power_w': 259.26, 'temperature_c': 66.0}
+prefix_4k_q1 measured: 100/100
+{"status": "completed", "baseline": "S2", "point": {"name": "prefix_4k_q1", "mode": "prefix_repetition", "isl": 4096, "n": 100, "groups": 10, "qps": 1, "osl": 128, "concurrency": 4}, "measurement": {"start_ns": 1789032620467185127, "end_ns": 1789033199488256985, "duration_s": 579.0210734169814, "completed": 100}, "input_sha256": "a1bdbc7865d384c48fddfee44c379339e583e71e5385adbd8d098468e20ec371", "transfer_bytes": {"gpu_to_cpu": 8551526400, "cpu_to_gpu": 3027714048}, "host_reuse_tokens": 82132, "evicted_tokens": 305503}
+清理本次服务进程并释放 GPU

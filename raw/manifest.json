@@ -1,0 +1,87 @@
+{
+  "model": "Qwen/Qwen2.5-3B-Instruct",
+  "seed": 42,
+  "sglang": "0.4.6.post5",
+  "kv_dtype": "fp16",
+  "gpu_kv_bytes": 1056964608,
+  "host_kv_bytes": 8589934592,
+  "points": [
+    {
+      "name": "random_2k_q1",
+      "mode": "random",
+      "isl": 2048,
+      "n": 100,
+      "groups": 100,
+      "qps": 1,
+      "osl": 128,
+      "concurrency": 4,
+      "input_sha256": "03796991652490a33fef09be05f7046eeefe42b1d6f38a598022dd9880c942e3"
+    },
+    {
+      "name": "prefix_2k_q1",
+      "mode": "prefix_repetition",
+      "isl": 2048,
+      "n": 100,
+      "groups": 10,
+      "qps": 1,
+      "osl": 128,
+      "concurrency": 4,
+      "input_sha256": "a9d1cbe95d4b3fd8c0e8886bd7e40568a3cf9a16abd401ab77de339bc1309f1b"
+    },
+    {
+      "name": "pressure_4k_q1",
+      "mode": "prefix_repetition",
+      "isl": 4096,
+      "n": 128,
+      "groups": 32,
+      "qps": 1,
+      "osl": 128,
+      "concurrency": 4,
+      "input_sha256": "42e21da4131ae4b34ba3aa98e2f5db2b6c86ee1b55edba1fbf5a083126a530b3"
+    },
+    {
+      "name": "prefix_2k_q025",
+      "mode": "prefix_repetition",
+      "isl": 2048,
+      "n": 100,
+      "groups": 10,
+      "qps": 0.25,
+      "osl": 128,
+      "concurrency": 4,
+      "input_sha256": "a9d1cbe95d4b3fd8c0e8886bd7e40568a3cf9a16abd401ab77de339bc1309f1b"
+    },
+    {
+      "name": "prefix_2k_q05",
+      "mode": "prefix_repetition",
+      "isl": 2048,
+      "n": 100,
+      "groups": 10,
+      "qps": 0.5,
+      "osl": 128,
+      "concurrency": 4,
+      "input_sha256": "a9d1cbe95d4b3fd8c0e8886bd7e40568a3cf9a16abd401ab77de339bc1309f1b"
+    },
+    {
+      "name": "prefix_1k_q1",
+      "mode": "prefix_repetition",
+      "isl": 1024,
+      "n": 100,
+      "groups": 10,
+      "qps": 1,
+      "osl": 128,
+      "concurrency": 4,
+      "input_sha256": "965f2a0b731a28d9ec5470d4ca4f00da6612175f90bd85982b4625a7f9611c5f"
+    },
+    {
+      "name": "prefix_4k_q1",
+      "mode": "prefix_repetition",
+      "isl": 4096,
+      "n": 100,
+      "groups": 10,
+      "qps": 1,
+      "osl": 128,
+      "concurrency": 4,
+      "input_sha256": "a1bdbc7865d384c48fddfee44c379339e583e71e5385adbd8d098468e20ec371"
+    }
+  ]
+}
