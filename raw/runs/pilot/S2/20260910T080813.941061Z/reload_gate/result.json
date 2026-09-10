@@ -1,0 +1,27 @@
+{
+  "status": "completed",
+  "baseline": "S2",
+  "point": {
+    "name": "reload_gate",
+    "mode": "controlled_prefix_repetition",
+    "isl": 4096,
+    "n": 18,
+    "groups": 11,
+    "qps": 0,
+    "osl": 16,
+    "concurrency": 1
+  },
+  "measurement": {
+    "start_ns": 1789027736843155267,
+    "end_ns": 1789027777390937881,
+    "duration_s": 40.547784986993065,
+    "completed": 18
+  },
+  "input_sha256": "0a8c0ca7a9ee4bc644e10c4336695147bf1cf78e168318af24aaf1e0e6ff62fb",
+  "transfer_bytes": {
+    "gpu_to_cpu": 2189426688,
+    "cpu_to_gpu": 75497472
+  },
+  "host_reuse_tokens": 2048,
+  "evicted_tokens": 34981
+}

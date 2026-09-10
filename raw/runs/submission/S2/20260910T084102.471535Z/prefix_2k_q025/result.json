@@ -1,0 +1,27 @@
+{
+  "status": "completed",
+  "baseline": "S2",
+  "point": {
+    "name": "prefix_2k_q025",
+    "mode": "prefix_repetition",
+    "isl": 2048,
+    "n": 100,
+    "groups": 10,
+    "qps": 0.25,
+    "osl": 128,
+    "concurrency": 4
+  },
+  "measurement": {
+    "start_ns": 1789031301704160738,
+    "end_ns": 1789031740521453000,
+    "duration_s": 438.81729382497724,
+    "completed": 100
+  },
+  "input_sha256": "a9d1cbe95d4b3fd8c0e8886bd7e40568a3cf9a16abd401ab77de339bc1309f1b",
+  "transfer_bytes": {
+    "gpu_to_cpu": 4370780160,
+    "cpu_to_gpu": 599076864
+  },
+  "host_reuse_tokens": 16251,
+  "evicted_tokens": 119616
+}

@@ -1,0 +1,27 @@
+{
+  "status": "completed",
+  "baseline": "S1",
+  "point": {
+    "name": "prefix_1k_q1",
+    "mode": "prefix_repetition",
+    "isl": 1024,
+    "n": 100,
+    "groups": 10,
+    "qps": 1,
+    "osl": 128,
+    "concurrency": 4
+  },
+  "measurement": {
+    "start_ns": 1789032154337139377,
+    "end_ns": 1789032575967813301,
+    "duration_s": 421.63067554001464,
+    "completed": 100
+  },
+  "input_sha256": "965f2a0b731a28d9ec5470d4ca4f00da6612175f90bd85982b4625a7f9611c5f",
+  "transfer_bytes": {
+    "gpu_to_cpu": 0,
+    "cpu_to_gpu": 0
+  },
+  "host_reuse_tokens": 0,
+  "evicted_tokens": 44344
+}

@@ -1,0 +1,65 @@
+/root/slvr_workspace/envs/seds/lib/python3.12/site-packages/torch/cuda/__init__.py:61: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+/root/slvr_workspace/envs/seds/lib/python3.12/site-packages/torch/cuda/__init__.py:61: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+Cuda graph is disabled because of using torch native attention backend
+[2026-09-10 08:08:23] server_args=ServerArgs(model_path='/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct', tokenizer_path='/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct', tokenizer_mode='auto', skip_tokenizer_init=False, load_format='auto', trust_remote_code=False, dtype='half', kv_cache_dtype='auto', quantization=None, quantization_param_path=None, context_length=8192, device='cuda', served_model_name='/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct', chat_template=None, completion_template=None, is_embedding=False, enable_multimodal=None, revision=None, host='127.0.0.1', port=30171, mem_fraction_static=0.65, max_running_requests=4, max_total_tokens=28672, chunked_prefill_size=-1, max_prefill_tokens=16384, schedule_policy='fcfs', schedule_conservativeness=1.0, cpu_offload_gb=0, page_size=1, tp_size=1, pp_size=1, max_micro_batch_size=None, stream_interval=1, stream_output=False, random_seed=42, constrained_json_whitespace_pattern=None, watchdog_timeout=300, dist_timeout=None, download_dir=None, base_gpu_id=0, gpu_id_step=1, log_level='info', log_level_http=None, log_requests=False, log_requests_level=0, show_time_cost=False, enable_metrics=True, bucket_time_to_first_token=None, bucket_e2e_request_latency=None, bucket_inter_token_latency=None, collect_tokens_histogram=False, decode_log_interval=40, enable_request_time_stats_logging=False, kv_events_config=None, api_key=None, file_storage_path='sglang_storage', enable_cache_report=False, reasoning_parser=None, dp_size=1, load_balance_method='round_robin', ep_size=1, dist_init_addr=None, nnodes=1, node_rank=0, json_model_override_args='{}', preferred_sampling_params=None, lora_paths=None, max_loras_per_batch=8, lora_backend='triton', attention_backend='torch_native', sampling_backend='pytorch', grammar_backend='xgrammar', speculative_algorithm=None, speculative_draft_model_path=None, speculative_num_steps=None, speculative_eagle_topk=None, speculative_num_draft_tokens=None, speculative_accept_threshold_single=1.0, speculative_accept_threshold_acc=1.0, speculative_token_map=None, enable_double_sparsity=False, ds_channel_config_path=None, ds_heavy_channel_num=32, ds_heavy_token_num=256, ds_heavy_channel_type='qk', ds_sparse_decode_threshold=4096, disable_radix_cache=False, disable_cuda_graph=True, disable_cuda_graph_padding=False, enable_nccl_nvls=False, enable_tokenizer_batch_encode=False, disable_outlines_disk_cache=False, disable_custom_all_reduce=True, disable_overlap_schedule=True, enable_mixed_chunk=False, enable_dp_attention=False, enable_dp_lm_head=False, enable_ep_moe=False, enable_deepep_moe=False, deepep_mode='auto', ep_num_redundant_experts=0, ep_dispatch_algorithm=None, init_expert_location='trivial', enable_eplb=False, eplb_rebalance_num_iterations=1000, expert_distribution_recorder_mode=None, expert_distribution_recorder_buffer_size=None, enable_expert_distribution_metrics=False, deepep_config=None, enable_torch_compile=False, torch_compile_max_bs=32, cuda_graph_max_bs=None, cuda_graph_bs=None, torchao_config='', enable_nan_detection=False, enable_p2p_check=False, triton_attention_reduce_in_fp32=False, triton_attention_num_kv_splits=8, num_continuous_decode_steps=1, delete_ckpt_after_loading=False, enable_memory_saver=False, allow_auto_truncate=False, enable_custom_logit_processor=False, tool_call_parser=None, enable_hierarchical_cache=True, hicache_ratio=2.0, hicache_size=8, hicache_write_policy='write_through_selective', flashinfer_mla_disable_ragged=False, warmups=None, moe_dense_tp_size=None, n_share_experts_fusion=0, disable_chunked_prefix_cache=False, disable_fast_image_processor=False, mm_attention_backend=None, debug_tensor_dump_output_folder=None, debug_tensor_dump_input_file=None, debug_tensor_dump_inject=False, disaggregation_mode='null', disaggregation_bootstrap_port=8998, disaggregation_transfer_backend='mooncake', disaggregation_ib_device=None, pdlb_url=None)
+[2026-09-10 08:08:23] Casting torch.bfloat16 to torch.float16.
+/root/slvr_workspace/envs/seds/lib/python3.12/site-packages/torch/cuda/__init__.py:61: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+/root/slvr_workspace/envs/seds/lib/python3.12/site-packages/torch/cuda/__init__.py:61: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+[2026-09-10 08:08:28] Casting torch.bfloat16 to torch.float16.
+/root/slvr_workspace/envs/seds/lib/python3.12/site-packages/torch/cuda/__init__.py:61: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+/root/slvr_workspace/envs/seds/lib/python3.12/site-packages/torch/cuda/__init__.py:61: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+[2026-09-10 08:08:29] Casting torch.bfloat16 to torch.float16.
+[2026-09-10 08:08:29] Init torch distributed begin.
+[2026-09-10 08:08:29] Init torch distributed ends. mem usage=0.00 GB
+[2026-09-10 08:08:29] init_expert_location from trivial
+[2026-09-10 08:08:29] Load weight begin. avail mem=31.37 GB
+[2026-09-10 08:08:29] Compute capability below sm80. Use float16 due to lack of bfloat16 support.
+[2026-09-10 08:08:29] Experimental sm70 native/FP16 compatibility route
+Loading safetensors checkpoint shards:   0% Completed | 0/2 [00:00<?, ?it/s]
+Loading safetensors checkpoint shards:  50% Completed | 1/2 [00:02<00:02,  2.65s/it]
+Loading safetensors checkpoint shards: 100% Completed | 2/2 [00:07<00:00,  3.83s/it]
+Loading safetensors checkpoint shards: 100% Completed | 2/2 [00:07<00:00,  3.65s/it]
+
+[2026-09-10 08:08:43] INFO:     Started server process [99885]
+[2026-09-10 08:08:43] INFO:     Waiting for application startup.
+[2026-09-10 08:08:43] INFO:     Application startup complete.
+[2026-09-10 08:08:43] INFO:     Uvicorn running on http://127.0.0.1:30171 (Press CTRL+C to quit)
+[2026-09-10 08:08:44] INFO:     127.0.0.1:46778 - "GET /get_model_info HTTP/1.1" 200 OK
+[2026-09-10 08:08:45] INFO:     127.0.0.1:46768 - "GET /health_generate HTTP/1.1" 200 OK
+[2026-09-10 08:08:45] INFO:     127.0.0.1:46794 - "POST /generate HTTP/1.1" 200 OK
+[2026-09-10 08:08:47] INFO:     127.0.0.1:46786 - "POST /generate HTTP/1.1" 200 OK
+[2026-09-10 08:08:47] The server is fired up and ready to roll!
+[2026-09-10 08:08:48] INFO:     127.0.0.1:46794 - "POST /generate HTTP/1.1" 200 OK
+[2026-09-10 08:08:50] INFO:     127.0.0.1:46794 - "POST /generate HTTP/1.1" 200 OK
+[2026-09-10 08:08:52] INFO:     127.0.0.1:46794 - "POST /generate HTTP/1.1" 200 OK
+[2026-09-10 08:08:55] INFO:     127.0.0.1:44086 - "POST /flush_cache HTTP/1.1" 200 OK
+[2026-09-10 08:08:56] INFO:     127.0.0.1:42764 - "GET /metrics HTTP/1.1" 200 OK
+[2026-09-10 08:08:56] INFO:     127.0.0.1:42772 - "POST /generate HTTP/1.1" 200 OK
+[2026-09-10 08:08:59] INFO:     127.0.0.1:42772 - "POST /generate HTTP/1.1" 200 OK
+[2026-09-10 08:09:01] INFO:     127.0.0.1:42772 - "POST /generate HTTP/1.1" 200 OK
+[2026-09-10 08:09:03] INFO:     127.0.0.1:42772 - "POST /generate HTTP/1.1" 200 OK
+[2026-09-10 08:09:05] INFO:     127.0.0.1:42772 - "POST /generate HTTP/1.1" 200 OK
+[2026-09-10 08:09:07] INFO:     127.0.0.1:42772 - "POST /generate HTTP/1.1" 200 OK
+[2026-09-10 08:09:09] INFO:     127.0.0.1:42772 - "POST /generate HTTP/1.1" 200 OK
+[2026-09-10 08:09:11] INFO:     127.0.0.1:42772 - "POST /generate HTTP/1.1" 200 OK
+[2026-09-10 08:09:14] INFO:     127.0.0.1:42772 - "POST /generate HTTP/1.1" 200 OK
+[2026-09-10 08:09:16] INFO:     127.0.0.1:42772 - "POST /generate HTTP/1.1" 200 OK
+[2026-09-10 08:09:19] INFO:     127.0.0.1:42772 - "POST /generate HTTP/1.1" 200 OK
+[2026-09-10 08:09:21] INFO:     127.0.0.1:42772 - "POST /generate HTTP/1.1" 200 OK
+[2026-09-10 08:09:23] INFO:     127.0.0.1:42772 - "POST /generate HTTP/1.1" 200 OK
+[2026-09-10 08:09:26] INFO:     127.0.0.1:42772 - "POST /generate HTTP/1.1" 200 OK
+[2026-09-10 08:09:28] INFO:     127.0.0.1:42772 - "POST /generate HTTP/1.1" 200 OK
+[2026-09-10 08:09:30] INFO:     127.0.0.1:42772 - "POST /generate HTTP/1.1" 200 OK
+[2026-09-10 08:09:33] INFO:     127.0.0.1:42772 - "POST /generate HTTP/1.1" 200 OK
+[2026-09-10 08:09:35] INFO:     127.0.0.1:42772 - "POST /generate HTTP/1.1" 200 OK
+[2026-09-10 08:09:38] INFO:     127.0.0.1:41850 - "GET /metrics HTTP/1.1" 200 OK
+[2026-09-10 08:09:38] SIGTERM received. signum=None frame=None. Draining requests and shutting down...
+[2026-09-10 08:09:38] Child process unexpectedly failed with an exit code 15. pid=99935
+[2026-09-10 08:09:38] Child process unexpectedly failed with an exit code 15. pid=99960
+[2026-09-10 08:09:39] Gracefully exiting... remaining number of requests 0

@@ -1,0 +1,6562 @@
+[
+  {
+    "kind": "batch",
+    "time_ns": 1789027738141786891,
+    "pid": 99959,
+    "phase": "prefill",
+    "request_ids": [
+      "reload_gate-1789027736843155267-0"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027736861926594,
+    "gpu_used_tokens": 4096,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 0,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 4096,
+    "host_call_s": 1.270484878012212,
+    "end_ns": 1789027738132471497,
+    "cuda_elapsed_s": 1.2793651123046874
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027738204454882,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-0"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027738142421381,
+    "gpu_used_tokens": 4097,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 0,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06107932000304572,
+    "end_ns": 1789027738203555452,
+    "cuda_elapsed_s": 0.06176051330566406
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027738266296453,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-0"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027738204838174,
+    "gpu_used_tokens": 4098,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 0,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.0604573130258359,
+    "end_ns": 1789027738265347854,
+    "cuda_elapsed_s": 0.06114508819580078
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027738328004494,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-0"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027738266558875,
+    "gpu_used_tokens": 4099,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 0,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060473491001175717,
+    "end_ns": 1789027738327074252,
+    "cuda_elapsed_s": 0.06116454315185547
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027738389500982,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-0"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027738328260372,
+    "gpu_used_tokens": 4100,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 0,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06031976698432118,
+    "end_ns": 1789027738388623748,
+    "cuda_elapsed_s": 0.06101401519775391
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027738451103996,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-0"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027738389829785,
+    "gpu_used_tokens": 4101,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 0,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.0603004879958462,
+    "end_ns": 1789027738450171055,
+    "cuda_elapsed_s": 0.0609986572265625
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027738512819103,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-0"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027738451334497,
+    "gpu_used_tokens": 4102,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 0,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06048314902000129,
+    "end_ns": 1789027738511860494,
+    "cuda_elapsed_s": 0.06117171096801758
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027738574230506,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-0"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027738513063480,
+    "gpu_used_tokens": 4103,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 0,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060247749992413446,
+    "end_ns": 1789027738573353498,
+    "cuda_elapsed_s": 0.06094131088256836
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027738635751103,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-0"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027738574547269,
+    "gpu_used_tokens": 4104,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 0,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06018960100482218,
+    "end_ns": 1789027738634776797,
+    "cuda_elapsed_s": 0.060862464904785155
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027738697096933,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-0"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027738635959288,
+    "gpu_used_tokens": 4105,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 0,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06022237500292249,
+    "end_ns": 1789027738696224404,
+    "cuda_elapsed_s": 0.06091775894165039
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027738758576529,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-0"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027738697400420,
+    "gpu_used_tokens": 4106,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 0,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06019302798085846,
+    "end_ns": 1789027738757633437,
+    "cuda_elapsed_s": 0.060889087677001956
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027738820326890,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-0"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027738758849853,
+    "gpu_used_tokens": 4107,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 0,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060487359995022416,
+    "end_ns": 1789027738819380730,
+    "cuda_elapsed_s": 0.06119116973876953
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027738881565320,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-0"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027738820556760,
+    "gpu_used_tokens": 4108,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 0,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06006735097616911,
+    "end_ns": 1789027738880666615,
+    "cuda_elapsed_s": 0.060761089324951174
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027738943041914,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-0"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027738881881067,
+    "gpu_used_tokens": 4109,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 0,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060255946998950094,
+    "end_ns": 1789027738942175914,
+    "cuda_elapsed_s": 0.0609536018371582
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027739004989162,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-0"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027738943344714,
+    "gpu_used_tokens": 4110,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 0,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06066443500458263,
+    "end_ns": 1789027739004048726,
+    "cuda_elapsed_s": 0.06135603332519531
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027739067233727,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-0"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027739005200641,
+    "gpu_used_tokens": 4111,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 0,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060283891012659296,
+    "end_ns": 1789027739065527381,
+    "cuda_elapsed_s": 0.060974079132080077
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027739118276352,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027739089679513,
+    "end_ns": 1789027739117724986,
+    "host_call_s": 0.027843380987178534,
+    "cuda_elapsed_s": 0.02789891242980957
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027739171199667,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027739121158301,
+    "end_ns": 1789027739170841577,
+    "host_call_s": 0.04957313998602331,
+    "cuda_elapsed_s": 0.025794815063476563
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027739203644695,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027739174973493,
+    "end_ns": 1789027739203375726,
+    "host_call_s": 0.02831229698495008,
+    "cuda_elapsed_s": 0.025886848449707033
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027739257313256,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027739207417802,
+    "end_ns": 1789027739256924802,
+    "host_call_s": 0.04940822802018374,
+    "cuda_elapsed_s": 0.025800224304199218
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027740297863765,
+    "pid": 99959,
+    "phase": "prefill",
+    "request_ids": [
+      "reload_gate-1789027736843155267-1"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027739087777255,
+    "gpu_used_tokens": 6159,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 4096,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 2048,
+    "host_call_s": 1.2049425519944634,
+    "end_ns": 1789027740292771780,
+    "cuda_elapsed_s": 1.2095150146484375
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027740359722775,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-1"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027740298404428,
+    "gpu_used_tokens": 6160,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 4096,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060315863986033946,
+    "end_ns": 1789027740358759726,
+    "cuda_elapsed_s": 0.060984321594238285
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027740421043141,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-1"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027740359982499,
+    "gpu_used_tokens": 6161,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 4096,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06015042299986817,
+    "end_ns": 1789027740420174902,
+    "cuda_elapsed_s": 0.06084403228759765
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027740482550666,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-1"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027740421365821,
+    "gpu_used_tokens": 6162,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 4096,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06020772899501026,
+    "end_ns": 1789027740481614642,
+    "cuda_elapsed_s": 0.060900352478027345
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027740543788866,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-1"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027740482816753,
+    "gpu_used_tokens": 6163,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 4096,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.05998017897945829,
+    "end_ns": 1789027740542841380,
+    "cuda_elapsed_s": 0.06066790390014649
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027740605088430,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-1"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027740544003229,
+    "gpu_used_tokens": 6164,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 4096,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060121250979136676,
+    "end_ns": 1789027740604167529,
+    "cuda_elapsed_s": 0.06081228637695312
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027740666261860,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-1"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027740605326911,
+    "gpu_used_tokens": 6165,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 4096,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.05995174197596498,
+    "end_ns": 1789027740665320852,
+    "cuda_elapsed_s": 0.0606453742980957
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027740727437712,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-1"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027740666498868,
+    "gpu_used_tokens": 6166,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 4096,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.05996696700458415,
+    "end_ns": 1789027740726508195,
+    "cuda_elapsed_s": 0.06065868759155273
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027740788841914,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-1"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027740727674553,
+    "gpu_used_tokens": 6167,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 4096,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06015929699060507,
+    "end_ns": 1789027740787890915,
+    "cuda_elapsed_s": 0.06085017776489258
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027740849936276,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-1"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027740789070073,
+    "gpu_used_tokens": 6168,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 4096,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.059896653983742,
+    "end_ns": 1789027740849007906,
+    "cuda_elapsed_s": 0.060590080261230465
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027740911165046,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-1"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027740850166282,
+    "gpu_used_tokens": 6169,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 4096,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06008693898911588,
+    "end_ns": 1789027740910295892,
+    "cuda_elapsed_s": 0.06077542495727539
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027740972393092,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-1"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027740911475709,
+    "gpu_used_tokens": 6170,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 4096,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.05994049701257609,
+    "end_ns": 1789027740971456506,
+    "cuda_elapsed_s": 0.06063820648193359
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027741034855923,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-1"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027740972624419,
+    "gpu_used_tokens": 6171,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 4096,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06129070199676789,
+    "end_ns": 1789027741033966115,
+    "cuda_elapsed_s": 0.06197760009765625
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027741096362765,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-1"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027741035183782,
+    "gpu_used_tokens": 6172,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 4096,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060211823001736775,
+    "end_ns": 1789027741095436264,
+    "cuda_elapsed_s": 0.06090444946289063
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027741157520123,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-1"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027741096583883,
+    "gpu_used_tokens": 6173,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 4096,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06004359800135717,
+    "end_ns": 1789027741156668856,
+    "cuda_elapsed_s": 0.06072217559814453
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027741219424953,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-1"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027741157866881,
+    "gpu_used_tokens": 6174,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 4096,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060024414997315034,
+    "end_ns": 1789027741217932013,
+    "cuda_elapsed_s": 0.06071705627441406
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027741293956064,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027741243706117,
+    "end_ns": 1789027741293443316,
+    "host_call_s": 0.04959508200408891,
+    "cuda_elapsed_s": 0.026351423263549806
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027741326472805,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027741297355652,
+    "end_ns": 1789027741326269215,
+    "host_call_s": 0.028826940979342908,
+    "cuda_elapsed_s": 0.0265020809173584
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027742392918270,
+    "pid": 99959,
+    "phase": "prefill",
+    "request_ids": [
+      "reload_gate-1789027736843155267-2"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027741239751822,
+    "gpu_used_tokens": 8222,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 6144,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 2048,
+    "host_call_s": 1.147972146020038,
+    "end_ns": 1789027742387781606,
+    "cuda_elapsed_s": 1.15257958984375
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027742454643978,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-2"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027742393450765,
+    "gpu_used_tokens": 8223,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 6144,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06023714999901131,
+    "end_ns": 1789027742453727965,
+    "cuda_elapsed_s": 0.060906494140625
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027742515948928,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-2"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027742454902795,
+    "gpu_used_tokens": 8224,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 6144,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06013306599925272,
+    "end_ns": 1789027742515078625,
+    "cuda_elapsed_s": 0.06083071899414062
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027742577212469,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-2"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027742516250484,
+    "gpu_used_tokens": 8225,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 6144,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06006145299761556,
+    "end_ns": 1789027742576351851,
+    "cuda_elapsed_s": 0.06075187301635742
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027742638499920,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-2"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027742577513049,
+    "gpu_used_tokens": 8226,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 6144,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06008392301737331,
+    "end_ns": 1789027742637637858,
+    "cuda_elapsed_s": 0.06077542495727539
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027742699847338,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-2"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027742638811637,
+    "gpu_used_tokens": 8227,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 6144,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060055321984691545,
+    "end_ns": 1789027742698907866,
+    "cuda_elapsed_s": 0.060746753692626956
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027742761094401,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-2"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027742700084081,
+    "gpu_used_tokens": 8228,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 6144,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06010423900443129,
+    "end_ns": 1789027742760229779,
+    "cuda_elapsed_s": 0.06080204772949219
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027742822390032,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-2"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027742761394332,
+    "gpu_used_tokens": 8229,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 6144,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06009713199455291,
+    "end_ns": 1789027742821532368,
+    "cuda_elapsed_s": 0.06078976058959961
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027742883682091,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-2"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027742822709287,
+    "gpu_used_tokens": 8230,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 6144,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06007567801862024,
+    "end_ns": 1789027742882826970,
+    "cuda_elapsed_s": 0.060761089324951174
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027742944825166,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-2"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027742884012902,
+    "gpu_used_tokens": 8231,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 6144,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.05982641800073907,
+    "end_ns": 1789027742943878645,
+    "cuda_elapsed_s": 0.06051430511474609
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027743006314125,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-2"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027742945053169,
+    "gpu_used_tokens": 8232,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 6144,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060158745996886864,
+    "end_ns": 1789027743005254596,
+    "cuda_elapsed_s": 0.060849151611328124
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027743067634614,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-2"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027743006591733,
+    "gpu_used_tokens": 8233,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 6144,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06015529698925093,
+    "end_ns": 1789027743066787561,
+    "cuda_elapsed_s": 0.060826625823974606
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027743129326498,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-2"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027743067968812,
+    "gpu_used_tokens": 8234,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 6144,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060449984011938795,
+    "end_ns": 1789027743128458889,
+    "cuda_elapsed_s": 0.06113894271850586
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027743190727696,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-2"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027743129642781,
+    "gpu_used_tokens": 8235,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 6144,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06015723699238151,
+    "end_ns": 1789027743189840557,
+    "cuda_elapsed_s": 0.06083891296386719
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027743252120676,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-2"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027743191036108,
+    "gpu_used_tokens": 8236,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 6144,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06011407700134441,
+    "end_ns": 1789027743251189393,
+    "cuda_elapsed_s": 0.06081126403808594
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027743313851908,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-2"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027743252353039,
+    "gpu_used_tokens": 8237,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 6144,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.05994862798252143,
+    "end_ns": 1789027743312343856,
+    "cuda_elapsed_s": 0.0606453742980957
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027743366005188,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027743335721949,
+    "end_ns": 1789027743365512105,
+    "host_call_s": 0.02963686699513346,
+    "cuda_elapsed_s": 0.029680608749389648
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027743414934977,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027743369206361,
+    "end_ns": 1789027743414710185,
+    "host_call_s": 0.045397050998872146,
+    "cuda_elapsed_s": 0.026305824279785155
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027744492661996,
+    "pid": 99959,
+    "phase": "prefill",
+    "request_ids": [
+      "reload_gate-1789027736843155267-3"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027743334825324,
+    "gpu_used_tokens": 10285,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 8192,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 2048,
+    "host_call_s": 1.1527100400126074,
+    "end_ns": 1789027744487591718,
+    "cuda_elapsed_s": 1.1572725830078125
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027744554211770,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-3"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027744493230842,
+    "gpu_used_tokens": 10286,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 8192,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06005912201362662,
+    "end_ns": 1789027744553329802,
+    "cuda_elapsed_s": 0.060750846862792966
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027744615358745,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-3"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027744554550636,
+    "gpu_used_tokens": 10287,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 8192,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.05989693698938936,
+    "end_ns": 1789027744614488034,
+    "cuda_elapsed_s": 0.06059110260009765
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027744676835081,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-3"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027744615673637,
+    "gpu_used_tokens": 10288,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 8192,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06013430200982839,
+    "end_ns": 1789027744675866610,
+    "cuda_elapsed_s": 0.060821502685546876
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027744738175890,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-3"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027744677066328,
+    "gpu_used_tokens": 10289,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 8192,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06010291399434209,
+    "end_ns": 1789027744737211566,
+    "cuda_elapsed_s": 0.06079897689819336
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027744799395098,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-3"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027744738376577,
+    "gpu_used_tokens": 10290,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 8192,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060102260002167895,
+    "end_ns": 1789027744798521393,
+    "cuda_elapsed_s": 0.06079283142089844
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027744860871846,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-3"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027744799720823,
+    "gpu_used_tokens": 10291,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 8192,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06021494200103916,
+    "end_ns": 1789027744859977057,
+    "cuda_elapsed_s": 0.06091263961791992
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027744922300048,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-3"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027744861190560,
+    "gpu_used_tokens": 10292,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 8192,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060111426981166005,
+    "end_ns": 1789027744921342299,
+    "cuda_elapsed_s": 0.06080204772949219
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027744983524495,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-3"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027744922553678,
+    "gpu_used_tokens": 10293,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 8192,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.0599929979944136,
+    "end_ns": 1789027744982588903,
+    "cuda_elapsed_s": 0.06068326568603516
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027745044966746,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-3"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027744983742087,
+    "gpu_used_tokens": 10294,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 8192,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060209593997569755,
+    "end_ns": 1789027745043994003,
+    "cuda_elapsed_s": 0.060900352478027345
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027745106213162,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-3"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027745045196648,
+    "gpu_used_tokens": 10295,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 8192,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060099483001977205,
+    "end_ns": 1789027745105338549,
+    "cuda_elapsed_s": 0.0607907829284668
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027745167463015,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-3"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027745106522927,
+    "gpu_used_tokens": 10296,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 8192,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060025165003025904,
+    "end_ns": 1789027745166588241,
+    "cuda_elapsed_s": 0.06071807861328125
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027745230440856,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-3"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027745167788762,
+    "gpu_used_tokens": 10297,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 8192,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.0616667729918845,
+    "end_ns": 1789027745229496802,
+    "cuda_elapsed_s": 0.062358528137207034
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027745293543594,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-3"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027745230675723,
+    "gpu_used_tokens": 10298,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 8192,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.061866774020018056,
+    "end_ns": 1789027745292600520,
+    "cuda_elapsed_s": 0.06254182434082031
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027745356726363,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-3"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027745293831201,
+    "gpu_used_tokens": 10299,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 8192,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.061889150994829834,
+    "end_ns": 1789027745355764548,
+    "cuda_elapsed_s": 0.062561279296875
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027745420752839,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-3"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027745356974308,
+    "gpu_used_tokens": 10300,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 8192,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.062163554975995794,
+    "end_ns": 1789027745419180405,
+    "cuda_elapsed_s": 0.06285414505004883
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027745472083952,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027745442034459,
+    "end_ns": 1789027745471657154,
+    "host_call_s": 0.029502674005925655,
+    "cuda_elapsed_s": 0.029557952880859373
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027745502818364,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027745475799582,
+    "end_ns": 1789027745502408494,
+    "host_call_s": 0.02651370599051006,
+    "cuda_elapsed_s": 0.026488351821899413
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027746603240256,
+    "pid": 99959,
+    "phase": "prefill",
+    "request_ids": [
+      "reload_gate-1789027736843155267-4"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027745441635976,
+    "gpu_used_tokens": 12348,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 10240,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 2048,
+    "host_call_s": 1.156390050018672,
+    "end_ns": 1789027746598110561,
+    "cuda_elapsed_s": 1.1610040283203125
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027746667056563,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-4"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027746603806198,
+    "gpu_used_tokens": 12349,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 10240,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06226115900790319,
+    "end_ns": 1789027746666108689,
+    "cuda_elapsed_s": 0.06295449447631836
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027746730569322,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-4"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027746667325025,
+    "gpu_used_tokens": 12350,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 10240,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06233305000932887,
+    "end_ns": 1789027746729702170,
+    "cuda_elapsed_s": 0.06301081466674804
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027746794217855,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-4"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027746730917387,
+    "gpu_used_tokens": 12351,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 10240,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.062331409979378805,
+    "end_ns": 1789027746793289451,
+    "cuda_elapsed_s": 0.0630118408203125
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027746857644837,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-4"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027746794468865,
+    "gpu_used_tokens": 12352,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 10240,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.062221246014814824,
+    "end_ns": 1789027746856733572,
+    "cuda_elapsed_s": 0.06289510345458985
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027746921042558,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-4"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027746857946004,
+    "gpu_used_tokens": 12353,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 10240,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.062152501981472597,
+    "end_ns": 1789027746920142092,
+    "cuda_elapsed_s": 0.06284492874145507
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027746984534390,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-4"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027746921382724,
+    "gpu_used_tokens": 12354,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 10240,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06214315298711881,
+    "end_ns": 1789027746983576080,
+    "cuda_elapsed_s": 0.06283059310913086
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027747047942229,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-4"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027746984796891,
+    "gpu_used_tokens": 12355,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 10240,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06217007301165722,
+    "end_ns": 1789027747047009721,
+    "cuda_elapsed_s": 0.06285823822021484
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027747111308734,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-4"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027747048178059,
+    "gpu_used_tokens": 12356,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 10240,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.0621603210165631,
+    "end_ns": 1789027747110381278,
+    "cuda_elapsed_s": 0.06284595108032226
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027747174731469,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-4"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027747111546434,
+    "gpu_used_tokens": 12357,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 10240,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.062197318009566516,
+    "end_ns": 1789027747173786586,
+    "cuda_elapsed_s": 0.06287257766723633
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027747238103394,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-4"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027747174967838,
+    "gpu_used_tokens": 12358,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 10240,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06216651399154216,
+    "end_ns": 1789027747237177209,
+    "cuda_elapsed_s": 0.06285721588134766
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027747301577088,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-4"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027747238328277,
+    "gpu_used_tokens": 12359,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 10240,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.062351404019864276,
+    "end_ns": 1789027747300728774,
+    "cuda_elapsed_s": 0.0630231056213379
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027747365036348,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-4"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027747301889849,
+    "gpu_used_tokens": 12360,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 10240,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.062250846007373184,
+    "end_ns": 1789027747364180774,
+    "cuda_elapsed_s": 0.06293299102783204
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027747428266205,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-4"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027747365331032,
+    "gpu_used_tokens": 12361,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 10240,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06202939400100149,
+    "end_ns": 1789027747427411846,
+    "cuda_elapsed_s": 0.06270361709594727
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027747491834804,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-4"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027747428578114,
+    "gpu_used_tokens": 12362,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 10240,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06226342899026349,
+    "end_ns": 1789027747490880985,
+    "cuda_elapsed_s": 0.06295654296875
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027747555958633,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-4"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027747492056260,
+    "gpu_used_tokens": 12363,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 10240,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06232047500088811,
+    "end_ns": 1789027747554419127,
+    "cuda_elapsed_s": 0.06299545669555665
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027747604820245,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027747575741826,
+    "end_ns": 1789027747604492582,
+    "host_call_s": 0.02862006099894643,
+    "cuda_elapsed_s": 0.02866864013671875
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027747636017459,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027747609100253,
+    "end_ns": 1789027747635706079,
+    "host_call_s": 0.02648206998128444,
+    "cuda_elapsed_s": 0.026489152908325195
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027748735775460,
+    "pid": 99959,
+    "phase": "prefill",
+    "request_ids": [
+      "reload_gate-1789027736843155267-5"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027747605785128,
+    "gpu_used_tokens": 14411,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 12288,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 2048,
+    "host_call_s": 1.1248028239933774,
+    "end_ns": 1789027748730670666,
+    "cuda_elapsed_s": 1.12934814453125
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027748798163290,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-5"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027748736404793,
+    "gpu_used_tokens": 14412,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 12288,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06073282301076688,
+    "end_ns": 1789027748797186738,
+    "cuda_elapsed_s": 0.06140723037719727
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027748859490500,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-5"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027748798440760,
+    "gpu_used_tokens": 14413,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 12288,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06013138999696821,
+    "end_ns": 1789027748858615204,
+    "cuda_elapsed_s": 0.06082867050170898
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027748920937633,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-5"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027748859817297,
+    "gpu_used_tokens": 14414,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 12288,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06015931398724206,
+    "end_ns": 1789027748920017761,
+    "cuda_elapsed_s": 0.06084198379516602
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027748982177571,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-5"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027748921175782,
+    "gpu_used_tokens": 14415,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 12288,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06001786302658729,
+    "end_ns": 1789027748981235605,
+    "cuda_elapsed_s": 0.06071295928955078
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027749043596713,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-5"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027748982413415,
+    "gpu_used_tokens": 14416,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 12288,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060055840003769845,
+    "end_ns": 1789027749042510954,
+    "cuda_elapsed_s": 0.06075187301635742
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027749104893115,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-5"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027749043856410,
+    "gpu_used_tokens": 14417,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 12288,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06001170998206362,
+    "end_ns": 1789027749103910492,
+    "cuda_elapsed_s": 0.06070476913452148
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027749166020321,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-5"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027749105099874,
+    "gpu_used_tokens": 14418,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 12288,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.05994921698584221,
+    "end_ns": 1789027749165091011,
+    "cuda_elapsed_s": 0.060641281127929686
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027749227368459,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-5"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027749166242047,
+    "gpu_used_tokens": 14419,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 12288,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06015740099246614,
+    "end_ns": 1789027749226442279,
+    "cuda_elapsed_s": 0.06085017776489258
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027749289765205,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-5"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027749227602231,
+    "gpu_used_tokens": 14420,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 12288,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.061231480998685583,
+    "end_ns": 1789027749288876044,
+    "cuda_elapsed_s": 0.06192435073852539
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027749351577289,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-5"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027749290071344,
+    "gpu_used_tokens": 14421,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 12288,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06050332201994024,
+    "end_ns": 1789027749350615100,
+    "cuda_elapsed_s": 0.0611962890625
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027749413143319,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-5"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027749351839226,
+    "gpu_used_tokens": 14422,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 12288,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060333069995976985,
+    "end_ns": 1789027749412215137,
+    "cuda_elapsed_s": 0.061028350830078126
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027749474845755,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-5"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027749413366156,
+    "gpu_used_tokens": 14423,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 12288,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060480998014099896,
+    "end_ns": 1789027749473889566,
+    "cuda_elapsed_s": 0.061175807952880856
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027749536260139,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-5"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027749475076753,
+    "gpu_used_tokens": 14424,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 12288,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06027946900576353,
+    "end_ns": 1789027749535397889,
+    "cuda_elapsed_s": 0.06097305679321289
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027749597998118,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-5"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027749536556305,
+    "gpu_used_tokens": 14425,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 12288,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060541305982042104,
+    "end_ns": 1789027749597137739,
+    "cuda_elapsed_s": 0.06123417663574219
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027749659771211,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-5"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027749598299965,
+    "gpu_used_tokens": 14426,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 12288,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06052637501852587,
+    "end_ns": 1789027749658866499,
+    "cuda_elapsed_s": 0.061216766357421876
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027749744142247,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027749688752133,
+    "end_ns": 1789027749743670388,
+    "host_call_s": 0.0547171950165648,
+    "cuda_elapsed_s": 0.040866687774658204
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027749794045944,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027749748298644,
+    "end_ns": 1789027749793829533,
+    "host_call_s": 0.04539811101858504,
+    "cuda_elapsed_s": 0.03893692779541016
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027751036400072,
+    "pid": 99959,
+    "phase": "prefill",
+    "request_ids": [
+      "reload_gate-1789027736843155267-6"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027749684764990,
+    "gpu_used_tokens": 18522,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 14336,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 4096,
+    "host_call_s": 1.342125675000716,
+    "end_ns": 1789027751026981149,
+    "cuda_elapsed_s": 1.351183349609375
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027751098522836,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-6"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027751036971880,
+    "gpu_used_tokens": 18523,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 14336,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06061972500174306,
+    "end_ns": 1789027751097632684,
+    "cuda_elapsed_s": 0.06131609725952149
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027751160179673,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-6"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027751098868995,
+    "gpu_used_tokens": 18524,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 14336,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060391656996216625,
+    "end_ns": 1789027751159300239,
+    "cuda_elapsed_s": 0.06109491348266602
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027751221789738,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-6"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027751160483098,
+    "gpu_used_tokens": 18525,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 14336,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060400096990633756,
+    "end_ns": 1789027751220922864,
+    "cuda_elapsed_s": 0.061090816497802736
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027751283401674,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-6"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027751222096950,
+    "gpu_used_tokens": 18526,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 14336,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06039585100370459,
+    "end_ns": 1789027751282532681,
+    "cuda_elapsed_s": 0.06108979034423828
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027751344962864,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-6"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027751283730620,
+    "gpu_used_tokens": 18527,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 14336,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06033104701782577,
+    "end_ns": 1789027751344101273,
+    "cuda_elapsed_s": 0.061023231506347655
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027751410233014,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-6"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027751345260568,
+    "gpu_used_tokens": 18528,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 14336,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06352021900238469,
+    "end_ns": 1789027751408820954,
+    "cuda_elapsed_s": 0.06416896057128907
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027751475073245,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-6"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027751410732732,
+    "gpu_used_tokens": 18529,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 14336,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06339133298024535,
+    "end_ns": 1789027751474190461,
+    "cuda_elapsed_s": 0.06407270050048829
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027751537409625,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-6"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027751475399012,
+    "gpu_used_tokens": 18530,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 14336,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06109432800440118,
+    "end_ns": 1789027751536533966,
+    "cuda_elapsed_s": 0.0617891845703125
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027751599567558,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-6"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027751537754166,
+    "gpu_used_tokens": 18531,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 14336,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06087666601524688,
+    "end_ns": 1789027751598675022,
+    "cuda_elapsed_s": 0.061587455749511716
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027751661912522,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-6"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027751599914187,
+    "gpu_used_tokens": 18532,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 14336,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.061003045993857086,
+    "end_ns": 1789027751660957442,
+    "cuda_elapsed_s": 0.061695999145507815
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027751724191319,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-6"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027751662151129,
+    "gpu_used_tokens": 18533,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 14336,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06112758902600035,
+    "end_ns": 1789027751723321423,
+    "cuda_elapsed_s": 0.061818878173828126
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027751786362007,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-6"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027751724512862,
+    "gpu_used_tokens": 18534,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 14336,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06085945898666978,
+    "end_ns": 1789027751785413275,
+    "cuda_elapsed_s": 0.061553665161132816
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027751848872920,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-6"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027751786593616,
+    "gpu_used_tokens": 18535,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 14336,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06131863399059512,
+    "end_ns": 1789027751847955510,
+    "cuda_elapsed_s": 0.06198169708251953
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027751911049483,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-6"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027751849106668,
+    "gpu_used_tokens": 18536,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 14336,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.061018384993076324,
+    "end_ns": 1789027751910166314,
+    "cuda_elapsed_s": 0.06171340942382812
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027751973228105,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-6"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027751911355124,
+    "gpu_used_tokens": 18537,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 14336,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060948120983084664,
+    "end_ns": 1789027751972343951,
+    "cuda_elapsed_s": 0.061639678955078124
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027752035394081,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027751993660087,
+    "end_ns": 1789027752034789471,
+    "host_call_s": 0.040081504004774615,
+    "cuda_elapsed_s": 0.04101052856445313
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027752079966661,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027752040523621,
+    "end_ns": 1789027752079673322,
+    "host_call_s": 0.03899599800934084,
+    "cuda_elapsed_s": 0.03901126480102539
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027752128652084,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027752083737523,
+    "end_ns": 1789027752128412576,
+    "host_call_s": 0.044563215982634574,
+    "cuda_elapsed_s": 0.03893612670898437
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027752191852491,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027752130850561,
+    "end_ns": 1789027752191313282,
+    "host_call_s": 0.06021456001326442,
+    "cuda_elapsed_s": 0.04329391860961914
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027753445374831,
+    "pid": 99959,
+    "phase": "prefill",
+    "request_ids": [
+      "reload_gate-1789027736843155267-7"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027752036594562,
+    "gpu_used_tokens": 22633,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 18432,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 4096,
+    "host_call_s": 1.3992255800112616,
+    "end_ns": 1789027753435998721,
+    "cuda_elapsed_s": 1.4082109375
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027753508394986,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-7"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027753446029566,
+    "gpu_used_tokens": 22634,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 18432,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.061344629008090124,
+    "end_ns": 1789027753507425972,
+    "cuda_elapsed_s": 0.062023681640625
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027753570538158,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-7"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027753508643470,
+    "gpu_used_tokens": 22635,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 18432,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060915405018022284,
+    "end_ns": 1789027753569601979,
+    "cuda_elapsed_s": 0.06160486221313476
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027753632179959,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-7"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027753570769236,
+    "gpu_used_tokens": 22636,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 18432,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06041245299275033,
+    "end_ns": 1789027753631224353,
+    "cuda_elapsed_s": 0.061104129791259766
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027753693909131,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-7"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027753632417953,
+    "gpu_used_tokens": 22637,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 18432,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06045493800775148,
+    "end_ns": 1789027753692915291,
+    "cuda_elapsed_s": 0.06114508819580078
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027753755418523,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-7"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027753694107391,
+    "gpu_used_tokens": 22638,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 18432,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06039757400867529,
+    "end_ns": 1789027753754547140,
+    "cuda_elapsed_s": 0.06108979034423828
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027753817362140,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-7"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027753755783111,
+    "gpu_used_tokens": 22639,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 18432,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060650879982858896,
+    "end_ns": 1789027753816475530,
+    "cuda_elapsed_s": 0.06134783935546875
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027753878959941,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-7"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027753817674826,
+    "gpu_used_tokens": 22640,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 18432,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060364979988662526,
+    "end_ns": 1789027753878097688,
+    "cuda_elapsed_s": 0.061055999755859375
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027753940561433,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-7"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027753879266036,
+    "gpu_used_tokens": 22641,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 18432,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.0603263369994238,
+    "end_ns": 1789027753939631930,
+    "cuda_elapsed_s": 0.06100377655029297
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027754002179767,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-7"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027753940788941,
+    "gpu_used_tokens": 22642,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 18432,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060405894997529685,
+    "end_ns": 1789027754001237734,
+    "cuda_elapsed_s": 0.06109900665283203
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027754068516559,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-7"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027754002389755,
+    "gpu_used_tokens": 22643,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 18432,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06515849698917009,
+    "end_ns": 1789027754067589921,
+    "cuda_elapsed_s": 0.06584114837646485
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027754130337271,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-7"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027754068739552,
+    "gpu_used_tokens": 22644,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 18432,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06068344000959769,
+    "end_ns": 1789027754129466647,
+    "cuda_elapsed_s": 0.061379585266113285
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027754192031416,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-7"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027754130639074,
+    "gpu_used_tokens": 22645,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 18432,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06038539300789125,
+    "end_ns": 1789027754191065640,
+    "cuda_elapsed_s": 0.061077503204345705
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027754253830152,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-7"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027754192346510,
+    "gpu_used_tokens": 22646,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 18432,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06046564501593821,
+    "end_ns": 1789027754252854690,
+    "cuda_elapsed_s": 0.06115737533569336
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027754315446540,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-7"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027754254062409,
+    "gpu_used_tokens": 22647,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 18432,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06040513000334613,
+    "end_ns": 1789027754314509754,
+    "cuda_elapsed_s": 0.06110003280639648
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027754377604108,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-7"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027754315718254,
+    "gpu_used_tokens": 22648,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 18432,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06027138201170601,
+    "end_ns": 1789027754376032583,
+    "cuda_elapsed_s": 0.06096588897705078
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027754452095087,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027754402228222,
+    "end_ns": 1789027754451571118,
+    "host_call_s": 0.0492206159979105,
+    "cuda_elapsed_s": 0.02579532814025879
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027754488943759,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027754455499746,
+    "end_ns": 1789027754488593126,
+    "host_call_s": 0.03298202998121269,
+    "cuda_elapsed_s": 0.025819456100463867
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027754541892621,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027754492194585,
+    "end_ns": 1789027754541585560,
+    "host_call_s": 0.049297812016448006,
+    "cuda_elapsed_s": 0.02571811294555664
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027754578988807,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027754545630428,
+    "end_ns": 1789027754578642625,
+    "host_call_s": 0.03286868002032861,
+    "cuda_elapsed_s": 0.02606003189086914
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027755787460620,
+    "pid": 99959,
+    "phase": "prefill",
+    "request_ids": [
+      "reload_gate-1789027736843155267-8"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027754398228739,
+    "gpu_used_tokens": 26744,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 22528,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 4096,
+    "host_call_s": 1.3801531679928303,
+    "end_ns": 1789027755778435611,
+    "cuda_elapsed_s": 1.3891307373046875
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027755850072488,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-8"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027755788360247,
+    "gpu_used_tokens": 26745,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 22528,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06071910698665306,
+    "end_ns": 1789027755849120609,
+    "cuda_elapsed_s": 0.06140723037719727
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027755911669127,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-8"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027755850296076,
+    "gpu_used_tokens": 26746,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 22528,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06040083902189508,
+    "end_ns": 1789027755910738500,
+    "cuda_elapsed_s": 0.06107648086547852
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027755973254022,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-8"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027755911940614,
+    "gpu_used_tokens": 26747,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 22528,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060391273989807814,
+    "end_ns": 1789027755972373506,
+    "cuda_elapsed_s": 0.061085697174072265
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027756035010382,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-8"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027755973574648,
+    "gpu_used_tokens": 26748,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 22528,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06044034200021997,
+    "end_ns": 1789027756034055446,
+    "cuda_elapsed_s": 0.06113177490234375
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027756096605125,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-8"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027756035245426,
+    "gpu_used_tokens": 26749,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 22528,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06047140099690296,
+    "end_ns": 1789027756095758713,
+    "cuda_elapsed_s": 0.06114508819580078
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027756158234349,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-8"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027756096924408,
+    "gpu_used_tokens": 26750,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 22528,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060335147980367765,
+    "end_ns": 1789027756157299174,
+    "cuda_elapsed_s": 0.061026302337646485
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027756219753631,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-8"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027756158465051,
+    "gpu_used_tokens": 26751,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 22528,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06030983600066975,
+    "end_ns": 1789027756218817731,
+    "cuda_elapsed_s": 0.0609986572265625
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027756281268830,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-8"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027756219980223,
+    "gpu_used_tokens": 26752,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 22528,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06031137498212047,
+    "end_ns": 1789027756280333398,
+    "cuda_elapsed_s": 0.06100582504272461
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027756342835324,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-8"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027756281471623,
+    "gpu_used_tokens": 26753,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 22528,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06044069098425098,
+    "end_ns": 1789027756341954001,
+    "cuda_elapsed_s": 0.06113587188720703
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027756404450266,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-8"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027756343136154,
+    "gpu_used_tokens": 26754,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 22528,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060337107977829874,
+    "end_ns": 1789027756403513027,
+    "cuda_elapsed_s": 0.0610252799987793
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027756466104300,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-8"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027756404680354,
+    "gpu_used_tokens": 26755,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 22528,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06043122900882736,
+    "end_ns": 1789027756465169215,
+    "cuda_elapsed_s": 0.06112460708618164
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027756527627410,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-8"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027756466312390,
+    "gpu_used_tokens": 26756,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 22528,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060326816979795694,
+    "end_ns": 1789027756526681415,
+    "cuda_elapsed_s": 0.06102425765991211
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027756589112651,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-8"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027756527859723,
+    "gpu_used_tokens": 26757,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 22528,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06033913901774213,
+    "end_ns": 1789027756588240911,
+    "cuda_elapsed_s": 0.061034496307373044
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027756650832067,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-8"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027756589419566,
+    "gpu_used_tokens": 26758,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 22528,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06048764500883408,
+    "end_ns": 1789027756649947537,
+    "cuda_elapsed_s": 0.06118092727661133
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027756713366980,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-8"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027756651156860,
+    "gpu_used_tokens": 26759,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 22528,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060298653988866135,
+    "end_ns": 1789027756711495249,
+    "cuda_elapsed_s": 0.06098739242553711
+  },
+  {
+    "kind": "eviction",
+    "time_ns": 1789027756733202778,
+    "pid": 99959,
+    "tokens": 4126
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027756787468433,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027756737475517,
+    "end_ns": 1789027756786927119,
+    "host_call_s": 0.04930645501008257,
+    "cuda_elapsed_s": 0.025682432174682617
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027756824281235,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027756790770948,
+    "end_ns": 1789027756823875232,
+    "host_call_s": 0.03289342799689621,
+    "cuda_elapsed_s": 0.025834848403930664
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027756876888799,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027756827146239,
+    "end_ns": 1789027756876455471,
+    "host_call_s": 0.04921579302754253,
+    "cuda_elapsed_s": 0.02581884765625
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027756913820730,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027756880480068,
+    "end_ns": 1789027756913500775,
+    "host_call_s": 0.03292928700102493,
+    "cuda_elapsed_s": 0.02604617691040039
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027758122316153,
+    "pid": 99959,
+    "phase": "prefill",
+    "request_ids": [
+      "reload_gate-1789027736843155267-9"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027756733491107,
+    "gpu_used_tokens": 26729,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 26624,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 4096,
+    "host_call_s": 1.379369443980977,
+    "end_ns": 1789027758112913358,
+    "cuda_elapsed_s": 1.388401611328125
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027758184515153,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-9"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027758122878943,
+    "gpu_used_tokens": 26730,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 26624,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06064086698461324,
+    "end_ns": 1789027758183563044,
+    "cuda_elapsed_s": 0.06132940673828125
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027758246358337,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-9"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027758184740827,
+    "gpu_used_tokens": 26731,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 26624,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06061566399876028,
+    "end_ns": 1789027758245399572,
+    "cuda_elapsed_s": 0.06130176162719726
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027758308452107,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-9"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027758246605274,
+    "gpu_used_tokens": 26732,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 26624,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060847640997963026,
+    "end_ns": 1789027758307499714,
+    "cuda_elapsed_s": 0.061530113220214844
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027758370035588,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-9"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027758308658781,
+    "gpu_used_tokens": 26733,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 26624,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06037491202005185,
+    "end_ns": 1789027758369094010,
+    "cuda_elapsed_s": 0.06106521606445312
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027758431673455,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-9"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027758370296992,
+    "gpu_used_tokens": 26734,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 26624,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060383976000593975,
+    "end_ns": 1789027758430724685,
+    "cuda_elapsed_s": 0.06106009674072266
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027758493355189,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-9"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027758431981527,
+    "gpu_used_tokens": 26735,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 26624,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06038596699363552,
+    "end_ns": 1789027758492411242,
+    "cuda_elapsed_s": 0.06107955169677735
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027758554899602,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-9"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027758493605741,
+    "gpu_used_tokens": 26736,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 26624,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.0602770549885463,
+    "end_ns": 1789027758553925490,
+    "cuda_elapsed_s": 0.06097510528564453
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027758616426049,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-9"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027758555110334,
+    "gpu_used_tokens": 26737,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 26624,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06032731500454247,
+    "end_ns": 1789027758615480362,
+    "cuda_elapsed_s": 0.061021183013916014
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027758677875691,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-9"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027758616671582,
+    "gpu_used_tokens": 26738,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 26624,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.0602710850071162,
+    "end_ns": 1789027758677000030,
+    "cuda_elapsed_s": 0.06095974349975586
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027758739263640,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-9"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027758678179027,
+    "gpu_used_tokens": 26739,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 26624,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060119214991573244,
+    "end_ns": 1789027758738338130,
+    "cuda_elapsed_s": 0.06081536102294922
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027758800883042,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-9"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027758739495651,
+    "gpu_used_tokens": 26740,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 26624,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06035040898132138,
+    "end_ns": 1789027758799889593,
+    "cuda_elapsed_s": 0.061047809600830075
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027758862345375,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-9"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027758801090090,
+    "gpu_used_tokens": 26741,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 26624,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06026827299501747,
+    "end_ns": 1789027758861399892,
+    "cuda_elapsed_s": 0.06096486282348633
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027758923876983,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-9"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027758862563301,
+    "gpu_used_tokens": 26742,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 26624,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060298853990389034,
+    "end_ns": 1789027758922904188,
+    "cuda_elapsed_s": 0.06099148941040039
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027758985216503,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-9"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027758924072092,
+    "gpu_used_tokens": 26743,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 26624,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06023357599042356,
+    "end_ns": 1789027758984349356,
+    "cuda_elapsed_s": 0.06093209457397461
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027759047607157,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-9"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027758985530274,
+    "gpu_used_tokens": 26744,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 26624,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06022307899547741,
+    "end_ns": 1789027759045793538,
+    "cuda_elapsed_s": 0.06089625549316406
+  },
+  {
+    "kind": "eviction",
+    "time_ns": 1789027759067748135,
+    "pid": 99959,
+    "tokens": 4126
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027759098942373,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027759070650784,
+    "end_ns": 1789027759098531548,
+    "host_call_s": 0.027758857002481818,
+    "cuda_elapsed_s": 0.027715007781982423
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027759150230344,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027759101044577,
+    "end_ns": 1789027759149835956,
+    "host_call_s": 0.04866634000791237,
+    "cuda_elapsed_s": 0.02560908889770508
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027759187099079,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027759153871628,
+    "end_ns": 1789027759186848010,
+    "host_call_s": 0.03286790297715925,
+    "cuda_elapsed_s": 0.025968896865844728
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027759241053035,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027759190945343,
+    "end_ns": 1789027759240753268,
+    "host_call_s": 0.04968020899104886,
+    "cuda_elapsed_s": 0.026062208175659178
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027760459139044,
+    "pid": 99959,
+    "phase": "prefill",
+    "request_ids": [
+      "reload_gate-1789027736843155267-10"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027759068093820,
+    "gpu_used_tokens": 26714,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 30720,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 4096,
+    "host_call_s": 1.3819380390050355,
+    "end_ns": 1789027760450085406,
+    "cuda_elapsed_s": 1.390962646484375
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027760522077314,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-10"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027760460098568,
+    "gpu_used_tokens": 26715,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 30720,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06093532798695378,
+    "end_ns": 1789027760521084945,
+    "cuda_elapsed_s": 0.06161407852172852
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027760583952707,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-10"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027760522342644,
+    "gpu_used_tokens": 26716,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 30720,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06059075798839331,
+    "end_ns": 1789027760582976967,
+    "cuda_elapsed_s": 0.06128128051757813
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027760645897941,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-10"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027760584172418,
+    "gpu_used_tokens": 26717,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 30720,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060694723011692986,
+    "end_ns": 1789027760644909139,
+    "cuda_elapsed_s": 0.06138470458984375
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027760707367427,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-10"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027760646101473,
+    "gpu_used_tokens": 26718,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 30720,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06033491899142973,
+    "end_ns": 1789027760706479963,
+    "cuda_elapsed_s": 0.0610252799987793
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027760769128395,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-10"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027760707749010,
+    "gpu_used_tokens": 26719,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 30720,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06045338499825448,
+    "end_ns": 1789027760768243668,
+    "cuda_elapsed_s": 0.06114713668823242
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027760830746649,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-10"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027760769443154,
+    "gpu_used_tokens": 26720,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 30720,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06030613600159995,
+    "end_ns": 1789027760829790649,
+    "cuda_elapsed_s": 0.06098124694824219
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027760892324573,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-10"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027760830962007,
+    "gpu_used_tokens": 26721,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 30720,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060363189986674115,
+    "end_ns": 1789027760891367684,
+    "cuda_elapsed_s": 0.061050880432128904
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027760953955870,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-10"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027760892556497,
+    "gpu_used_tokens": 26722,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 30720,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06047166499774903,
+    "end_ns": 1789027760953072062,
+    "cuda_elapsed_s": 0.06116556930541992
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027761015527015,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-10"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027760954264250,
+    "gpu_used_tokens": 26723,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 30720,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06028153601801023,
+    "end_ns": 1789027761014586317,
+    "cuda_elapsed_s": 0.06097817611694336
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027761077083959,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-10"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027761015777768,
+    "gpu_used_tokens": 26724,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 30720,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06018558700452559,
+    "end_ns": 1789027761076005746,
+    "cuda_elapsed_s": 0.060878849029541014
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027761138852836,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-10"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027761077376894,
+    "gpu_used_tokens": 26725,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 30720,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.0604841609892901,
+    "end_ns": 1789027761137902148,
+    "cuda_elapsed_s": 0.06117478561401367
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027761200328027,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-10"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027761139073536,
+    "gpu_used_tokens": 26726,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 30720,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06026867701439187,
+    "end_ns": 1789027761199384740,
+    "cuda_elapsed_s": 0.06096588897705078
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027761261951692,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-10"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027761200563818,
+    "gpu_used_tokens": 26727,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 30720,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060394327010726556,
+    "end_ns": 1789027761261000280,
+    "cuda_elapsed_s": 0.06108364868164062
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027761323549597,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-10"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027761262190041,
+    "gpu_used_tokens": 26728,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 30720,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06037689102231525,
+    "end_ns": 1789027761322609736,
+    "cuda_elapsed_s": 0.06106828689575195
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027761387018520,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-10"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027761323796080,
+    "gpu_used_tokens": 26729,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 30720,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06162977300118655,
+    "end_ns": 1789027761385467985,
+    "cuda_elapsed_s": 0.06232371139526367
+  },
+  {
+    "kind": "eviction",
+    "time_ns": 1789027761408174143,
+    "pid": 99959,
+    "tokens": 4126
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027761439854096,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027761410801056,
+    "end_ns": 1789027761439403690,
+    "host_call_s": 0.028435654006898403,
+    "cuda_elapsed_s": 0.02832454490661621
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027761492680037,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027761442308502,
+    "end_ns": 1789027761492306044,
+    "host_call_s": 0.049908608983969316,
+    "cuda_elapsed_s": 0.026459615707397462
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027761530477224,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027761496326257,
+    "end_ns": 1789027761530037823,
+    "host_call_s": 0.03362275697872974,
+    "cuda_elapsed_s": 0.02661577606201172
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027761583915639,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027761533274770,
+    "end_ns": 1789027761583587383,
+    "host_call_s": 0.050192767987027764,
+    "cuda_elapsed_s": 0.026710367202758788
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027762801196182,
+    "pid": 99959,
+    "phase": "prefill",
+    "request_ids": [
+      "reload_gate-1789027736843155267-11"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027761408497956,
+    "gpu_used_tokens": 26699,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 34816,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 4096,
+    "host_call_s": 1.383291434001876,
+    "end_ns": 1789027762791842249,
+    "cuda_elapsed_s": 1.392279541015625
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027762863194180,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-11"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027762801728004,
+    "gpu_used_tokens": 26700,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 34816,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.0604348489723634,
+    "end_ns": 1789027762862205424,
+    "cuda_elapsed_s": 0.061123584747314455
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027762924568588,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-11"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027762863410465,
+    "gpu_used_tokens": 26701,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 34816,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060259308986132964,
+    "end_ns": 1789027762923712526,
+    "cuda_elapsed_s": 0.06093619155883789
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027762986099454,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-11"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027762924890948,
+    "gpu_used_tokens": 26702,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 34816,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060248078021686524,
+    "end_ns": 1789027762985179070,
+    "cuda_elapsed_s": 0.06093824005126953
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027763047443589,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-11"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027762986345166,
+    "gpu_used_tokens": 26703,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 34816,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06011020301957615,
+    "end_ns": 1789027763046497598,
+    "cuda_elapsed_s": 0.060801025390625
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027763108814211,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-11"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027763047678854,
+    "gpu_used_tokens": 26704,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 34816,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06011851399671286,
+    "end_ns": 1789027763107855495,
+    "cuda_elapsed_s": 0.06080716705322266
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027763169990829,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-11"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027763109022333,
+    "gpu_used_tokens": 26705,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 34816,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060060032992623746,
+    "end_ns": 1789027763169123857,
+    "cuda_elapsed_s": 0.060750846862792966
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027763231287233,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-11"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027763170290610,
+    "gpu_used_tokens": 26706,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 34816,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060087899008067325,
+    "end_ns": 1789027763230418033,
+    "cuda_elapsed_s": 0.06077849578857422
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027763292791095,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-11"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027763231595398,
+    "gpu_used_tokens": 26707,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 34816,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06022021500393748,
+    "end_ns": 1789027763291855792,
+    "cuda_elapsed_s": 0.060906494140625
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027763354326726,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-11"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027763293027851,
+    "gpu_used_tokens": 26708,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 34816,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06026558397570625,
+    "end_ns": 1789027763353334838,
+    "cuda_elapsed_s": 0.06096076965332031
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027763415751194,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-11"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027763354543715,
+    "gpu_used_tokens": 26709,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 34816,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060279744007857516,
+    "end_ns": 1789027763414865177,
+    "cuda_elapsed_s": 0.06095769500732422
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027763476990959,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-11"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027763416062449,
+    "gpu_used_tokens": 26710,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 34816,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06001410898170434,
+    "end_ns": 1789027763476116782,
+    "cuda_elapsed_s": 0.060711936950683595
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027763538239072,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-11"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027763477292886,
+    "gpu_used_tokens": 26711,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 34816,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06003291500383057,
+    "end_ns": 1789027763537365864,
+    "cuda_elapsed_s": 0.060728321075439455
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027763599767139,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-11"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027763538544249,
+    "gpu_used_tokens": 26712,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 34816,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06024066501413472,
+    "end_ns": 1789027763598824264,
+    "cuda_elapsed_s": 0.06090444946289063
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027763661095972,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-11"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027763600003921,
+    "gpu_used_tokens": 26713,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 34816,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060128568002255633,
+    "end_ns": 1789027763660175079,
+    "cuda_elapsed_s": 0.060818431854248046
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027763723271544,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-11"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027763661326127,
+    "gpu_used_tokens": 26714,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 34816,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060129154997412115,
+    "end_ns": 1789027763721496974,
+    "cuda_elapsed_s": 0.06082355117797852
+  },
+  {
+    "kind": "eviction",
+    "time_ns": 1789027763742960511,
+    "pid": 99959,
+    "tokens": 6159
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027763774463671,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027763745548831,
+    "end_ns": 1789027763774158333,
+    "host_call_s": 0.02842964101000689,
+    "cuda_elapsed_s": 0.02822326469421387
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027763827577088,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027763776994958,
+    "end_ns": 1789027763827371680,
+    "host_call_s": 0.05025737400865182,
+    "cuda_elapsed_s": 0.026782432556152345
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027763865560772,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027763831447978,
+    "end_ns": 1789027763865321699,
+    "host_call_s": 0.03373193598235957,
+    "cuda_elapsed_s": 0.02682582473754883
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027763919470755,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027763868740753,
+    "end_ns": 1789027763919297772,
+    "host_call_s": 0.0504427480045706,
+    "cuda_elapsed_s": 0.026855392456054686
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027765138320885,
+    "pid": 99959,
+    "phase": "prefill",
+    "request_ids": [
+      "reload_gate-1789027736843155267-12"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027763743285004,
+    "gpu_used_tokens": 24651,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 38912,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 4096,
+    "host_call_s": 1.3855806390056387,
+    "end_ns": 1789027765128916658,
+    "cuda_elapsed_s": 1.3946173095703125
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027765200594322,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-12"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027765138879302,
+    "gpu_used_tokens": 24652,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 38912,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060708035016432405,
+    "end_ns": 1789027765199629153,
+    "cuda_elapsed_s": 0.0613939208984375
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027765262026396,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-12"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027765200871190,
+    "gpu_used_tokens": 24653,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 38912,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06017274298937991,
+    "end_ns": 1789027765261086550,
+    "cuda_elapsed_s": 0.06086860656738281
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027765323610420,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-12"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027765262275959,
+    "gpu_used_tokens": 24654,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 38912,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06045575099415146,
+    "end_ns": 1789027765322774325,
+    "cuda_elapsed_s": 0.06111334228515625
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027765385041958,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-12"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027765323940131,
+    "gpu_used_tokens": 24655,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 38912,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06013660001917742,
+    "end_ns": 1789027765384117339,
+    "cuda_elapsed_s": 0.060832767486572265
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027765446494034,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-12"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027765385272151,
+    "gpu_used_tokens": 24656,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 38912,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06023303800611757,
+    "end_ns": 1789027765445546972,
+    "cuda_elapsed_s": 0.060930049896240235
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027765507912564,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-12"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027765446762034,
+    "gpu_used_tokens": 24657,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 38912,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06014581801719032,
+    "end_ns": 1789027765506950314,
+    "cuda_elapsed_s": 0.06084096145629883
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027765569201075,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-12"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027765508144856,
+    "gpu_used_tokens": 24658,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 38912,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060139292996609583,
+    "end_ns": 1789027765568326024,
+    "cuda_elapsed_s": 0.06083174514770508
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027765630610803,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-12"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027765569508604,
+    "gpu_used_tokens": 24659,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 38912,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060128579003503546,
+    "end_ns": 1789027765629676980,
+    "cuda_elapsed_s": 0.060819454193115234
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027765692038657,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-12"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027765630858141,
+    "gpu_used_tokens": 24660,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 38912,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06020356799126603,
+    "end_ns": 1789027765691103445,
+    "cuda_elapsed_s": 0.06089932632446289
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027765753363048,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-12"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027765692275750,
+    "gpu_used_tokens": 24661,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 38912,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060178118001203984,
+    "end_ns": 1789027765752496179,
+    "cuda_elapsed_s": 0.06087168121337891
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027765814773280,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-12"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027765753664511,
+    "gpu_used_tokens": 24662,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 38912,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060114507999969646,
+    "end_ns": 1789027765813835655,
+    "cuda_elapsed_s": 0.060801025390625
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027765875917954,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-12"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027765815000461,
+    "gpu_used_tokens": 24663,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 38912,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.05992547899950296,
+    "end_ns": 1789027765874967557,
+    "cuda_elapsed_s": 0.06061772918701172
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027765937365154,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-12"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027765876162708,
+    "gpu_used_tokens": 24664,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 38912,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06021126700215973,
+    "end_ns": 1789027765936417336,
+    "cuda_elapsed_s": 0.060911617279052734
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027765998639202,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-12"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027765937598030,
+    "gpu_used_tokens": 24665,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 38912,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06007369398139417,
+    "end_ns": 1789027765997713989,
+    "cuda_elapsed_s": 0.06075289535522461
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027766060635103,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-12"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027765998901860,
+    "gpu_used_tokens": 24666,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 38912,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.0601868650119286,
+    "end_ns": 1789027766059132328,
+    "cuda_elapsed_s": 0.06087680053710937
+  },
+  {
+    "kind": "eviction",
+    "time_ns": 1789027766081466463,
+    "pid": 99959,
+    "tokens": 4111
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027766113486787,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027766084515840,
+    "end_ns": 1789027766113176415,
+    "host_call_s": 0.028561462997458875,
+    "cuda_elapsed_s": 0.02854003143310547
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027766165129723,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027766115508217,
+    "end_ns": 1789027766164795237,
+    "host_call_s": 0.04919862298993394,
+    "cuda_elapsed_s": 0.026557216644287108
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027766202745804,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027766168659657,
+    "end_ns": 1789027766202345844,
+    "host_call_s": 0.033589794009458274,
+    "cuda_elapsed_s": 0.02645769691467285
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027766256552237,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027766206132491,
+    "end_ns": 1789027766256393530,
+    "host_call_s": 0.05014179801219143,
+    "cuda_elapsed_s": 0.02655628776550293
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027767476203353,
+    "pid": 99959,
+    "phase": "prefill",
+    "request_ids": [
+      "reload_gate-1789027736843155267-13"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027766081784806,
+    "gpu_used_tokens": 24651,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 43008,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 4096,
+    "host_call_s": 1.38503276501433,
+    "end_ns": 1789027767466869739,
+    "cuda_elapsed_s": 1.3939476318359374
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027767538818705,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-13"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027767476881903,
+    "gpu_used_tokens": 24652,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 43008,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06088021901086904,
+    "end_ns": 1789027767537817714,
+    "cuda_elapsed_s": 0.06153420639038086
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027767600917566,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-13"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027767539102813,
+    "gpu_used_tokens": 24653,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 43008,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06074613498640247,
+    "end_ns": 1789027767599896514,
+    "cuda_elapsed_s": 0.06142464065551758
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027767662530609,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-13"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027767601135709,
+    "gpu_used_tokens": 24654,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 43008,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060381944000255316,
+    "end_ns": 1789027767661562216,
+    "cuda_elapsed_s": 0.061067264556884764
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027767724225129,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-13"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027767662795662,
+    "gpu_used_tokens": 24655,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 43008,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06041228101821616,
+    "end_ns": 1789027767723250747,
+    "cuda_elapsed_s": 0.06109900665283203
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027767786059197,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-13"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027767724492101,
+    "gpu_used_tokens": 24656,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 43008,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06043268498615362,
+    "end_ns": 1789027767784967402,
+    "cuda_elapsed_s": 0.06112460708618164
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027767848062828,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-13"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027767786355884,
+    "gpu_used_tokens": 24657,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 43008,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060782538988860324,
+    "end_ns": 1789027767847180200,
+    "cuda_elapsed_s": 0.061470718383789064
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027767909826885,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-13"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027767848377409,
+    "gpu_used_tokens": 24658,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 43008,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060436805011704564,
+    "end_ns": 1789027767908853880,
+    "cuda_elapsed_s": 0.06112255859375
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027767971246898,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-13"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027767910045203,
+    "gpu_used_tokens": 24659,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 43008,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06021097899065353,
+    "end_ns": 1789027767970299490,
+    "cuda_elapsed_s": 0.060900352478027345
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027768032606686,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-13"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027767971486622,
+    "gpu_used_tokens": 24660,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 43008,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06020596600137651,
+    "end_ns": 1789027768031735363,
+    "cuda_elapsed_s": 0.06087577438354492
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027768094278334,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-13"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027768032972516,
+    "gpu_used_tokens": 24661,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 43008,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06031674100086093,
+    "end_ns": 1789027768093328791,
+    "cuda_elapsed_s": 0.06100582504272461
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027768155482521,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-13"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027768094527054,
+    "gpu_used_tokens": 24662,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 43008,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.05997276699054055,
+    "end_ns": 1789027768154542188,
+    "cuda_elapsed_s": 0.060662784576416016
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027768216829252,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-13"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027768155728520,
+    "gpu_used_tokens": 24663,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 43008,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06010123799205758,
+    "end_ns": 1789027768215876778,
+    "cuda_elapsed_s": 0.06078566360473633
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027768278191526,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-13"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027768217075187,
+    "gpu_used_tokens": 24664,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 43008,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06021004501963034,
+    "end_ns": 1789027768277328100,
+    "cuda_elapsed_s": 0.06090137481689453
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027768339602764,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-13"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027768278504695,
+    "gpu_used_tokens": 24665,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 43008,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060128641984192654,
+    "end_ns": 1789027768338673914,
+    "cuda_elapsed_s": 0.060819454193115234
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027768401910285,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-13"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027768339858419,
+    "gpu_used_tokens": 24666,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 43008,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060385606018826365,
+    "end_ns": 1789027768400285863,
+    "cuda_elapsed_s": 0.061075454711914064
+  },
+  {
+    "kind": "eviction",
+    "time_ns": 1789027768416906789,
+    "pid": 99959,
+    "tokens": 4111
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027768474978651,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027768426872518,
+    "end_ns": 1789027768474310955,
+    "host_call_s": 0.04730291600571945,
+    "cuda_elapsed_s": 0.026279680252075194
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027768512416784,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027768479071501,
+    "end_ns": 1789027768512135837,
+    "host_call_s": 0.032942505000391975,
+    "cuda_elapsed_s": 0.02635696029663086
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027768566633225,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027768516489155,
+    "end_ns": 1789027768566300485,
+    "host_call_s": 0.04969354398781434,
+    "cuda_elapsed_s": 0.026369279861450195
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027768604294957,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027768571142617,
+    "end_ns": 1789027768603994575,
+    "host_call_s": 0.03270261001307517,
+    "cuda_elapsed_s": 0.02648201560974121
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027769816221016,
+    "pid": 99959,
+    "phase": "prefill",
+    "request_ids": [
+      "reload_gate-1789027736843155267-14"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027768417613939,
+    "gpu_used_tokens": 24651,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 47104,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 4096,
+    "host_call_s": 1.3891562080243602,
+    "end_ns": 1789027769806930124,
+    "cuda_elapsed_s": 1.3980712890625
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027769879392557,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-14"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027769816839220,
+    "gpu_used_tokens": 24652,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 47104,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.061551274004159495,
+    "end_ns": 1789027769878439315,
+    "cuda_elapsed_s": 0.06222848129272461
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027769941441496,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-14"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027769879657949,
+    "gpu_used_tokens": 24653,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 47104,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060783096007071435,
+    "end_ns": 1789027769940494035,
+    "cuda_elapsed_s": 0.06147686386108398
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027770003376630,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-14"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027769941648325,
+    "gpu_used_tokens": 24654,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 47104,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06084544601617381,
+    "end_ns": 1789027770002532422,
+    "cuda_elapsed_s": 0.061537281036376956
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027770065671264,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-14"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027770003719607,
+    "gpu_used_tokens": 24655,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 47104,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06100074900314212,
+    "end_ns": 1789027770064759524,
+    "cuda_elapsed_s": 0.061671424865722656
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027770127715248,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-14"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027770065939260,
+    "gpu_used_tokens": 24656,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 47104,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06080474497866817,
+    "end_ns": 1789027770126781930,
+    "cuda_elapsed_s": 0.061475841522216794
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027770189903824,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-14"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027770127935206,
+    "gpu_used_tokens": 24657,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 47104,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06096011699992232,
+    "end_ns": 1789027770188934034,
+    "cuda_elapsed_s": 0.06163763046264648
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027770252250950,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-14"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027770190123399,
+    "gpu_used_tokens": 24658,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 47104,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06111385201802477,
+    "end_ns": 1789027770251278719,
+    "cuda_elapsed_s": 0.06179123306274414
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027770314444681,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-14"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027770252484269,
+    "gpu_used_tokens": 24659,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 47104,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06095799501053989,
+    "end_ns": 1789027770313483862,
+    "cuda_elapsed_s": 0.061638656616210936
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027770376341943,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-14"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027770314643908,
+    "gpu_used_tokens": 24660,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 47104,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.0607296789821703,
+    "end_ns": 1789027770375413881,
+    "cuda_elapsed_s": 0.061415424346923826
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027770438207010,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-14"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027770376555048,
+    "gpu_used_tokens": 24661,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 47104,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.0606385680148378,
+    "end_ns": 1789027770437232602,
+    "cuda_elapsed_s": 0.06133350372314453
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027770500081029,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-14"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027770438404339,
+    "gpu_used_tokens": 24662,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 47104,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06070110300788656,
+    "end_ns": 1789027770499145056,
+    "cuda_elapsed_s": 0.06139187240600586
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027770561830495,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-14"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027770500273181,
+    "gpu_used_tokens": 24663,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 47104,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.0605703039909713,
+    "end_ns": 1789027770560882563,
+    "cuda_elapsed_s": 0.061259777069091796
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027770623758045,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-14"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027770562020289,
+    "gpu_used_tokens": 24664,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 47104,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060807770991232246,
+    "end_ns": 1789027770622866629,
+    "cuda_elapsed_s": 0.06149631881713867
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027770685605626,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-14"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027770624023058,
+    "gpu_used_tokens": 24665,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 47104,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06062428100267425,
+    "end_ns": 1789027770684684854,
+    "cuda_elapsed_s": 0.06131302261352539
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027770748333355,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-14"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027770685819189,
+    "gpu_used_tokens": 24666,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 47104,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060569898021640256,
+    "end_ns": 1789027770746427661,
+    "cuda_elapsed_s": 0.061254657745361325
+  },
+  {
+    "kind": "eviction",
+    "time_ns": 1789027770767778313,
+    "pid": 99959,
+    "tokens": 4111
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027770823026523,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027770772372167,
+    "end_ns": 1789027770822507301,
+    "host_call_s": 0.050000646006083116,
+    "cuda_elapsed_s": 0.02650927925109863
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027770860642717,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027770826661476,
+    "end_ns": 1789027770860194852,
+    "host_call_s": 0.03341807401739061,
+    "cuda_elapsed_s": 0.02641302490234375
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027770913419691,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027770863641549,
+    "end_ns": 1789027770913108178,
+    "host_call_s": 0.04935285201645456,
+    "cuda_elapsed_s": 0.02621615982055664
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027770951169059,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027770918072342,
+    "end_ns": 1789027770950738091,
+    "host_call_s": 0.03246788401156664,
+    "cuda_elapsed_s": 0.02653561592102051
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027772160108315,
+    "pid": 99959,
+    "phase": "prefill",
+    "request_ids": [
+      "reload_gate-1789027736843155267-15"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027770768111702,
+    "gpu_used_tokens": 24651,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 51200,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 4096,
+    "host_call_s": 1.3825777420133818,
+    "end_ns": 1789027772150741258,
+    "cuda_elapsed_s": 1.391561767578125
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027772222657813,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-15"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027772160627360,
+    "gpu_used_tokens": 24652,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 51200,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06104872698779218,
+    "end_ns": 1789027772221719016,
+    "cuda_elapsed_s": 0.06172467041015625
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027772284650647,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-15"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027772222921854,
+    "gpu_used_tokens": 24653,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 51200,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06077605500468053,
+    "end_ns": 1789027772283737803,
+    "cuda_elapsed_s": 0.06146662521362305
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027772346463870,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-15"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027772284889026,
+    "gpu_used_tokens": 24654,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 51200,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06059606099734083,
+    "end_ns": 1789027772345523715,
+    "cuda_elapsed_s": 0.061292545318603515
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027772408199430,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-15"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027772346684404,
+    "gpu_used_tokens": 24655,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 51200,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06052745500346646,
+    "end_ns": 1789027772407267397,
+    "cuda_elapsed_s": 0.06122086334228516
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027772469785092,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-15"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027772408395287,
+    "gpu_used_tokens": 24656,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 51200,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06041869000182487,
+    "end_ns": 1789027772468851356,
+    "cuda_elapsed_s": 0.06110617446899414
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027772531486111,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-15"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027772469970070,
+    "gpu_used_tokens": 24657,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 51200,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06054600598872639,
+    "end_ns": 1789027772530554501,
+    "cuda_elapsed_s": 0.061241344451904295
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027772593251256,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-15"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027772531720853,
+    "gpu_used_tokens": 24658,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 51200,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060559677018318325,
+    "end_ns": 1789027772592320664,
+    "cuda_elapsed_s": 0.06125363159179688
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027772654891477,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-15"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027772593471008,
+    "gpu_used_tokens": 24659,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 51200,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06042961502680555,
+    "end_ns": 1789027772653939401,
+    "cuda_elapsed_s": 0.06112460708618164
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027772716513008,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-15"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027772655084542,
+    "gpu_used_tokens": 24660,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 51200,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.0604622200189624,
+    "end_ns": 1789027772715584775,
+    "cuda_elapsed_s": 0.06115225601196289
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027772778137653,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-15"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027772716724583,
+    "gpu_used_tokens": 24661,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 51200,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06045668799197301,
+    "end_ns": 1789027772777219794,
+    "cuda_elapsed_s": 0.061146110534667966
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027772839809540,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-15"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027772778355903,
+    "gpu_used_tokens": 24662,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 51200,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060471542994491756,
+    "end_ns": 1789027772838866564,
+    "cuda_elapsed_s": 0.06116147232055664
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027772901357272,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-15"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027772840025457,
+    "gpu_used_tokens": 24663,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 51200,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060363050986779854,
+    "end_ns": 1789027772900427271,
+    "cuda_elapsed_s": 0.061058048248291016
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027772962876456,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-15"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027772901549166,
+    "gpu_used_tokens": 24664,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 51200,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060435751016484573,
+    "end_ns": 1789027772962023245,
+    "cuda_elapsed_s": 0.06113075256347656
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027773024597564,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-15"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027772963177808,
+    "gpu_used_tokens": 24665,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 51200,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06044960397412069,
+    "end_ns": 1789027773023665697,
+    "cuda_elapsed_s": 0.06114508819580078
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027773087329611,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-15"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027773024838781,
+    "gpu_used_tokens": 24666,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 51200,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.0603634089929983,
+    "end_ns": 1789027773085240476,
+    "cuda_elapsed_s": 0.06105702209472656
+  },
+  {
+    "kind": "host_reuse",
+    "time_ns": 1789027773105263039,
+    "pid": 99959,
+    "tokens": 2048
+  },
+  {
+    "kind": "eviction",
+    "time_ns": 1789027773106565427,
+    "pid": 99959,
+    "tokens": 4111
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027773141677520,
+    "pid": 99959,
+    "direction": "cpu_to_gpu",
+    "bytes": 2097152,
+    "start_ns": 1789027773110841747,
+    "end_ns": 1789027773141314239,
+    "host_call_s": 0.0013971870066598058,
+    "cuda_elapsed_s": 0.03026540756225586
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027773141893478,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027773112317312,
+    "end_ns": 1789027773141462465,
+    "host_call_s": 0.028889381006592885,
+    "cuda_elapsed_s": 0.028895488739013674
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027773196316725,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027773145473084,
+    "end_ns": 1789027773195367912,
+    "host_call_s": 0.04980804698425345,
+    "cuda_elapsed_s": 0.026366592407226563
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027773197191349,
+    "pid": 99959,
+    "direction": "cpu_to_gpu",
+    "bytes": 2097152,
+    "start_ns": 1789027773147127043,
+    "end_ns": 1789027773196737592,
+    "host_call_s": 0.0010153749899473041,
+    "cuda_elapsed_s": 0.001314560055732727
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027773230357029,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027773200506133,
+    "end_ns": 1789027773229561883,
+    "host_call_s": 0.02894550800556317,
+    "cuda_elapsed_s": 0.026550848007202147
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027773231134845,
+    "pid": 99959,
+    "direction": "cpu_to_gpu",
+    "bytes": 2097152,
+    "start_ns": 1789027773202064302,
+    "end_ns": 1789027773230732071,
+    "host_call_s": 0.0009015419927891344,
+    "cuda_elapsed_s": 0.001016703963279724
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027773261675788,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027773234361205,
+    "end_ns": 1789027773261315659,
+    "host_call_s": 0.02648423399659805,
+    "cuda_elapsed_s": 0.02664633560180664
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027773261884261,
+    "pid": 99959,
+    "direction": "cpu_to_gpu",
+    "bytes": 2097152,
+    "start_ns": 1789027773233626400,
+    "end_ns": 1789027773261377945,
+    "host_call_s": 0.0008966590103227645,
+    "cuda_elapsed_s": 0.027594112396240236
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027773265514627,
+    "pid": 99959,
+    "direction": "cpu_to_gpu",
+    "bytes": 2097152,
+    "start_ns": 1789027773264426409,
+    "end_ns": 1789027773265327727,
+    "host_call_s": 0.000716445007128641,
+    "cuda_elapsed_s": 0.0007958080172538757
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027773269058691,
+    "pid": 99959,
+    "direction": "cpu_to_gpu",
+    "bytes": 2097152,
+    "start_ns": 1789027773268029653,
+    "end_ns": 1789027773268893925,
+    "host_call_s": 0.0006874800019431859,
+    "cuda_elapsed_s": 0.00042342400550842286
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027773275651916,
+    "pid": 99959,
+    "direction": "cpu_to_gpu",
+    "bytes": 2097152,
+    "start_ns": 1789027773271523789,
+    "end_ns": 1789027773275527262,
+    "host_call_s": 0.0038528860022779554,
+    "cuda_elapsed_s": 0.0002848320007324219
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027773278220401,
+    "pid": 99959,
+    "direction": "cpu_to_gpu",
+    "bytes": 2097152,
+    "start_ns": 1789027773277337669,
+    "end_ns": 1789027773278042930,
+    "host_call_s": 0.0005630799860227853,
+    "cuda_elapsed_s": 0.0006318399906158447
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027773282393042,
+    "pid": 99959,
+    "direction": "cpu_to_gpu",
+    "bytes": 2097152,
+    "start_ns": 1789027773279858459,
+    "end_ns": 1789027773282293229,
+    "host_call_s": 0.002320622996194288,
+    "cuda_elapsed_s": 0.00026054400205612185
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027773287054238,
+    "pid": 99959,
+    "direction": "cpu_to_gpu",
+    "bytes": 2097152,
+    "start_ns": 1789027773283542351,
+    "end_ns": 1789027773286962059,
+    "host_call_s": 0.003321841999422759,
+    "cuda_elapsed_s": 0.00026659199595451357
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027773289038015,
+    "pid": 99959,
+    "direction": "cpu_to_gpu",
+    "bytes": 2097152,
+    "start_ns": 1789027773288181455,
+    "end_ns": 1789027773288825250,
+    "host_call_s": 0.00047031600843183696,
+    "cuda_elapsed_s": 0.0005777279734611511
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027773291029741,
+    "pid": 99959,
+    "direction": "cpu_to_gpu",
+    "bytes": 2097152,
+    "start_ns": 1789027773290251798,
+    "end_ns": 1789027773290882580,
+    "host_call_s": 0.0004922859952785075,
+    "cuda_elapsed_s": 0.0005628479719161988
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027773292990859,
+    "pid": 99959,
+    "direction": "cpu_to_gpu",
+    "bytes": 2097152,
+    "start_ns": 1789027773292121739,
+    "end_ns": 1789027773292635080,
+    "host_call_s": 0.00042276500607840717,
+    "cuda_elapsed_s": 0.00046374401450157164
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027773294270121,
+    "pid": 99959,
+    "direction": "cpu_to_gpu",
+    "bytes": 2097152,
+    "start_ns": 1789027773293599460,
+    "end_ns": 1789027773294156416,
+    "host_call_s": 0.00044671198702417314,
+    "cuda_elapsed_s": 0.00048291200399398803
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027773299847152,
+    "pid": 99959,
+    "direction": "cpu_to_gpu",
+    "bytes": 2097152,
+    "start_ns": 1789027773295102811,
+    "end_ns": 1789027773299713379,
+    "host_call_s": 0.004517425986705348,
+    "cuda_elapsed_s": 0.00026710399985313413
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027773306716973,
+    "pid": 99959,
+    "direction": "cpu_to_gpu",
+    "bytes": 2097152,
+    "start_ns": 1789027773300663496,
+    "end_ns": 1789027773306480678,
+    "host_call_s": 0.005717633001040667,
+    "cuda_elapsed_s": 0.00025721600651741025
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027773308655405,
+    "pid": 99959,
+    "direction": "cpu_to_gpu",
+    "bytes": 2097152,
+    "start_ns": 1789027773307370900,
+    "end_ns": 1789027773308567252,
+    "host_call_s": 0.001117067993618548,
+    "cuda_elapsed_s": 0.00024822400510311125
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027773313446673,
+    "pid": 99959,
+    "direction": "cpu_to_gpu",
+    "bytes": 2097152,
+    "start_ns": 1789027773309508047,
+    "end_ns": 1789027773313256853,
+    "host_call_s": 0.0036651259870268404,
+    "cuda_elapsed_s": 0.0002490559965372086
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027773318158164,
+    "pid": 99959,
+    "direction": "cpu_to_gpu",
+    "bytes": 2097152,
+    "start_ns": 1789027773314146541,
+    "end_ns": 1789027773317928348,
+    "host_call_s": 0.003698268992593512,
+    "cuda_elapsed_s": 0.0002485760003328323
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027773319570210,
+    "pid": 99959,
+    "direction": "cpu_to_gpu",
+    "bytes": 2097152,
+    "start_ns": 1789027773318887271,
+    "end_ns": 1789027773319413971,
+    "host_call_s": 0.00042757802293635905,
+    "cuda_elapsed_s": 0.0004721280038356781
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027773321472637,
+    "pid": 99959,
+    "direction": "cpu_to_gpu",
+    "bytes": 2097152,
+    "start_ns": 1789027773320484329,
+    "end_ns": 1789027773321329066,
+    "host_call_s": 0.0007393529813271016,
+    "cuda_elapsed_s": 0.0002520959973335266
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027773323056295,
+    "pid": 99959,
+    "direction": "cpu_to_gpu",
+    "bytes": 2097152,
+    "start_ns": 1789027773322327192,
+    "end_ns": 1789027773322840255,
+    "host_call_s": 0.00043183600064367056,
+    "cuda_elapsed_s": 0.00043590399622917177
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027773324420265,
+    "pid": 99959,
+    "direction": "cpu_to_gpu",
+    "bytes": 2097152,
+    "start_ns": 1789027773323741465,
+    "end_ns": 1789027773324259756,
+    "host_call_s": 0.0004276380059309304,
+    "cuda_elapsed_s": 0.00046803200244903566
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027773325937629,
+    "pid": 99959,
+    "direction": "cpu_to_gpu",
+    "bytes": 2097152,
+    "start_ns": 1789027773325243790,
+    "end_ns": 1789027773325750431,
+    "host_call_s": 0.0004258889821358025,
+    "cuda_elapsed_s": 0.0004594239890575409
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027773330825386,
+    "pid": 99959,
+    "direction": "cpu_to_gpu",
+    "bytes": 2097152,
+    "start_ns": 1789027773326618739,
+    "end_ns": 1789027773330584210,
+    "host_call_s": 0.0038849209959153086,
+    "cuda_elapsed_s": 0.00025628799200057983
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027773337562434,
+    "pid": 99959,
+    "direction": "cpu_to_gpu",
+    "bytes": 2097152,
+    "start_ns": 1789027773331472381,
+    "end_ns": 1789027773337347229,
+    "host_call_s": 0.005791894014691934,
+    "cuda_elapsed_s": 0.0002619200050830841
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027773339659576,
+    "pid": 99959,
+    "direction": "cpu_to_gpu",
+    "bytes": 2097152,
+    "start_ns": 1789027773338271565,
+    "end_ns": 1789027773339458937,
+    "host_call_s": 0.0011073460045736283,
+    "cuda_elapsed_s": 0.0002555199861526489
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027773344341269,
+    "pid": 99959,
+    "direction": "cpu_to_gpu",
+    "bytes": 2097152,
+    "start_ns": 1789027773340341250,
+    "end_ns": 1789027773344141668,
+    "host_call_s": 0.0037191399896983057,
+    "cuda_elapsed_s": 0.0002486719936132431
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027773348949849,
+    "pid": 99959,
+    "direction": "cpu_to_gpu",
+    "bytes": 2097152,
+    "start_ns": 1789027773345020037,
+    "end_ns": 1789027773348833887,
+    "host_call_s": 0.003731180011527613,
+    "cuda_elapsed_s": 0.00025276800990104673
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027773350474473,
+    "pid": 99959,
+    "direction": "cpu_to_gpu",
+    "bytes": 2097152,
+    "start_ns": 1789027773349795490,
+    "end_ns": 1789027773350330223,
+    "host_call_s": 0.0004384729836601764,
+    "cuda_elapsed_s": 0.0004761599898338318
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027773352445807,
+    "pid": 99959,
+    "direction": "cpu_to_gpu",
+    "bytes": 2097152,
+    "start_ns": 1789027773351320198,
+    "end_ns": 1789027773352230034,
+    "host_call_s": 0.0008164609898813069,
+    "cuda_elapsed_s": 0.00024729600548744203
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027773353793870,
+    "pid": 99959,
+    "direction": "cpu_to_gpu",
+    "bytes": 2097152,
+    "start_ns": 1789027773353134668,
+    "end_ns": 1789027773353635363,
+    "host_call_s": 0.00042127500637434423,
+    "cuda_elapsed_s": 0.00034784001111984254
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027773355239732,
+    "pid": 99959,
+    "direction": "cpu_to_gpu",
+    "bytes": 2097152,
+    "start_ns": 1789027773354599988,
+    "end_ns": 1789027773355126103,
+    "host_call_s": 0.00043618399649858475,
+    "cuda_elapsed_s": 0.0004731839895248413
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027773356812488,
+    "pid": 99959,
+    "direction": "cpu_to_gpu",
+    "bytes": 2097152,
+    "start_ns": 1789027773356089807,
+    "end_ns": 1789027773356592930,
+    "host_call_s": 0.000423458986915648,
+    "cuda_elapsed_s": 0.00045641601085662844
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027773361645757,
+    "pid": 99959,
+    "direction": "cpu_to_gpu",
+    "bytes": 2097152,
+    "start_ns": 1789027773357484487,
+    "end_ns": 1789027773361498716,
+    "host_call_s": 0.0039288240077439696,
+    "cuda_elapsed_s": 0.00025862398743629455
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027773368485076,
+    "pid": 99959,
+    "direction": "cpu_to_gpu",
+    "bytes": 2097152,
+    "start_ns": 1789027773362493723,
+    "end_ns": 1789027773368260140,
+    "host_call_s": 0.005682649003574625,
+    "cuda_elapsed_s": 0.00026259198784828186
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027774333767885,
+    "pid": 99959,
+    "phase": "prefill",
+    "request_ids": [
+      "reload_gate-1789027736843155267-16"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027773106911947,
+    "gpu_used_tokens": 24651,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 55296,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 2048,
+    "host_call_s": 1.221670347993495,
+    "end_ns": 1789027774328635791,
+    "cuda_elapsed_s": 1.2261939697265625
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027774397547278,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-16"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027774334441602,
+    "gpu_used_tokens": 24652,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 55296,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.062055476009845734,
+    "end_ns": 1789027774396548432,
+    "cuda_elapsed_s": 0.06272716903686523
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027774460493368,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-16"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027774397828262,
+    "gpu_used_tokens": 24653,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 55296,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.061676149984123185,
+    "end_ns": 1789027774459544570,
+    "cuda_elapsed_s": 0.06236569595336914
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027774522935876,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-16"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027774460743281,
+    "gpu_used_tokens": 24654,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 55296,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.061242361000040546,
+    "end_ns": 1789027774522024942,
+    "cuda_elapsed_s": 0.061916160583496097
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027774585243560,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-16"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027774523132839,
+    "gpu_used_tokens": 24655,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 55296,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06113459001062438,
+    "end_ns": 1789027774584305692,
+    "cuda_elapsed_s": 0.06182809448242187
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027774647596829,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-16"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027774585434938,
+    "gpu_used_tokens": 24656,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 55296,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06119833400589414,
+    "end_ns": 1789027774646671113,
+    "cuda_elapsed_s": 0.06189363098144531
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027774710157886,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-16"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027774647802261,
+    "gpu_used_tokens": 24657,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 55296,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06137589298305102,
+    "end_ns": 1789027774709216297,
+    "cuda_elapsed_s": 0.06206771087646484
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027774772341529,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-16"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027774710353728,
+    "gpu_used_tokens": 24658,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 55296,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06109607999678701,
+    "end_ns": 1789027774771487927,
+    "cuda_elapsed_s": 0.0617891845703125
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027774834742830,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-16"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027774772625455,
+    "gpu_used_tokens": 24659,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 55296,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06110168801387772,
+    "end_ns": 1789027774833764841,
+    "cuda_elapsed_s": 0.06177587127685547
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027774896900899,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-16"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027774834912559,
+    "gpu_used_tokens": 24660,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 55296,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.061087629990652204,
+    "end_ns": 1789027774896038627,
+    "cuda_elapsed_s": 0.06177996826171875
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027774959232182,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-16"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027774897178239,
+    "gpu_used_tokens": 24661,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 55296,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06109196998295374,
+    "end_ns": 1789027774958308001,
+    "cuda_elapsed_s": 0.06178611373901367
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027775021657424,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-16"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027774959417146,
+    "gpu_used_tokens": 24662,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 55296,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06124823199934326,
+    "end_ns": 1789027775020702890,
+    "cuda_elapsed_s": 0.061927425384521485
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027775083962446,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-16"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027775021903578,
+    "gpu_used_tokens": 24663,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 55296,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06107779699959792,
+    "end_ns": 1789027775083020143,
+    "cuda_elapsed_s": 0.061770751953125
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027775146345009,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-16"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027775084158824,
+    "gpu_used_tokens": 24664,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 55296,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06121915302355774,
+    "end_ns": 1789027775145416734,
+    "cuda_elapsed_s": 0.061911041259765626
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027775208521613,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-16"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027775146562281,
+    "gpu_used_tokens": 24665,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 55296,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06098650398780592,
+    "end_ns": 1789027775207587175,
+    "cuda_elapsed_s": 0.06168166351318359
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027775271524573,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-16"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027775208745898,
+    "gpu_used_tokens": 24666,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 55296,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.061205670004710555,
+    "end_ns": 1789027775269990634,
+    "cuda_elapsed_s": 0.061892608642578124
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027775346162412,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027775296018458,
+    "end_ns": 1789027775345822652,
+    "host_call_s": 0.04966245900141075,
+    "cuda_elapsed_s": 0.026331584930419923
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027775379885984,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027775350147495,
+    "end_ns": 1789027775379554280,
+    "host_call_s": 0.029312156984815374,
+    "cuda_elapsed_s": 0.027096895217895507
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027776451837731,
+    "pid": 99959,
+    "phase": "prefill",
+    "request_ids": [
+      "reload_gate-1789027736843155267-17"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027775291804009,
+    "gpu_used_tokens": 26714,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 57344,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 2048,
+    "host_call_s": 1.1553712320164777,
+    "end_ns": 1789027776447228251,
+    "cuda_elapsed_s": 1.1599605712890626
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027776515373366,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-17"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027776452806112,
+    "gpu_used_tokens": 26715,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 57344,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.061549735022708774,
+    "end_ns": 1789027776514397640,
+    "cuda_elapsed_s": 0.06223052978515625
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027776578060995,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-17"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027776515605129,
+    "gpu_used_tokens": 26716,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 57344,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.061432275018887594,
+    "end_ns": 1789027776577081549,
+    "cuda_elapsed_s": 0.062115840911865235
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027776640671031,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-17"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027776578263743,
+    "gpu_used_tokens": 26717,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 57344,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06143668000004254,
+    "end_ns": 1789027776639740149,
+    "cuda_elapsed_s": 0.06209638214111328
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027776703063673,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-17"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027776640911094,
+    "gpu_used_tokens": 26718,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 57344,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06118105800123885,
+    "end_ns": 1789027776702133464,
+    "cuda_elapsed_s": 0.06186598587036133
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027776765390077,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-17"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027776703259600,
+    "gpu_used_tokens": 26719,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 57344,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06114792198059149,
+    "end_ns": 1789027776764446450,
+    "cuda_elapsed_s": 0.06183731079101563
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027776827743871,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-17"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027776765583802,
+    "gpu_used_tokens": 26720,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 57344,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.0611911180021707,
+    "end_ns": 1789027776826813121,
+    "cuda_elapsed_s": 0.06185779190063476
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027776890026206,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-17"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027776827976190,
+    "gpu_used_tokens": 26721,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 57344,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.061091426003258675,
+    "end_ns": 1789027776889109800,
+    "cuda_elapsed_s": 0.06178201675415039
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027776952165099,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-17"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027776890239686,
+    "gpu_used_tokens": 26722,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 57344,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060970070015173405,
+    "end_ns": 1789027776951247635,
+    "cuda_elapsed_s": 0.061658111572265625
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027777014306432,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-17"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027776952378065,
+    "gpu_used_tokens": 26723,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 57344,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06091715500224382,
+    "end_ns": 1789027777013333734,
+    "cuda_elapsed_s": 0.061606910705566405
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027777076428591,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-17"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027777014503254,
+    "gpu_used_tokens": 26724,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 57344,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.060958199988817796,
+    "end_ns": 1789027777075500361,
+    "cuda_elapsed_s": 0.06164889526367188
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027777138557059,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-17"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027777076642962,
+    "gpu_used_tokens": 26725,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 57344,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06095641400315799,
+    "end_ns": 1789027777137637809,
+    "cuda_elapsed_s": 0.061644798278808595
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027777200811767,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-17"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027777138789209,
+    "gpu_used_tokens": 26726,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 57344,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06104172900086269,
+    "end_ns": 1789027777199869830,
+    "cuda_elapsed_s": 0.06173286437988281
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027777262986065,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-17"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027777201002728,
+    "gpu_used_tokens": 26727,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 57344,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06103448799694888,
+    "end_ns": 1789027777262075440,
+    "cuda_elapsed_s": 0.061725696563720706
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027777325228029,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-17"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027777263197493,
+    "gpu_used_tokens": 26728,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 57344,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.0611701890011318,
+    "end_ns": 1789027777324406461,
+    "cuda_elapsed_s": 0.06186188888549805
+  },
+  {
+    "kind": "batch",
+    "time_ns": 1789027777388528165,
+    "pid": 99959,
+    "phase": "decode",
+    "request_ids": [
+      "reload_gate-1789027736843155267-17"
+    ],
+    "batch_size": 1,
+    "start_ns": 1789027777325534489,
+    "gpu_used_tokens": 26729,
+    "gpu_total_tokens": 28672,
+    "host_used_tokens": 57344,
+    "host_total_tokens": 233016,
+    "computed_prompt_tokens": 0,
+    "host_call_s": 0.06107914898893796,
+    "end_ns": 1789027777386651037,
+    "cuda_elapsed_s": 0.06177587127685547
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027777441286792,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027777410117514,
+    "end_ns": 1789027777440709284,
+    "host_call_s": 0.02977349699358456,
+    "cuda_elapsed_s": 0.02993312072753906
+  },
+  {
+    "kind": "transfer",
+    "time_ns": 1789027777830501597,
+    "pid": 99959,
+    "direction": "gpu_to_cpu",
+    "bytes": 37748736,
+    "start_ns": 1789027777783674505,
+    "end_ns": 1789027777829830967,
+    "host_call_s": 0.045843856991268694,
+    "cuda_elapsed_s": 0.045967681884765625
+  }
+]

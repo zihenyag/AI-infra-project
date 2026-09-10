@@ -1,0 +1,120 @@
+# HELP sglang:num_running_reqs The number of running requests.
+# TYPE sglang:num_running_reqs gauge
+sglang:num_running_reqs{engine_type="unified",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 4.0
+# HELP sglang:num_used_tokens The number of used tokens.
+# TYPE sglang:num_used_tokens gauge
+sglang:num_used_tokens{engine_type="unified",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 4728.0
+# HELP sglang:token_usage The token usage.
+# TYPE sglang:token_usage gauge
+sglang:token_usage{engine_type="unified",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 0.16489955357142858
+# HELP sglang:gen_throughput The generation throughput (token/s).
+# TYPE sglang:gen_throughput gauge
+sglang:gen_throughput{engine_type="unified",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 34.977048472691415
+# HELP sglang:num_queue_reqs The number of requests in the waiting queue.
+# TYPE sglang:num_queue_reqs gauge
+sglang:num_queue_reqs{engine_type="unified",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 0.0
+# HELP sglang:num_grammar_queue_reqs The number of requests in the grammar waiting queue.
+# TYPE sglang:num_grammar_queue_reqs gauge
+sglang:num_grammar_queue_reqs{engine_type="unified",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 0.0
+# HELP sglang:cache_hit_rate The prefix cache hit rate.
+# TYPE sglang:cache_hit_rate gauge
+sglang:cache_hit_rate{engine_type="unified",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 0.0
+# HELP sglang:spec_accept_length The average acceptance length of speculative decoding.
+# TYPE sglang:spec_accept_length gauge
+sglang:spec_accept_length{engine_type="unified",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 0.0
+# HELP sglang:num_prefill_prealloc_queue_reqs The number of requests in the prefill prealloc queue.
+# TYPE sglang:num_prefill_prealloc_queue_reqs gauge
+sglang:num_prefill_prealloc_queue_reqs{engine_type="unified",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 0.0
+# HELP sglang:num_prefill_infight_queue_reqs The number of requests in the prefill infight queue.
+# TYPE sglang:num_prefill_infight_queue_reqs gauge
+sglang:num_prefill_infight_queue_reqs{engine_type="unified",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 0.0
+# HELP sglang:num_decode_prealloc_queue_reqs The number of requests in the decode prealloc queue.
+# TYPE sglang:num_decode_prealloc_queue_reqs gauge
+sglang:num_decode_prealloc_queue_reqs{engine_type="unified",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 0.0
+# HELP sglang:num_decode_transfer_queue_reqs The number of requests in the decode transfer queue.
+# TYPE sglang:num_decode_transfer_queue_reqs gauge
+sglang:num_decode_transfer_queue_reqs{engine_type="unified",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 0.0
+# HELP sglang:time_to_first_token_seconds Histogram of time to first token in seconds.
+# TYPE sglang:time_to_first_token_seconds histogram
+sglang:time_to_first_token_seconds_sum{model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 1100.8224227428436
+sglang:time_to_first_token_seconds_bucket{le="0.1",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 0.0
+sglang:time_to_first_token_seconds_bucket{le="0.2",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 0.0
+sglang:time_to_first_token_seconds_bucket{le="0.4",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 1.0
+sglang:time_to_first_token_seconds_bucket{le="0.6",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 31.0
+sglang:time_to_first_token_seconds_bucket{le="0.8",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 60.0
+sglang:time_to_first_token_seconds_bucket{le="1.0",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 71.0
+sglang:time_to_first_token_seconds_bucket{le="2.0",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 440.0
+sglang:time_to_first_token_seconds_bucket{le="4.0",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 452.0
+sglang:time_to_first_token_seconds_bucket{le="6.0",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 473.0
+sglang:time_to_first_token_seconds_bucket{le="8.0",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 553.0
+sglang:time_to_first_token_seconds_bucket{le="10.0",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 553.0
+sglang:time_to_first_token_seconds_bucket{le="20.0",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 553.0
+sglang:time_to_first_token_seconds_bucket{le="40.0",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 553.0
+sglang:time_to_first_token_seconds_bucket{le="60.0",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 553.0
+sglang:time_to_first_token_seconds_bucket{le="80.0",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 553.0
+sglang:time_to_first_token_seconds_bucket{le="100.0",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 553.0
+sglang:time_to_first_token_seconds_bucket{le="200.0",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 553.0
+sglang:time_to_first_token_seconds_bucket{le="400.0",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 553.0
+sglang:time_to_first_token_seconds_bucket{le="+Inf",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 553.0
+sglang:time_to_first_token_seconds_count{model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 553.0
+# HELP sglang:inter_token_latency_seconds Histogram of inter-token latency in seconds.
+# TYPE sglang:inter_token_latency_seconds histogram
+sglang:inter_token_latency_seconds_sum{model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 8841.258924007416
+sglang:inter_token_latency_seconds_bucket{le="0.002",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 0.0
+sglang:inter_token_latency_seconds_bucket{le="0.004",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 0.0
+sglang:inter_token_latency_seconds_bucket{le="0.006",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 0.0
+sglang:inter_token_latency_seconds_bucket{le="0.008",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 0.0
+sglang:inter_token_latency_seconds_bucket{le="0.01",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 0.0
+sglang:inter_token_latency_seconds_bucket{le="0.015",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 0.0
+sglang:inter_token_latency_seconds_bucket{le="0.02",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 0.0
+sglang:inter_token_latency_seconds_bucket{le="0.025",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 0.0
+sglang:inter_token_latency_seconds_bucket{le="0.03",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 0.0
+sglang:inter_token_latency_seconds_bucket{le="0.035",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 0.0
+sglang:inter_token_latency_seconds_bucket{le="0.04",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 0.0
+sglang:inter_token_latency_seconds_bucket{le="0.06",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 1.0
+sglang:inter_token_latency_seconds_bucket{le="0.08",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 570.0
+sglang:inter_token_latency_seconds_bucket{le="0.1",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 2191.0
+sglang:inter_token_latency_seconds_bucket{le="0.2",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 69577.0
+sglang:inter_token_latency_seconds_bucket{le="0.4",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 69580.0
+sglang:inter_token_latency_seconds_bucket{le="0.6",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 69607.0
+sglang:inter_token_latency_seconds_bucket{le="0.8",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 69734.0
+sglang:inter_token_latency_seconds_bucket{le="1.0",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 69734.0
+sglang:inter_token_latency_seconds_bucket{le="2.0",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 70071.0
+sglang:inter_token_latency_seconds_bucket{le="4.0",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 70071.0
+sglang:inter_token_latency_seconds_bucket{le="6.0",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 70104.0
+sglang:inter_token_latency_seconds_bucket{le="8.0",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 70104.0
+sglang:inter_token_latency_seconds_bucket{le="+Inf",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 70104.0
+sglang:inter_token_latency_seconds_count{model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 70104.0
+# HELP sglang:e2e_request_latency_seconds Histogram of End-to-end request latency in seconds
+# TYPE sglang:e2e_request_latency_seconds histogram
+sglang:e2e_request_latency_seconds_sum{model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 9942.075286626816
+sglang:e2e_request_latency_seconds_bucket{le="0.1",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 0.0
+sglang:e2e_request_latency_seconds_bucket{le="0.2",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 0.0
+sglang:e2e_request_latency_seconds_bucket{le="0.4",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 0.0
+sglang:e2e_request_latency_seconds_bucket{le="0.6",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 0.0
+sglang:e2e_request_latency_seconds_bucket{le="0.8",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 0.0
+sglang:e2e_request_latency_seconds_bucket{le="1.0",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 0.0
+sglang:e2e_request_latency_seconds_bucket{le="2.0",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 0.0
+sglang:e2e_request_latency_seconds_bucket{le="4.0",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 0.0
+sglang:e2e_request_latency_seconds_bucket{le="6.0",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 1.0
+sglang:e2e_request_latency_seconds_bucket{le="8.0",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 1.0
+sglang:e2e_request_latency_seconds_bucket{le="10.0",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 1.0
+sglang:e2e_request_latency_seconds_bucket{le="20.0",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 393.0
+sglang:e2e_request_latency_seconds_bucket{le="40.0",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 553.0
+sglang:e2e_request_latency_seconds_bucket{le="60.0",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 553.0
+sglang:e2e_request_latency_seconds_bucket{le="80.0",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 553.0
+sglang:e2e_request_latency_seconds_bucket{le="100.0",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 553.0
+sglang:e2e_request_latency_seconds_bucket{le="200.0",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 553.0
+sglang:e2e_request_latency_seconds_bucket{le="400.0",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 553.0
+sglang:e2e_request_latency_seconds_bucket{le="800.0",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 553.0
+sglang:e2e_request_latency_seconds_bucket{le="+Inf",model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 553.0
+sglang:e2e_request_latency_seconds_count{model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 553.0
+# HELP sglang:prompt_tokens_total Number of prefill tokens processed.
+# TYPE sglang:prompt_tokens_total counter
+sglang:prompt_tokens_total{model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 1.471449e+06
+# HELP sglang:generation_tokens_total Number of generation tokens processed.
+# TYPE sglang:generation_tokens_total counter
+sglang:generation_tokens_total{model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 70664.0
+# HELP sglang:num_requests_total Number of requests processed.
+# TYPE sglang:num_requests_total counter
+sglang:num_requests_total{model_name="/root/beamforming/CV/v100-probe/models/Qwen2.5-3B-Instruct"} 553.0

@@ -1,0 +1,27 @@
+{
+  "status": "completed",
+  "baseline": "S0",
+  "point": {
+    "name": "pressure_4k_q1",
+    "mode": "prefix_repetition",
+    "isl": 4096,
+    "n": 128,
+    "groups": 32,
+    "qps": 1,
+    "osl": 128,
+    "concurrency": 4
+  },
+  "measurement": {
+    "start_ns": 1789028831642976931,
+    "end_ns": 1789029533874026093,
+    "duration_s": 702.231050819013,
+    "completed": 128
+  },
+  "input_sha256": "42e21da4131ae4b34ba3aa98e2f5db2b6c86ee1b55edba1fbf5a083126a530b3",
+  "transfer_bytes": {
+    "gpu_to_cpu": 0,
+    "cpu_to_gpu": 0
+  },
+  "host_reuse_tokens": 0,
+  "evicted_tokens": 0
+}

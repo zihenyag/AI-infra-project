@@ -1,0 +1,42 @@
+# 操作系统与编辑器临时文件
+.DS_Store
+._*
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+
+# Python 本地环境、构建产物与工具缓存
+__pycache__/
+*.py[cod]
+.venv*/
+venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.cache/
+.codegraph/
+.coverage
+.coverage.*
+htmlcov/
+build/
+dist/
+*.egg-info/
+
+# 本地配置与凭据（允许提交不含秘密的示例）
+.env
+.env.*
+!.env.example
+!.env.template
+*.pem
+*.key
+
+# 模型权重不属于实验交付；原始日志、数据集与结果必须保留
+*.safetensors
+*.ckpt
+/models/
+/model_cache/
+# 不忽略 raw/、results/、*.log 或 *.pkl，它们包含复现证据。
